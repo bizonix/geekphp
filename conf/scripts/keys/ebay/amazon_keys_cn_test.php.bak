@@ -1,0 +1,9 @@
+<?php
+	$AWS_ACCESS_KEY_ID		= 'AKIAJ4334O46ZYFP4P7Q';
+	$AWS_SECRET_ACCESS_KEY	= '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';
+	$MERCHANT_ID			= 'A15PGL78GKQWG2';
+	$MARKETPLACE_ID			= 'AAHKV2X7AFYLW';
+	$APPLICATION_NAME		= 'DB Order Synchronization';
+	$APPLICATION_VERSION	= '0.1';
+	$serviceUrl				= 'https://mws.amazonservices.com.cn/Orders/2011-01-01';
+?>

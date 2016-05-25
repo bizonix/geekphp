@@ -1,0 +1,16 @@
+# nginx rewrite rule 
+set $rule_allow 0;
+if ($request_filename !~ "^.*.(gif|jpg|jpeg|png|ico|swf|xml|css|js|txt|ttf|TTF|xlsx|doc|docx|xls|bmp|csv|CSV|My97DatePicker\.htm)$"){
+        set $rule_allow 2$rule_allow;
+}
+if ($request_filename !~ "^.*.verify\.php$"){
+        set $rule_allow 2$rule_allow;
+}
+if ($request_filename !~ "^.*.api\.php(.*)$"){
+        set $rule_allow 2$rule_allow;
+}
+if ($rule_allow = "2220"){
+        rewrite ^/(.*) /index.php?$1 last;
+}
+
+# end nginx rewrite rule 

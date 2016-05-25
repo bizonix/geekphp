@@ -1,0 +1,25 @@
+##############################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken></eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OrderIDArray>
+<OrderID>141496321560-1088114906004</OrderID>
+</OrderIDArray>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+
+
+##############################################  responseBody end  ###################################################

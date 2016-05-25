@@ -1,0 +1,47 @@
+<div class="span3" id="sidebar">
+    <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+        <li {if $mod == 'dashboard'} class="dropdown active"{/if}>
+            <a href="/dashboard/index"><i class="icon-chevron-right"></i> 监控中心</a>
+        </li>
+        <li {if $mod == 'userProducts'} class="dropdown active"{/if}>
+            <a href="/userProducts/getProducts"><i class="icon-chevron-right"></i> 产品库</a>
+        </li>
+        <li {if in_array($mod,array('goodsBasic','templates','listing'))} class="dropdown active"{/if}>
+            <a href="/goodsBasic/goodsBasic"><i class="icon-chevron-right"></i> 快速铺货</a>
+        </li>
+        <li {if $mod == 'order' || $mod == 'OrderDetails'} class="dropdown active"{/if}>
+            <a href="/order/orderlist"><i class="icon-chevron-right"></i> 订单管理</a>
+        </li>
+        <li {if $mod == 'shops'} class="dropdown active"{/if}>
+            <a href="/shops/shopListView"><i class="icon-chevron-right"></i> 店铺管理</a>
+        </li>
+        <li {if $mod == 'publish'} class="dropdown active"{/if}>
+            <a href="/ebayTemplate/templateList/spu//company_id/3/"><i class="icon-chevron-right"></i>刊登中心</a>
+            <!--<ul class="dropdown-menu">
+                <li style="padding:5px 0px;">
+                    <a href="#"> 我的范本</a>
+                </li>
+                <li style="padding:5px 0px;">
+                    <a href="#"> 店铺模板</a>
+                </li>
+                <li style="padding:5px 0px;">
+                    <a href="#"> listing</a>
+                </li>
+            </ul>-->
+        </li>
+        <li {if $mod == 'emails'} class="dropdown active"{/if}>
+            <a href="/emails/index"><i class="icon-chevron-right"></i> 邮件管理</a>
+        </li>
+        <li>
+            <a href="tables.html"><i class="icon-chevron-right"></i> 个人信息</a>
+        </li>
+        <li {if $mod == 'group'} class="dropdown active"{/if}>
+            <a href="/group/groupDetailView"><i class="icon-chevron-right"></i> 团体管理</a>
+        </li>
+        {if $_userid == 1}
+        <li {if $mod == 'adminSystemSet'} class="dropdown active"{/if}>
+            <a href="/adminSystemSet/systemTransport"><i class="icon-chevron-right"></i> 系统设置</a>
+        </li>
+        {/if}
+    </ul>
+</div>

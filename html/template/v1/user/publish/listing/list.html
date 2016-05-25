@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>产品列表</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- smarty定义的变量 -->
+        <!-- /smarty定义的变量 -->
+        <!-- Button trigger modal -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                     <div class="row-fluid">
+                        {include file="user/publish/publishHead.html"}
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Listing列表</div>
+                                <div class="pull-right"><span class="badge badge-info">{if isset($count)}{$count}{/if}</span></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="table-toolbar">
+                                      <div class="btn-group pull-right">
+                                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-success">工具 <span class="caret"></span></button>
+                                         <ul class="dropdown-menu">
+                                            <li><a target="_blank" name="online" href-data="/listing/onlineListing" data-toggle="modal" data-target="#batchOnlineOfflineModal" href="#">批量上架</a></li>
+                                            <li><a target="_blank" name="offline" href-data="/listing/offlineListing" data-toggle="modal" data-target="#batchOnlineOfflineModal" href="#">批量下架</a></li>
+                                            <li><a target="_blank" href-data="/listing/importShopListing" data-toggle="modal" data-target="#importShopListingModal" href="#">同步店铺listing</a></li>
+                                            <li><a target="_blank" href="#">批量修改</a></li>
+                                            <li><a target="_blank" href="#">导出Listing</a></li>
+                                            <li><a target="_blank" href="#">批量删除</a></li>
+                                         </ul>
+                                      </div>
+                                      <form action="/listing/list" method="post">
+                                          <div class="btn-group pull-left">
+                                             <select name="platform" style="width:100px;">
+                                                <option value=''>平台</option>
+                                                {foreach from=$platforms key=k item=v}
+                                                  <option {if isset($p_platform) && $p_platform == $k}selected{/if} value='{$k}'>{$v.platform_cn_name}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="account" style="width:100px;">
+                                                <option value=''>店铺</option>
+                                                {foreach from=$shops key=k item=v}
+                                                  <option {if isset($p_account) && $p_account == $k}selected{/if} value='{$k}'>{$v.shop_account}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="status" style="width:100px;">
+                                                <option value='0'>状态</option>
+                                                {foreach from=$lsStatus key=k item=v}
+                                                  <option {if isset($p_status) && $p_status == $k}selected{/if} value='{$k}'>{$v}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <input name="spu" type="text" value="{if isset($p_spu)}{$p_spu}{/if}" class="input-small" placeholder="料号">
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <input name="create_user" type="text" value="{if isset($p_create_user)}{$p_create_user}{/if}" class="input-small" placeholder="创建者">
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <button type="submit" title="查询" class="btn btn-success"><i class="icon-search icon-white"></i></button>
+                                          </div>
+                                      </form>
+                                   </div>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></span>#</th>
+                                                <th colspan="2" style="text-align:center;">Listing信息</th>
+                                                <th style="text-align:center;">店铺</th>
+                                                <th style="text-align:center;">平台</th>
+                                                <th style="text-align:center;">站点</th>
+                                                <th style="text-align:center;">状态</th>
+                                                <th style="text-align:center;">作者</th>
+                                                <th style="text-align:center;">时间</th>
+                                                <th style="text-align:center;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$lsData item=val}
+                                              <tr class="gradeX">
+                                                <td style="text-align:center;"><p align="left"><input name="ls_id" value="{$val['id']}" type="checkbox">{$val["id"]}</p></td>
+                                                <td style="text-align:center;"><img width="60px;" src="{$val.main_image}"/></td>
+												<td>spu：{if !empty($val['spu'])}{$val['spu']}{else}<span style="color:red;">未知</span>{/if}</p><p>title:{$val['title']}</p></td>
+                                                <td style="text-align:center;">{$shops[$val['account']]['shop_account']}</td>
+                                                <td style="text-align:center;">{if !empty($val['platform'])}{$platforms[$val['platform']]['platform_cn_name']}{else}-{/if}</td>
+                                                <td style="text-align:center;">{if !empty($val.site_id)}{$val.site_id}{else}-{/if}</td>
+                                                <td style="text-align:center;">{$val.statusStr}</td>
+                                                <td style="text-align:center;">{$val["create_user"]}</td>
+                                                <td style="text-align:center;">{"Y-m-d H:i:s"|date:$val["create_time"]}</td>
+                                                <td>
+                                                  <div class="btn-group pull-right">
+                                                      <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
+                                                      <ul class="dropdown-menu">
+                                                        <li><a name="edit" href="/listing/lsEdit/lsId/{$val['id']}/platform/{$val['platform']}">编辑</a></li>
+                                                        {if $val.status == '1'}<li><a name="offlineListing" href-data="/listing/offlineListing/lsIds/{$val['id']}">下架</a></li>{else}
+                                                        <li><a name="onlineListing" href-data="/listing/onlineListing/lsIds/{$val['id']}">上架</a></li>{/if}
+                                                        <li><a name="operLog" href="#">保存修改</a></li>
+                                                        <li><a name="operLog" href="#">操作日志</a></li>
+                                                        <li><a name="delete" role-href="#">删除</a></li>
+                                                      </ul>
+                                                   </div>
+                                                </td>
+                                              </tr>
+                                            {/foreach}                                           
+                                        </tbody>
+                                    </table>
+                                    {$page}
+                                    <p>&nbsp;&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="user/publish/listing/list_modal.html"}
+            {include file="footerInner.html"}
+        </div>
+        {literal}
+        <script>
+        $(function(){
+        	//全选，反选
+        	$('input[name=checkAll]').on('click',function(){
+        		$('td :checkbox').prop('checked',$(this).prop('checked'));
+        	})
+        	//上下架
+			$('a[name=offlineListing],a[name=onlineListing]').on('click',function(){
+        		if(confirm('你确定要操作该listing吗？')){
+        			$.ajax({
+      	       	      type  : "POST",
+      	       	      async : false,
+      	       	      url   : $(this).attr('href-data'),
+      	       	      dataType : "json",
+      	       	      success : function(ret){
+      	       	          if(ret.errCode == '200'){
+      	       	        	  var data = ret.data;
+      	       	        	  for(var k in data){
+      	       	        		  if(data[k][0] = '200'){
+          	       	        		location.reload();
+          	       	        	  }else{
+          	       	        		alert(ret.data[k][1]);
+          	       	        	  }
+                              }
+      	       	          }else{
+      	       	        	  alert(ret.errMsg);
+      	       	          }
+      	       	      },
+      	       	  	});
+        		}
+        	});
+        });
+        </script>
+        {/literal}
+    </body>
+
+</html>

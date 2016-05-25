@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Trackings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS -->
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+
+
+
+      /* Custom page CSS
+      -------------------------------------------------- */
+      /* Not required for template or sticky footer method. */
+
+      .container {
+        width: auto;
+        max-width: 1000px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+      .trackBtn{
+        height:50px;background-color:#0065CC;border:none;color:#fff;width:100px;
+      }
+      .trackBtn:hover{
+        background-color:green;
+      }
+      .status-first{
+        background-image: url("/images/status_first.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .status-second{
+        background-image: url("/images/status_second.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .status-third{
+        background-image: url("/images/status_third.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .trackInfo{
+        width:100%;
+        background: #E8FBFF;
+      }
+      .trackInfo td{
+        padding:10px;
+      }
+
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+  </head>
+
+  <body>
+
+
+    <!-- Part 1: Wrap all page content here -->
+    <div id="wrap">
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="page-header">
+          <img src="/images/chinaPost.jpg" style="height:75px;margin-right:10px;"/>
+          <img src="/images/swidenPost.jpg" style="height:65px;margin-right:10px;"/>
+          <img src="/images/weissPost.jpg" style="height:75px;margin-right:10px;"/>
+          <img src="/images/hangkongPost.jpg" style="height:75px;margin-right:10px;"/>
+          <img src="/images/singapoePost.jpg" style="height:75px;margin-right:10px;"/>
+          <img src="/images/DHL.jpg" style="height:50px;margin-right:10px;"/>
+        </div>
+        <form action="/track/getTrackings" method="post">
+        <p class="lead">
+          Track Number: &nbsp;&nbsp;&nbsp;
+          <input maxlength="13" style="height:50px;width:400px;text-align:center;" value="{$p_trackNumber}" class="span6" type="text" name="trackNumber"/>
+          <button class="trackBtn" type="submit">Track</button>
+        </p>
+        </form>
+        <p>Track global postal number here.</p>
+        <hr/>
+        <div>
+          <table style="width:100%;">
+            <tr>
+              <td>
+                <p>China Post</p>
+                <p>China Time consuming：<span style="color:green;">{($trackInfo["deliverCountryTime"]/(3600*24))|floor} days {($trackInfo["deliverCountryTime"]%(3600*24)/3600)|ceil} hours</span></p>
+                {if !empty($trackInfo['country'])}<p>{$trackInfo['country']} Service Area：<span style="color:green;">{($trackInfo["desinationCountryTime"]/(3600*24))|floor} days {($trackInfo["desinationCountryTime"]%(3600*24)/3600)|ceil} hours</span></p>{/if}
+              </td>
+              <td>
+                <p>Origin Service Area：<span style="color:green;">China</span></p>
+                {if !empty($trackInfo['country'])}<p>Destination Service Area：<span style="color:green;">{$trackInfo['country']}</span></p>{/if}
+                <p>Package Weight：<span style="color:green;">{if empty($trackInfo['weight'])}0.00{else}{$trackInfo['weight']}{/if}kg</span></p>
+              </td>
+            </tr>
+          </table>
+          <hr/>
+          <table class="trackInfo" id="trackInfoList">
+            <tbody>
+            {foreach from=$trackDetail key=k item=v}
+                <tr>
+                  <td width="25%">{"Y-m-d H:i:s"|date:$v[0]}</td>
+                  <td width="10%" class="{if $k==0}status-first{elseif ($k+1)==($trackDetail|count)}status-third{else}status-second{/if}"></td>
+                  <td width="25%">{$v[1]}</td>
+                  <td width="40">{$v[2]}</td>
+                </tr>
+            {/foreach}
+            {if $trackDetail|count==0}
+               <tr>
+                <td width="25%">{"Y-m-d H:i:s"|date}</td>
+                <td width="10%" class="status-first"></td>
+                <td width="25%">No data</td>
+                <td width="40">No data</td>
+                </tr>
+              <tr>
+            {/if}
+            </tbody>
+          </table>
+          <p>&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255168637'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255168637' type='text/javascript'%3E%3C/script%3E"));</script>

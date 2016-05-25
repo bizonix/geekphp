@@ -1,0 +1,18 @@
+<link href="{$smarty.const.TPL}/public/assets/dtree.css" rel="stylesheet" media="screen">
+<script src="{$smarty.const.TPL}/public/assets/dtree.js"></script>
+<div class="span3 dtree nav nav-list bs-docs-sidenav" style="background:none;" id="sidebar">
+	<p><a href="javascript: d.openAll();">展开全部</a> | <a href="javascript: d.closeAll();">收起</a></p>
+
+	<script type="text/javascript">
+		<!--
+
+		d = new dTree('d');
+		d.add(0,-1,' 商品分类','','','','');
+		{foreach from=$categorys item=val}
+			d.add({$val["id"]},{$val["pid"]},'{$val["name"]}','');
+		{/foreach}
+		document.write(d);
+
+		//-->
+	</script>
+</div>

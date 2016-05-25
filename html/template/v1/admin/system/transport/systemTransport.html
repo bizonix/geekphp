@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>运输方式管理</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- smarty定义的变量 -->
+        <!-- /smarty定义的变量 -->
+        <!-- Button trigger modal -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+					  <div class="row-fluid">
+						<div class="navbar">
+							<div class="navbar-inner">
+								<ul class="breadcrumb">
+									<i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+									<i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+									<li>
+										<a href="/adminSystemSet/systemTransport" {if $act=="systemTransport"}style="color:gray;"{/if}>系统运输方式</a> <span class="divider">|</span>	
+									</li>
+									<li>
+										<a href="/adminSystemSet/platformTransport" {if $act=="platformTransport"}style="color:gray;"{/if}>平台运输方式</a> <span class="divider">|</span>	
+									</li>
+									<li class="active"></li>
+								</ul>
+							</div>
+						</div>
+					 </div>
+					 <!-- Modal1 新增运输方式 -->
+					<div class="modal fade" style="display:none;" id="addDiv" tabindex="-1" role="dialog" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+							<h4 class="modal-title" id="myModalLabel">新增系统运输方式</h4>
+						  </div>
+						  <div class="modal-body">
+							<form class="form-horizontal" action="#" method="post">
+							  <div class="control-group">
+								<label class="control-label">中文名称</label>
+								<div class="controls">
+								  <input class="input disabled" name="carrier_name_cn" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">英文名称</label>
+								<div class="controls">
+								  <input class="input disabled" name="carrier_name_en" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">简称</label>
+								<div class="controls">
+								  <input class="input disabled" name="carrier_ali" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">简码</label>
+								<div class="controls">
+								  <input class="input disabled" maxlength='5' name="carrier_abb" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">字母索引</label>
+								<div class="controls">
+								  <input class="input disabled" maxlength='1' name="carrier_index" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">运输方式类型</label>
+								<div class="controls">
+								  <input class="input" name="type" type="radio" checked="checked" value="1">快递
+								  <input class="input" name="type" type="radio" value="0">非快递
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否运费计算</label>
+								<div class="controls">
+								  <input class="input" name="is_shipfee" type="radio" checked="checked" value="1">是
+								  <input class="input" name="is_shipfee" type="radio" value="0">否
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否有跟踪号</label>
+								<div class="controls">
+								  <input class="input" name="is_track" type="radio" checked="checked" value="1">是
+								  <input class="input" name="is_track" type="radio" value="0">否
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否分配跟踪号</label>
+								<div class="controls">
+								  <input class="input" name="is_tracknum" type="radio" checked="checked" value="1">自动分配
+								  <input class="input" name="is_tracknum" type="radio" value="0">非自动分配
+								  <input class="input" name="is_tracknum" type="radio" value="2">无跟踪号
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否启用</label>
+								<div class="controls">
+								  <input class="input" name="is_on" type="radio" checked="checked" value="1">是
+								  <input class="input" name="is_on" type="radio" value="0">否
+								</div>
+							  </div>
+							  </form>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button name="startAdd" type="button" class="btn btn-primary">新增</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					{literal}
+					<script type="text/javascript">
+						$(function(){
+							//开始更新
+							$("button[name=startAdd]").on("click",function(){
+								var carrier_name_cn	= $("#addDiv").find("input[name=carrier_name_cn]").val();
+								var carrier_name_en	= $("#addDiv").find("input[name=carrier_name_en]").val();
+								var carrier_ali		= $("#addDiv").find("input[name=carrier_ali]").val();
+								var carrier_abb		= $("#addDiv").find("input[name=carrier_abb]").val();
+								var carrier_index	= $("#addDiv").find("input[name=carrier_index]").val();
+								var type			= $("#addDiv").find("input[name=type]").val();
+								var is_shipfee		= $("#addDiv").find("input[name=is_shipfee]").val();
+								var is_tracknum		= $("#addDiv").find("input[name=is_tracknum]").val();
+								var is_on			= $("#addDiv").find("input[name=is_on]").val();
+								$.ajax({
+									type  : "POST",
+									async : false,
+									url   : '/adminSystemSet/addSystemTransport',
+									dataType : "json",
+									data : $("#addDiv").find("form").serialize(),
+									success : function(data){
+										var code = data.errCode;
+										var msg  = data.errMsg;
+										var data = data.data;
+										if(code == 200){
+											location.reload();
+										}else{
+											alert(msg);
+										}
+									},
+									error : function(){
+										alert("网络错误");
+									}
+								});
+							});
+						});
+					</script>
+					{/literal}
+					<!-- Modal2 修改运输方式 -->
+					<div class="modal fade" style="display:none;" id="updateDiv" tabindex="-1" role="dialog" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+							<h4 class="modal-title" id="myModalLabel">修改系统运输方式</h4>
+						  </div>
+						  <div class="modal-body">
+							<form class="form-horizontal" action="#" method="post">
+							  <div class="control-group">
+								<label class="control-label">中文名称</label>
+								<div class="controls">
+								  <input class="input disabled" name="carrier_name_cn" type="text" value="">
+								  <input class="input disabled" name="sysCarrierId" type="hidden" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">英文名称</label>
+								<div class="controls">
+								  <input class="input disabled" name="carrier_name_en" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">简称</label>
+								<div class="controls">
+								  <input class="input disabled" name="carrier_ali" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">简码</label>
+								<div class="controls">
+								  <input class="input disabled" maxlength='5' name="carrier_abb" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">字母索引</label>
+								<div class="controls">
+								  <input class="input disabled" maxlength='1' name="carrier_index" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">运输方式类型</label>
+								<div class="controls">
+								  <input class="input" name="type" type="radio" value="1">快递
+								  <input class="input" name="type" type="radio" value="0">非快递
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否运费计算</label>
+								<div class="controls">
+								  <input class="input" name="is_shipfee" type="radio" value="1">是
+								  <input class="input" name="is_shipfee" type="radio" value="0">否
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否有跟踪号</label>
+								<div class="controls">
+								  <input class="input" name="is_track" type="radio" value="1">是
+								  <input class="input" name="is_track" type="radio" value="0">否
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否分配跟踪号</label>
+								<div class="controls">
+								  <input class="input" name="is_tracknum" type="radio" value="1">自动分配
+								  <input class="input" name="is_tracknum" type="radio" value="0">非自动分配
+								  <input class="input" name="is_tracknum" type="radio" value="2">无跟踪号
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">是否启用</label>
+								<div class="controls">
+								  <input class="input" name="is_on" type="radio" value="1">是
+								  <input class="input" name="is_on" type="radio" value="0">否
+								</div>
+							  </div>
+							  </form>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button name="startUpdate" type="button" class="btn btn-primary">修改</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					{literal}
+					<script type="text/javascript">
+						$(function(){
+							//开始更新
+							$("button[name=startUpdate]").on("click",function(){
+								$.ajax({
+									type  : "POST",
+									async : false,
+									url   : '/adminSystemSet/updateSystemTransport',
+									dataType : "json",
+									data : $("#updateDiv").find("form").serialize(),
+									success : function(data){
+										var code = data.errCode;
+										var msg  = data.errMsg;
+										var data = data.data;
+										if(code == 200){
+											location.reload();
+										}else{
+											alert(msg);
+										}
+									},
+									error : function(){
+										alert("网络错误");
+									}
+								});
+							});
+						});
+					</script>
+					{/literal}
+                     <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">系统运输方式 </div>
+                                <div class="pull-right"><span class="badge badge-info">{$carriers|count}</span></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                      <div class="btn-group pull-right">
+                                         <a href="#"><button data-toggle="modal" data-target="#addDiv" class="btn btn-success">新增 <i class="icon-plus icon-white"></i></button></a>
+                                      </div><br/><br/>
+                                    
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></span>#</th>
+                                                <th>简码</th>
+												<th>中文名称</th>
+                                                <th>英文名称</th>
+                                                <th>简称</th>
+												<th>字母索引</th>
+                                                <th>物流类型</th>
+												<th>状态</th>
+												<th>跟踪号分配</th>
+												<th>添加时间</th>
+												<th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$carriers item=v}
+                                              <tr class="even gradeC" style="border-top:none;">
+                                                  <td style="text-align:center;">{$v["id"]}</td>
+												  <td style="text-align:center;">{$v["carrier_abb"]}</td>
+												  <td style="text-align:center;">{$v["carrier_name_cn"]}</td>
+												  <td style="text-align:center;">{$v["carrier_name_en"]}</td>
+												  <td style="text-align:center;">{$v["carrier_ali"]}</td>
+												  <td style="text-align:center;">{$v["carrier_index"]}</td>
+												  <td style="text-align:center;">{if $v["type"]}快递{else}非快递{/if}</td>
+												  <td style="text-align:center;">{if $v["is_on"] == 1}启用{else}停用{/if}</td>
+												  <td style="text-align:center;">{if $v["is_tracknum"] == 1}自动分配{elseif is_tracknum == 0}非自动分配{else}无{/if}</td>
+												  <td style="text-align:center;">{'Y-m-d H:i:s'|date:$v["add_time"]}</td>
+												  <td style="text-align:center;" role-id='{$v["id"]}'  role-type='{$v["type"]}'  role-carrier_name_cn='{$v["carrier_name_cn"]}'  role-carrier_name_en='{$v["carrier_name_en"]}'  role-is_track='{$v["is_track"]}'  role-carrier_ali='{$v["carrier_ali"]}'  role-carrier_abb='{$v["carrier_abb"]}' role-carrier_index='{$v["carrier_index"]}' role-is_shipfee='{$v["is_shipfee"]}' role-is_tracknum='{$v["is_tracknum"]}' role-is_on='{$v["is_on"]}'><a role-name="updateBtn" data-toggle="modal" data-target="#updateDiv" href="#">修改</a>&nbsp;|&nbsp;<a role-name="deleteBtn" href="#">删除</a></td>
+                                              </tr> 
+                                            {/foreach}                                           
+                                        </tbody>
+                                    </table>
+                                    <p>&nbsp;&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        <link href="{$smarty.const.TPL}/public/vendors/datepicker.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/bootstrap-datepicker.js"></script>
+        {literal}
+        <script>
+        $(function() {
+            
+			//点击修改操作时
+			$("a[role-name=updateBtn]").on("click",function(){
+				var id				= $(this).parents("td").attr("role-id");
+				var type			= $(this).parents("td").attr("role-type");
+				var carrier_name_cn	= $(this).parents("td").attr("role-carrier_name_cn");
+				var carrier_name_en = $(this).parents("td").attr("role-carrier_name_en");
+				var is_track		= $(this).parents("td").attr("role-is_track");
+				var carrier_ali		= $(this).parents("td").attr("role-carrier_ali");
+				var carrier_abb		= $(this).parents("td").attr("role-carrier_abb");
+				var carrier_index	= $(this).parents("td").attr("role-carrier_index");
+				var is_tracknum		= $(this).parents("td").attr("role-is_tracknum");
+				var is_shipfee		= $(this).parents("td").attr("role-is_shipfee");
+				var is_on			= $(this).parents("td").attr("role-is_on");
+				$("#updateDiv").find("input[name=sysCarrierId]").val(id);
+				$("#updateDiv").find("input[name=type]").prop("checked",false);
+				$("#updateDiv").find("input[name=type][value="+type+"]").prop("checked",true);
+				$("#updateDiv").find("input[name=carrier_name_en]").val(carrier_name_en);
+				$("#updateDiv").find("input[name=carrier_name_cn]").val(carrier_name_cn);
+				$("#updateDiv").find("input[name=is_track]").prop("checked",false);
+				$("#updateDiv").find("input[name=is_track][value="+is_track+"]").prop("checked",true);
+				$("#updateDiv").find("input[name=carrier_ali]").val(carrier_ali);
+				$("#updateDiv").find("input[name=carrier_abb]").val(carrier_abb);
+				$("#updateDiv").find("input[name=carrier_index]").val(carrier_index);
+				$("#updateDiv").find("input[name=is_tracknum]").prop("checked",false);
+				$("#updateDiv").find("input[name=is_tracknum][value="+is_tracknum+"]").prop("checked",true);
+				$("#updateDiv").find("input[name=is_shipfee]").removeAttr("checked");
+				$("#updateDiv").find("input[name=is_shipfee][value="+is_shipfee+"]").prop("checked",true);
+				$("#updateDiv").find("input[name=is_on]").prop("checked",false);
+				$("#updateDiv").find("input[name=is_on][value="+is_on+"]").prop("checked",true);
+			});
+
+            //点击删除操作时
+            $("a[role-name=deleteBtn]").on("click",function(){
+                if(confirm("确定要删除该运输方式吗？")){
+                      var id = $(this).parents("td").attr("role-id");
+                      $.ajax({
+                          type  : "POST",
+                          async : false,
+                          url   : '/adminSystemSet/deleteSystemTransport',
+                          dataType : "json",
+                          data : {"carrierId":id},
+                          success : function(data){
+							var code = data.errCode;
+							var msg  = data.errMsg;
+							var data = data.data;
+							if(code == 200){
+								location.reload();
+							}else{
+								alert(msg);
+							}
+						  },
+						  error : function(){
+							alert("网络错误");
+						  }
+                      });
+                }
+            });
+
+        });
+        </script>
+        {/literal}
+    </body>
+
+</html>

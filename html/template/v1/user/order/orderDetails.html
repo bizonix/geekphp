@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>订单列表</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                      <!-- smarty定义的变量 -->
+                      {assign var='_orderHandleStatus' value=ORDERHANDLESTATUS|C}
+                      {assign var='_platforms' value=PLATFORMS|C}
+                      {assign var="productList" value=$detailData['v']['productList']}
+                      <!-- /smarty定义的变量 -->
+                     <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">订单列表<span class="divider">&nbsp;>&nbsp;</span> </div>
+                                <div class="muted pull-left">速卖通平台 <span class="divider">&nbsp;>&nbsp;</span> </div>
+                                <div class="muted pull-left">订单详情 </div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div class="row" style="margin:5px 15px;padding:5px;">
+                                      <div class="span10">
+                                        订单处理状态：
+                                        <span style="font-weight:bolder;color:red;">{$_orderHandleStatus[$mainData['handle_status']]} </span>
+                                        {if $mainData['note']}<p style="color:red;text-indent:2em;">({$mainData['note']})</p>{/if}
+                                      </div>
+                                      <div class="span2">
+                                        <a href="#"><button name="updateBtn" data-toggle="modal" data-target="#updateOrder" class="btn btn-danger">修改</button></a>
+                                        <div class="btn-group pull-right">
+                                          <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
+                                           <ul class="dropdown-menu">
+                                              <li><a href="#">推送至{$companys[$mainData['company_id']]['short_name']}</a></li>
+                                              {if $mainData['delivery_from'] != $mainData['company_id']}
+                                              <li><a href="#">推送至{$companys[$mainData['delivery_from']]['short_name']}</a></li>
+                                              {/if}
+                                              <li><a data-toggle="modal" data-target="#updateOrder" href="#">修改订单</a></li>
+                                              <li><a href="#">废弃订单</a></li>
+                                           </ul>
+                                         </div>
+                                      </div>
+                                    </div>
+                                    <hr/>
+                                    <h5>产品信息</h5>
+                                    <table class="table table-striped table-bordered">
+                                      <tr><th>订单sku/原商品编码</th><th>单价</th><th>运费</th><th>数量</th><th>状态</th><th>物流信息</th></tr>
+                                        {foreach from=$productList key=k item=v}
+                                          <tr>
+                                            <td width="50%">
+                                              <div class="media">
+                                                <a class="media-left pull-left" href="#">
+                                                  <img src="{$v['productImgUrl']}" alt="">
+                                                </a>
+                                                <div class="media-body">
+                                                  <p class="media-heading">商品编码:{$v['productId']} / SKU:{$v['skuCode']}</p>
+                                                  <a target="_blank" href="{"\\"|str_replace:"":$v['productSnapUrl']}">{$v['productName']}
+                                                  {assign var='productAttributes' value=$detailData['detail']['childOrderList'][$k]['productAttributes']|json_decode:true}{foreach from=$productAttributes['sku'] key=kk item=vv}
+                                                      【{$vv['pName']}:{$vv['pValue']}】
+                                                  {/foreach}</a>
+                                                </div>
+                                              </div>
+                                            </td>
+                                            <td>{$v['productUnitPrice']['amount']}{$v['productUnitPrice']['currency']['symbol']}</td>
+                                            <td>{$v['logisticsAmount']['amount']}{$v['logisticsAmount']['currency']['symbol']}</td>
+                                            <td>{$v['productCount']}</td>
+                                            <td>
+                                              <p>{$_platforms['0']['orderStatus'][$v['sonOrderStatus']]}</p>
+                                              <p>备注：{if empty($v['memo'])}无{else}<span style="color:red;">{$v['memo']}</span>{/if}</p>
+                                            </td>
+                                            {if $k == 0}
+                                            <td name="transportType" rowspan="{$v['productCount']}">{$v['logisticsServiceName']}</td>
+                                            {/if}
+                                        {/foreach}
+                                      </tr>
+                                    </table>
+                                    <h5>订单系统表现</h5>
+                                    <table class="table table-striped table-bordered">
+                                    <tr><th>系统号</th><th>订单编号</th><th>状态</th><th>来源</th><th>时间</th><th>所属</th><th>去向</th></tr>
+                                      <tr>
+                                        <td>{$mainData['id']}</td>
+                                        <td>{$mainData['order_id']}</td>
+                                        <td>
+                                          <p>处理状态：{$_orderHandleStatus[$mainData['handle_status']]}</p>
+                                        </td>
+                                        <td>
+                                          <p>店铺：{$mainData['source_account']}</p>
+                                          <p>平台：{$_platforms[$mainData['source_platform']]['platformName']}</p>
+                                          <p>进入方式：系统抓取{$_source[$mainData['source']]}</p>
+                                        </td>
+                                        <td>
+                                          <p>进入系统：{"Y-m-d H:i:s"|date:$mainData['create_time']}</p>
+                                          <p>修改时间：{if !empty($mainData['update_time'])}{"Y-m-d H:i:s"|date:$mainData['update_time']}{else}无{/if}</p>
+                                          <p>处理时间：{if !empty($mainData['update_time'])}{"Y-m-d H:i:s"|date:$mainData['delivery_time']}{else}无{/if}</p>
+                                        </td>
+                                        <td>
+                                          <p>组织：{$companys[$mainData['company_id']]['short_name']}</p>
+                                          <p>用户：{$mainData['user_name']}</p>
+                                        </td>
+                                        <td>
+                                          <p>{$companys[$mainData['delivery_from']]['short_name']}</p>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <h5>订单总额</h5>
+                                    <table class="table table-striped table-bordered">
+                                    <tr><th>产品价格</th><th>运费</th><th>订单总额</th><th>预计可得</th><th>留言</th><th>纠纷</th><th>资金冻结</th></tr>
+                                      <tr>
+                                        <td>{$detailData['v']['productList'][0]['totalProductAmount']['amount']}{$detailData['v']['productList'][0]['totalProductAmount']['currency']['symbol']}</td>
+                                        <td>{$detailData['detail']['logisticsAmount']['amount']}{$detailData['detail']['logisticsAmount']['currency']['symbol']}</td>
+                                        <td>{$detailData['detail']['orderAmount']['amount']}{$detailData['detail']['orderAmount']['currency']['symbol']}</td>
+                                        <td>{$detailData['detail']['orderAmount']['amount']}{$detailData['detail']['orderAmount']['currency']['symbol']}</td>
+                                        <td>{if empty($detailData['detail']['orderMsgList'])}无{else}{$detailData['detail']['orderMsgList']|var_dump}{/if}</td>
+                                        <td>{$_platforms['0']['issueStatus'][$detailData['detail']['issueStatus']]}</td>
+                                        <td>{$_platforms['0']['frozenStatus'][$detailData['detail']['frozenStatus']]}</td>
+                                      </tr>
+                                    </table>
+                                    <h5>买家信息</h5>
+                                    <table class="table table-striped table-bordered">
+                                      <tr><th>收件人</th><th>地址</th><th>邮编</th><th>联系方式</th></tr>
+                                      <tr>
+                                      <td>
+                                        <p>姓名: {$detailData['detail']['buyerInfo']['firstName']} {$detailData['detail']['buyerInfo']['lastName']}</p>
+                                        <p>买家平台ID: {$detailData['detail']['buyerInfo']['loginId']}</p>
+                                        <p>买家国家:{$detailData['detail']['buyerInfo']['country']}</p>
+                                      </td>
+                                      <td>
+                                        <p>国家：{$detailData['detail']['receiptAddress']['country']}</p>
+                                        <p>省/州：{$detailData['detail']['receiptAddress']['province']}</p>
+                                        <p>城市：{$detailData['detail']['receiptAddress']['city']}</p>
+                                        <p>地址: {$detailData['detail']['receiptAddress']['address2']}</p>
+                                        <p>详细地址：{$detailData['detail']['receiptAddress']['detailAddress']}</p>
+                                      </td>
+                                      <td>{$detailData['detail']['receiptAddress']['zip']}</td>
+                                      <td>
+                                        <p>手机：{$detailData['detail']['receiptAddress']['mobileNo']}</p>
+                                        <p>电话：{$detailData['detail']['receiptAddress']['phoneNumber']}</p>
+                                        <p>email: {$detailData['detail']['buyerInfo']['email']}</p>
+                                      </td></tr>
+                                    </table>
+                                    <!--
+                                    <h5>收款金额</h5>
+                                    <table class="table">
+                                      <tr><th>买家应付</th><th>已付款</th><th>支付方式</th><th>收款日期</th></tr>
+                                      <tr><td>xxxxxx</td><td>xxxxxx</td><td>xxxxxx</td><td>xxxxxx</td></tr>
+                                    </table>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        <!-- Button trigger modal -->
+        <!-- Modal1 手动拉取 -->
+        <form id="updateOrderInfo" class="form-horizontal">
+        <div class="modal fade" id="updateOrder" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">订单修改</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="control-group">
+                    <label class="control-label">订单编号</label>
+                    <div class="controls">
+                      <input class="input disabled" name="orderId" type="text" value="{$mainData['order_id']}">
+                      <input type="hidden" name="orderSysId" value="{$mainData['id']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="select01">订单去向</label>
+                    <div class="controls">
+                      <select name="receiveCompany" id="select01" class="chzn-select">
+                        <option value="{$companys[$mainData['delivery_from']]['id']}">{$companys[$mainData['delivery_from']]['cn_name']}</option>
+                        {foreach from=$companys key=k item=v}
+                          {if $v['id'] != $mainData['delivery_from']}
+                            <option value="{$k}">{$v['cn_name']}</option>
+                          {/if}
+                        {/foreach}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="select02">运输方式</label>
+                    <div class="controls">
+                      <select name="transportType" id="select02">
+                        <option value="">加载中...</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">国家</label>
+                    <div class="controls">
+                      <input class="input" name="countrySn" type="text" value="{$detailData['detail']['receiptAddress']['country']}">
+                    </div>
+                  </div>
+                  {foreach from=$productList item=v}
+                    <div class="control-group">
+                      <a class="control-label" href="#">
+                        <img src="{$v['productImgUrl']}" alt="">
+                      </a>
+                      <div class="controls">
+                        <p class="media-heading">商品编码:{$v['productId']}</p>
+                        SKU: <input name="skuCodes[{$v['productId']}][]" class="input" type="text" value="{$v['skuCode']}">
+                      </div>
+                    </div>
+                    <div class="control-group">
+                    <label class="control-label" for="disabledInput">商品备注</label>
+                    <div class="controls">
+                      <textarea name="msgLists[{$v['productId']}][]" value="{$v['memo']}">{$v['memo']}</textarea> 
+                    </div>
+                  </div>
+                  {/foreach}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="updateSave" type="button" class="btn btn-primary">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+              $("button[name=updateSave]").on("click",function(){
+                  $.ajax({
+                    type  : "POST",
+                    async : false,
+                    url   : '/orderDetails/updateOrderInfo',
+                    dataType : "json",
+                    data  : $("#updateOrderInfo").serialize(),
+                    success : function(data){
+                      if(data.errCode == '200'){
+                          location.reload();
+                      }else{
+                          alert("操作失败");
+                      }
+                    }
+                  });
+              });
+
+              $("button[name=updateBtn]").on("click",function(){
+                  var transportType = $("td[name=transportType]").text();
+                  setTimeout(function(){getPlatformCarrier(transportType);},500);
+              });
+
+
+          });
+
+
+          function getPlatformCarrier(currentCarrier){
+                if(!$("#select02").data("isExit")){
+                    $.ajax({
+                        type  : "POST",
+                        async : false,
+                        url   : '/public/getPlatformCarrier/',
+                        dataType : "json",
+                        data : {"platformId":2},
+                        success : function(data){
+                            var code = data.errCode;
+                            var msg  = data.errMsg;
+                            var data = data.data;
+                            if(code == 200){
+                                var  result = '';
+                                var selected = '';
+                                for(var k in data){
+                                    if(data[k]["displayName"] == currentCarrier){
+                                        selected = 'selected';
+                                    }else{
+                                        selected = '';
+                                    }
+                                    result += '<option '+selected+' value="'+data[k]["displayName"]+'">'+data[k]["displayName"]+'</option>';
+                                }
+                                result += '<option value="other">其他</option>';
+                                $("#select02").data("isExit",true).html(result);
+                            }else{
+                                alert(msg);
+                            }
+                        },
+                        error : function(){
+                            alert("网络错误");
+                        }
+                    });
+                }else if(currentCarrier){
+                    $("#select02").find("option").each(function(){
+                        if($(this).text() == currentCarrier){
+                            $("#select02").val($(this).val());
+                            exit;
+                        }
+                    });
+                }
+            }
+        </script>
+        {/literal}
+        <!-- /Modal1 -->
+        <!-- Modal2 批量推送 -->
+        <div class="modal fade" style="display:none;" id="pushTogether" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">订单推送</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                    
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">后台推送</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Modal1 -->
+        <link href="{$smarty.const.TPL}/public/vendors/chosen.min.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/chosen.jquery.min.js"></script>
+        <script>
+          $(function(){
+              $(".chzn-select").chosen();
+          });
+        </script>
+    </body>
+
+</html>

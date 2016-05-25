@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>新增范本</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+        <link href="{$smarty.const.TPL}/public/vendors/chosen.min.css" rel="stylesheet" media="screen">
+        <link href="{$smarty.const.TPL}/public/vendors/uniform.default.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- smarty定义的变量 -->
+        <!-- /smarty定义的变量 -->
+        <!-- Button trigger modal -->
+        <!-- 分类选择 -->
+        <div role-modal class="modal hide fade"  id="chooseCategoryDialog" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="chooseCategoryLabel" style="height: auto; width: auto;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only"></span>
+              </button>
+              <h4 class="modal-title" id="chooseCategoryLabel" >分类选择</h4>
+
+            </div>
+            <div class="modal-body">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr name="categoryList">
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+              <button name="chooseCategory" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+
+        <!-- 多属性图片选择 -->
+        <div role-modal class="modal hide fade"  id="choosePicDialog" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="choosePicLabel" style="width: 900px;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only"></span>
+              </button>
+              <h4 class="modal-title" id="choosePicLabel" >选择图片</h4>
+            </div>
+            <div class="modal-body">
+              <span>图片库选择</span><br />
+                <div name="picLibChoose" >
+                   
+              </div>
+              <span>
+                <span>
+                  <span id="localVariationPic">打开</span>
+                  <span id="localVariationPicPlaceholder" ></span>
+                  <input id="variationBtnCancel1" style="display:none;" type="button" value="取消上传" onclick="swfu1.cancelQueue();" />
+                </span>
+                <span class="fieldset flash" id="variationPicProgress"></span>
+              </span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+              <button name="choosePic" type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+
+        <!-- 橱窗图选择 -->
+        <div role-modal class="modal hide fade"  id="chooseMainPicDialog" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="chooseMainPicLabel" style="width: 900px;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only"></span>
+              </button>
+              <h4 class="modal-title" id="chooseMainPicLabel" >选择图片</h4>
+            </div>
+            <div class="modal-body">
+              <span>图片库选择</span><br />
+              <div name="mainPicLibChoose" >
+                 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+
+
+        <!-- 描述图选择 -->
+        <div role-modal class="modal hide fade"  id="chooseDetailPicDialog" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="chooseMainPicLabel" style="width: 900px;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only"></span>
+              </button>
+              <h4 class="modal-title" id="chooseDetailPicLabel" >选择图片</h4>
+            </div>
+            <div class="modal-body">
+              <span>图片库选择</span><br />
+              <div name="detailPicLibChoose" >
+                 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+
+
+        <!-- 不运送区域选择 -->
+        <div role-modal class="modal hide fade"  id="chooseShippingExclusionDialog" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="chooseShippingExclusionLabel" style="width: 900px;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only"></span>
+              </button>
+              <h4 class="modal-title" id="chooseShippingExclusionLabel" >选择区域</h4>
+            </div>
+            <div class="modal-body">
+              <span>不运送区域选择</span><br />
+              <div name="shippingExclusionChoose" >
+                 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+        <!-- /Modal4 -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                     <div class="row-fluid">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <ul class="breadcrumb">
+                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <li>
+                                        范本基础信息<!-- <span class="divider">|</span> -->
+                                    </li>                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- block -->
+                        <div class="block">
+                          <form class="form-horizontal" action="/template/addTemplate" method="post" id="addTemplateForm">
+                            <fieldset>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    一般信息
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in" style="overflow-y:visible;">
+                                  <div class="span12" style="padding-bottom:50px;">
+                                    <div class="control-group">
+                                      <label class="control-label" >主料号(spu)</label>
+                                      <div class="controls">
+                                        <input name="spu" class="input focused"  type="text">
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >来源</label>
+                                      <div class="controls">
+                                        {html_options  options=$sourceInfo name=source class="form-control chzn-select"}
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    
+                                    <div class="control-group">
+                                      <label class="control-label" >站点</label>
+                                      <div class="controls">
+                                        {html_options  options=$siteInfo name=siteId class="form-control chzn-select"}
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >账号</label>
+                                      <div class="controls">
+                                        {html_options  options=$accountInfo name=account class="form-control chzn-select" multiple='multiple'}
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >刊登类型</label>
+                                      <div class="controls">
+                                        {html_options  options=$addTypeInfo name=addType class="form-control chzn-select" }
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >定价方式</label>
+                                      <div class="controls">
+                                        {html_options  options=$calPriceType name=calPriceType class="form-control chzn-select" }
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >刊登时间</label>
+                                      <div class="controls">
+                                        {html_options  values=$durationInfo output=$durationInfo  name=duration class="form-control chzn-select" }
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >标题</label>
+                                      <div class="controls">
+                                        <input name="title" maxlength="80" class="input focused" type="text" style="width: 500px;">
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    分类信息
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                  <div class="span12" style="padding-bottom:50px;">
+                                    <div class="control-group">
+                                      <label class="control-label" >商品分类</label>
+                                      <div class="controls">
+                                        <input name="good_category" class="input focused" type="text" readonly>
+                                        <li data-target="#chooseCategoryDialog" name="chooseCategory" class="btn btn-info" data-toggle="modal" >选择分类</li>
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >店铺分类</label>
+                                      <div class="controls">
+                                        <input name="shop_category" class="input focused" type="text">
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    属性与物品状况
+
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                  <div class="span12" style="padding-bottom:50px;">
+                                    <div class="control-group">
+                                      <label class="control-label" >多属性</label>
+                                      <div class="controls">
+                                        
+                                        <table name="variationAttributeTable">
+                                          <thead name="variationAttributeHead">
+                                            <tr>
+                                              <th>sku</th>
+                                              <th >数量</th>
+                                              <th >价格</th>
+                                              <th ><li class="btn btn-info" name="addVariationAttribute">添加属性</li></th>
+                                            </tr>
+                                          </thead>
+                                          <tbody style="text-align:center" name="variationAttributeBody">
+                                            <tr>
+                                              <td ><input style="width:100px;" type="text"></td>
+                                              <td><input style="width:100px;" type="text"></td>
+                                              <td ><input style="width:100px;" type="text"></td>
+                                              <td ><li class="btn btn-info" onclick="delVariationAttributeRow(this)">删除</li></td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                        <span><li class="btn btn-info" name="addVariationAttributeRow">添加新的料号</li></span><br>
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >多属性图片</label>
+                                      <div class="controls">
+                                        <span><li class="btn btn-info" name="variationAttributePic">设置多属性图片</li></span>
+                                        <table>
+                                          <tbody name="variationAttributePicBody">
+                                          </tbody>
+                                        </table>
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >自定义属性</label>
+                                      <div class="controls">
+                                        <input name="source" class="input focused" type="text">
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    <div class="control-group">
+                                      <label class="control-label" >物品状况</label>
+                                      <div class="controls">
+                                        <input name="source" class="input focused" type="text">
+                                        <span class="help-inline"></span>
+                                      </div>
+                                    </div>
+                                    
+                                  </div>
+                              </div>
+                            
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+
+                                    图片
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span>
+
+                                  </div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >橱窗图</label>
+                                    <div class="controls">
+                                      <span>
+                                        <li data-target="#chooseMainPicDialog" name="chooseMainPic" class="btn btn-info" data-toggle="modal" >选择橱窗图</li></span>
+                                      <span>
+                                          <span>
+                                            <span id="localMainPic">打开</span>
+                                            <span id="localMainPicPlaceholder" ></span>
+                                            <input id="mainBtnCancel1" style="display:none;" type="button" value="取消上传" onclick="swfu2.cancelQueue();" />
+                                          </span>
+                                          <span class="fieldset flash" id="mainPicProgress"></span>
+                                      </span>
+                                      <div name="mainPicBody" >
+                 
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              
+
+
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    刊登模板
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >描述图片</label>
+                                    <div class="controls">
+                                      <span>
+                                        <li data-target="#chooseDetailPicDialog" name="chooseDetailPic" class="btn btn-info" data-toggle="modal" >选择描述图</li></span>
+                                      <span>
+                                          <span>
+                                            <span id="localDetailPic">打开</span>
+                                            <span id="localDetailPicPlaceholder" ></span>
+                                            <input id="detailBtnCancel1" style="display:none;" type="button" value="取消上传" onclick="swfu3.cancelQueue();" />
+                                          </span>
+                                          <span class="fieldset flash" id="detailPicProgress"></span>
+                                      </span>
+                                      <div name="detailPicBody" >
+                 
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >刊登模板</label>
+                                    <div class="controls">
+                                      {html_options  options=$descTemplateList name=descTemplate class="form-control chzn-select" }
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >描述标题</label>
+                                    <div class="controls">
+                                      <input name="source" class="input focused" type="text">
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <div class="controls">
+                                      <div class="span12" id="content">
+                                        <div class="row-fluid">
+                                            <div class="block">
+                                                <div class="navbar navbar-inner block-header">
+                                                    <div class="muted pull-left">详情描述</div>
+                                                </div>
+                                                <div class="block-content collapse in">
+                                                   <textarea id="decText" name="dec"></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /block -->
+                                        </div>
+                                      </div>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    付款信息
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >PayPal</label>
+                                    <div class="controls">
+                                      {html_options  options=$paypalList name=paypal class="form-control chzn-select" }
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >付款说明</label>
+                                    <div class="controls">
+                                      <textarea name="PaymentInstruction"  style="width:600px; height:100px;" class="input focused" ></textarea>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    买家要求
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >买家要求</label>
+                                    <div class="controls">
+                                      <div id="upBuyerRequirement">
+                                        <ul style="list-style: none;">
+                                          <li style="list-style: none;">
+                                            <input type="radio" value="1" name="BuyerRequirementSpecified" onclick="changeBuyerRequirement('1')">
+                                            允许所有买家购买我的物品
+                                          </li>
+                                          <li style="list-style: none;">
+                                            <input type="radio" value="2" name="BuyerRequirementSpecified" onclick="changeBuyerRequirement('2')" checked="checked">
+                                            不允许以下买家购买我的物品
+                                            <ul class="buyerrequirement" id="BuyerRequirementDetail" style="margin-left:20px;" style="list-style: none;">
+                                              <li id="liLinkedPayPalAccount" style="list-style: none;">
+                                                <input value="true" type="checkbox" id="LinkedPayPalAccount" name="LinkedPayPalAccount">
+                                                没有 PayPal 账户
+                                              </li>
+                                              <li style="list-style: none;">
+                                                <input value="true" type="checkbox" name="ShipToRegistrationCountry" checked="checked">
+                                                主要运送地址在我的运送范围之外
+                                              </li>
+                                              <li style="list-style: none;">
+                                                <input value="true" type="checkbox" name="MaximumUnpaidItemStrikesInfo" checked="checked">
+                                                曾收到
+                                                <select name="MaximumUnpaidItemStrikesInfo_Count">
+                                                                                <option value="2" selected="selected">2</option>
+                                                  <option value="3">3</option>
+                                                  <option value="4">4</option>
+                                                  <option value="5">5</option>
+                                                </select>
+                                                个弃标个案，在过去
+                                                <select name="MaximumUnpaidItemStrikesInfo_Period">
+                                                  <option value="Days_30" selected="selected">30</option>
+                                                  <option value="Days_180">180</option>
+                                                  <option value="Days_360">360</option>
+                                                </select>
+                                                天</li>                    
+                                              <li style="list-style: none;">
+                                                <input value="true" type="checkbox" name="MaximumBuyerPolicyViolations" checked="checked">
+                                                曾收到
+                                                <select name="MaximumBuyerPolicyViolations_Count">
+                                                                                <option value="4" selected="selected">4</option>
+                                                  <option value="5">5</option>
+                                                  <option value="6">6</option>
+                                                  <option value="7">7</option>
+                                                </select>
+                                                个违反政策检举，在过去
+                                                <select name="MaximumBuyerPolicyViolations_Period">
+                                                  <option value="Days_30" selected="selected">30</option>
+                                                  <option value="Days_180">180</option>
+                                                </select>
+                                                天</li>
+                                              <li style="list-style: none;">
+                                                <input value="true" type="checkbox" name="MinFeedbackScoreSpecified" checked="checked">
+                                                信用指标等于或低于：
+                                                <select name="MinFeedbackScore">
+                                                  <option value="-1" selected="selected">-1</option>
+                                                  <option value="-2">-2</option>
+                                                  <option value="-3">-3</option>
+                                                </select>
+                                              </li>
+                                              <li style="list-style: none;">
+                                                <input value="true" type="checkbox" name="MaximumItemRequirements" onchange="js_MinimumFeedbackScoreSpecified(this);" checked="checked">
+                                                在过去10天内曾出价或购买我的物品，已达到我所设定的限制
+                                                <select name="MaximumItemRequirements_MaximumItemCount">
+                                                  <option value="1">1</option>
+                                                  <option value="2">2</option>
+                                                  <option value="3">3</option>
+                                                  <option value="4">4</option>
+                                                  <option value="5">5</option>
+                                                  <option value="6">6</option>
+                                                  <option value="7">7</option>
+                                                  <option value="8">8</option>
+                                                  <option value="9">9</option>
+                                                  <option value="10">10</option>
+                                                  <option value="25">25</option>
+                                                  <option value="50">50</option>
+                                                  <option value="75">75</option>
+                                                  <option value="100" selected="selected">100</option>
+                                                </select>
+                                              </li>
+                                              <li style="list-style: none;">
+                                                <ul style="list-style: none;">
+                                                  <li style="list-style: none;">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input value="true" type="checkbox" name="MinimumFeedbackScoreSpecified" id="MinimumFeedbackScoreSpecified_id">
+                                                    这项限制只适用于买家信用指数等于或低于
+                                                    <select name="MaximumItemRequirements_MinimumFeedbackScore">
+                                                      <option value="5">5</option>
+                                                      <option value="4">4</option>
+                                                      <option value="3">3</option>
+                                                      <option value="2">2</option>
+                                                      <option value="1">1</option>
+                                                      <option value="0">0</option>
+                                                    </select>
+                                                  </li>
+                                                </ul>
+                                              </li>
+                                            </ul>
+                                          </li>
+                                        </ul>                
+                                      
+                                    </div>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    退货政策
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >退货政策</label>
+                                    <div class="controls">
+                                      <select id="ReturnsAcceptedOption" name="ReturnsAcceptedOption" onchange="changeReturnPolicy(this.value)">
+                                      <option value="ReturnsAccepted" selected="selected">Returns Accepted</option>
+                                      <option value="ReturnsNotAccepted">Returns Not Accepted</option>
+                                    </select>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >退货时间</label>
+                                    <div class="controls">
+                                      <select id="ReturnsWithinOption" name="ReturnsWithinOption">
+                                        <option value="Days_14">14 days</option>
+                                        <option value="Days_30" selected="selected">30 days</option>
+                                        <option value="Days_60">60 days</option>
+                                      </select>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >运费承担</label>
+                                    <div class="controls">
+                                      <select id="ShippingCostPaidByOption" name="ShippingCostPaidByOption">
+                                        <option value="Buyer" selected="selected">Buyer</option>
+                                        <option value="Seller">Seller</option>
+                                      </select>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >退货政策详情</label>
+                                    <div class="controls">
+                                      <textarea name="ReturnPolicyDescription"  style="width:600px; height:100px;" class="input focused" ></textarea>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    物品所在地
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >物品所在地</label>
+                                    <div class="controls">
+                                      <input name="ItemLocation" class="input focused" type="text">
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >国家</label>
+                                    <div class="controls">
+                                      <select id="Country_id" name="Country">
+                                        <option value="CN">China</option>
+                                        <option value="US">USA</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="DE">Germany</option>
+                                        <option value="MY">Malaysia</option>
+                                        <option value="SG">Singapore</option>
+                                        <option value="HK">HongKong</option>   
+                                      </select>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >邮编</label>
+                                    <div class="controls">
+                                      <input name="postcode" class="input focused" type="text">
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    国内运输
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >运输方式</label>
+                                    <div class="controls">
+                                      <select id="idShippingService" name="ShippingService" onclick="calShippingFee(this.value)" class="form-control chzn-select">
+                                      </select>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >运费</label>
+                                    <div class="controls">
+                                      <input type="text" id="ShippingServiceCost"  value="0" name="ShippingServiceCost">
+                                      <input type="checkbox" />免费
+                                      <span class="help-in  line"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >额外每件加收</label>
+                                    <div class="controls">
+                                       <input type="text" class="txtfee" disabled="disabled" id="ShippingServiceAdditionalCost" value="0" name="ShippingServiceAdditionalCost">
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    国际运输
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >
+                                      
+                                      运输方式
+                                    </label>
+                                    <div class="controls">
+                                      <select id="InternationalShippingService" name="InternationalShippingService"></select>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >运费sss</label>
+                                    <div class="controls">
+                                      <input type="text" class="txtfee" id="InternationalShippingServiceCost" disabled="disabled" value="0" name="InternationalShippingServiceCost" />
+                                      <input type="checkbox" name="InternationalShippingServiceCostFree" checked="checked" id="InternationalShippingServiceCostFree" onclick="setShippingServiceFree('2')" />免费
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >额外每件加收</label>
+                                    <div class="controls">
+                                      <input type="text" class="txtfee" disabled="disabled" id="InternationalShippingServiceAdditionalCost" value="0" name="InternationalShippingServiceAdditionalCost">
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >运到</label>
+                                    <div class="controls">
+                                      <ul class="shipcountry" id="shipcountry" style="float: left;list-style: none;margin: 0 0 12px 0px">
+                                        <li style="float: left;list-style: none;">
+                                          <input checked="checked" type="checkbox" value="Americas" id="shippingLocation_0" name="shippingLocation[]">N. and S. America
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input checked="checked" type="checkbox" value="Asia" id="shippingLocation_1" name="shippingLocation[]">Asia
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input type="checkbox" value="AU" id="shippingLocation_2" name="shippingLocation[]">Australia
+                                        </li style="float: left;list-style: none">
+                                        <li style="float: left;list-style: none">
+                                          <input type="checkbox" value="MX" id="shippingLocation_3" name="shippingLocation[]">Mexico
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input checked="checked" type="checkbox" value="CA" id="shippingLocation_4" name="shippingLocation[]">Canada
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input type="checkbox" value="Worldwide" id="shippingLocation_5" name="shippingLocation[]">Worldwide
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input checked="checked" type="checkbox" value="DE" id="shippingLocation_6" name="shippingLocation[]">Germany
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input checked="checked" type="checkbox" value="Europe" id="shippingLocation_7" name="shippingLocation[]">Europe
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input type="checkbox" value="GB" id="shippingLocation_8" name="shippingLocation[]">United Kingdom
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input type="checkbox" value="JP" id="shippingLocation_9" name="shippingLocation[]">Japan
+                                        </li>
+                                        <li style="float: left;list-style: none">
+                                          <input type="checkbox" value="US" id="shippingLocation_10" name="shippingLocation[]">United States
+                                        </li>
+                                      </ul>
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >不运送国家</label>
+                                    <div class="controls">
+                                      <select id="ddlExclusionListType" name="ShippingExclusionListType" onchange="setShippingExclusion()">
+                                        <option value="0">运输至所有国家</option>
+                                        <option value="1">使用 eBay 站点设置</option>
+                                        <option value="2">选择不运送地区</option>
+                                      </select>
+                                      <span><li class="btn btn-info" onclick="setShippingExclusion()">设置不运送地区</li></span>
+                                      <div id="ExcludeShippingDetail"></div>
+                                      <input type="hidden" value="" name="ExcludeShipping" id="ExcludeShippingList" />
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >是否设置国际费率表</label>
+                                    <div class="controls">
+                                      <input name="InternationalRateTable" class="input focused" type="checkbox">
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="navbar navbar-inner block-header">
+                                  <div class="muted pull-left">
+                                    <i class="icon-chevron-up"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-down" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    广告设置
+                                  </div>
+                                  <div class="pull-right"><span class="badge badge-info"></span></div>
+                              </div>
+                              <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="control-group">
+                                    <label class="control-label" >小图</label>
+                                    <div class="controls">
+                                      <input type="checkbox" name="AD_Gallery" />
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >橱窗展示</label>
+                                    <div class="controls">
+                                      <input type="checkbox" name="AD_Plus" />
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                  <div class="control-group">
+                                    <label class="control-label" >国际站点曝光</label>
+                                    <div class="controls">
+                                      <input type="checkbox" name="AD_CrossBorderTrade" />
+                                      <span class="help-inline"></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-actions" style="width: 100%;height: 40px;padding-top: 15px;background-color: #cccccc;position: fixed;bottom: 0;">
+                                <span></span>>
+                                  <button name="checkFee" class="btn btn-primary" >查看刊登费用</button>
+                                  <button name="publish" class="btn btn-primary" >刊登</button>
+                                  <button name="add" class="btn btn-primary" >新增范本</button>
+                                  <button name="preview" class="btn btn-primary" >预览</button>
+                                </span>
+                              </div>
+                            </fieldset>
+                          </form>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        
+        <script src="{$smarty.const.TPL}/public/vendors/jquery.uniform.min.js"></script>
+        <script src="{$smarty.const.TPL}/public/js/template.js"></script>
+
+        <script src="http://source.huanhuan365.com/js/swfupload/swfupload/swfupload.js"></script>
+        <script src="http://source.huanhuan365.com/js/swfupload/js/swfupload.queue.js"></script>
+        <script src="http://source.huanhuan365.com/js/swfupload/js/fileprogress.js"></script>
+        <script src="{$smarty.const.TPL}/public/vendors/ckeditor/ckeditor.js"></script>
+        <script src="{$smarty.const.TPL}/public/vendors/ckeditor/adapters/jquery.js"></script>
+        <script src="http://source.huanhuan365.com/js/swfupload/js/handlers.js"></script>
+        {literal}
+        
+        <script>
+
+        </script>
+        {/literal}
+    </body>
+
+</html>

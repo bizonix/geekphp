@@ -1,0 +1,127 @@
+<?php
+/**
+ * 功能：产品管理
+ * @author zjr
+ * v 1.0
+ * 时间：2015/03/27
+ *
+ */
+class EbayTemplateView extends BaseView {
+    /**
+     * 构造函数
+     */
+    public function __construct() {
+        parent::__construct();
+        C(include WEB_PATH.'conf/order_conf.php');
+    }
+    /**
+     * 模板列表
+     * @return [type] [description]
+     */
+    public function view_templateList() {
+        $sourceCompany = array("3"=>"赛维科技");
+        $this->smarty->assign('sourceCompany',$sourceCompany);
+        $this->smarty->assign(array(
+            'sourceCompany'=>$sourceCompany,
+            'dataList' => A("Template")->act_templateList($this->_getCondition(array("company_id","spu"))),
+        ));
+        $this->smarty->display('user/publish/template/list.html');
+    }
+    public function view_templateEdit(){
+        $id  = $this->getParam("id",0);
+        $spu = $this->getParam("spu",'');
+        if(empty($id)||empty($spu)){
+            $this->error(get_promptmsg(40001));
+        }else{
+            $data = A($this->getAction())->act_getTemplateDetail(array("id"=>$id,"spu"=>$spu));
+            $this->smarty->assign(array(
+                "templateDetail" => $data[0],
+                "siteInfo"       => $this->_getSiteInfo(),
+            ));
+            $this->smarty->display('user/publish/template/ebay/edit.html');
+        }
+    }
+    public function view_addTemplate(){
+        $this->smarty->assign(array(
+            "sourceInfo" => array('1'=>"手动制作",'2'=>"url拉取",'3'=>"产品库选择"),
+            "siteInfo"   => $this->_getSiteInfo(),
+            "accountInfo"=> $this->_getAccontInfo(),
+            "addTypeInfo"=>array("1"=>"估价","2"=>"多属性","3"=>"拍卖"),
+            "calPriceType"=>array("1"=>"手动定价",2=>"自动定价"),
+            "durationInfo"=> array("Days_1","Days_3","Days_5","Days_7","Days_10","Days_30","GTC"),
+            "descTemplateList" => array("1" => "aaa","2" => "bbb","3" =>"ccc"),
+            "paypalList" => array("a@a.com" => "a@a.com","b@b.com" => "b@b.com"),
+        ));
+        $this->smarty->display('user/publish/template/ebay/add.html');
+    }
+    public function view_getShippingExclusion(){
+        $data = '{"errCode":0,"errMsg":"","data":{"Worldwide":[{"Description":"Africa","Location":"Africa","Region":"Worldwide"},{"Description":"Asia","Location":"Asia","Region":"Worldwide"},{"Description":"Central America and Caribbean","Location":"Central America and Caribbean","Region":"Worldwide"},{"Description":"Europe","Location":"Europe","Region":"Worldwide"},{"Description":"North America","Location":"North America","Region":"Worldwide"},{"Description":"Oceania","Location":"Oceania","Region":"Worldwide"},{"Description":"South America","Location":"South America","Region":"Worldwide"}],"Asia":[{"Description":"Middle East","Location":"Middle East","Region":"Asia"},{"Description":"Southeast Asia","Location":"Southeast Asia","Region":"Asia"},{"Description":"Tajikistan","Location":"TJ","Region":"Asia"},{"Description":"Bangladesh","Location":"BD","Region":"Asia"},{"Description":"Maldives","Location":"MV","Region":"Asia"},{"Description":"Pakistan","Location":"PK","Region":"Asia"},{"Description":"Kazakhstan","Location":"KZ","Region":"Asia"},{"Description":"Bhutan","Location":"BT","Region":"Asia"},{"Description":"Korea, South","Location":"KR","Region":"Asia"},{"Description":"Kyrgyzstan","Location":"KG","Region":"Asia"},{"Description":"Sri Lanka","Location":"LK","Region":"Asia"},{"Description":"China","Location":"CN","Region":"Asia"},{"Description":"Japan","Location":"JP","Region":"Asia"},{"Description":"Uzbekistan","Location":"UZ","Region":"Asia"},{"Description":"Turkmenistan","Location":"TM","Region":"Asia"},{"Description":"India","Location":"IN","Region":"Asia"},{"Description":"Nepal","Location":"NP","Region":"Asia"},{"Description":"Armenia","Location":"AM","Region":"Asia"},{"Description":"Mongolia","Location":"MN","Region":"Asia"},{"Description":"Azerbaijan Republic","Location":"AZ","Region":"Asia"},{"Description":"Georgia","Location":"GE","Region":"Asia"},{"Description":"Afghanistan","Location":"AF","Region":"Asia"},{"Description":"Russian Federation","Location":"RU","Region":"Asia"}],"Domestic Location":[{"Description":"Alaska\/Hawaii","Location":"Alaska\/Hawaii","Region":"Domestic Location"},{"Description":"US Protectorates","Location":"US Protectorates","Region":"Domestic Location"},{"Description":"APO\/FPO","Location":"APO\/FPO","Region":"Domestic Location"}],"Additional Locations":[{"Description":"PO Box","Location":"PO Box","Region":"Additional Locations"}],"Africa":[{"Description":"Western Sahara","Location":"EH","Region":"Africa"},{"Description":"Central African Republic","Location":"CF","Region":"Africa"},{"Description":"Saint Helena","Location":"SH","Region":"Africa"},{"Description":"Tanzania","Location":"TZ","Region":"Africa"},{"Description":"Uganda","Location":"UG","Region":"Africa"},{"Description":"Djibouti","Location":"DJ","Region":"Africa"},{"Description":"Sierra Leone","Location":"SL","Region":"Africa"},{"Description":"Lesotho","Location":"LS","Region":"Africa"},{"Description":"Ghana","Location":"GH","Region":"Africa"},{"Description":"Mozambique","Location":"MZ","Region":"Africa"},{"Description":"Congo, Republic of the","Location":"CG","Region":"Africa"},{"Description":"Congo, Democratic Republic of the","Location":"CD","Region":"Africa"},{"Description":"Rwanda","Location":"RW","Region":"Africa"},{"Description":"Chad","Location":"TD","Region":"Africa"},{"Description":"Liberia","Location":"LR","Region":"Africa"},{"Description":"Reunion","Location":"RE","Region":"Africa"},{"Description":"Guinea","Location":"GN","Region":"Africa"},{"Description":"Libya","Location":"LY","Region":"Africa"},{"Description":"Mayotte","Location":"YT","Region":"Africa"},{"Description":"Seychelles","Location":"SC","Region":"Africa"},{"Description":"Ethiopia","Location":"ET","Region":"Africa"},{"Description":"Malawi","Location":"MW","Region":"Africa"},{"Description":"Senegal","Location":"SN","Region":"Africa"},{"Description":"Comoros","Location":"KM","Region":"Africa"},{"Description":"Tunisia","Location":"TN","Region":"Africa"},{"Description":"Botswana","Location":"BW","Region":"Africa"},{"Description":"Equatorial Guinea","Location":"GQ","Region":"Africa"},{"Description":"Gabon Republic","Location":"GA","Region":"Africa"},{"Description":"Nigeria","Location":"NG","Region":"Africa"},{"Description":"Mauritania","Location":"MR","Region":"Africa"},{"Description":"Guinea-Bissau","Location":"GW","Region":"Africa"},{"Description":"Kenya","Location":"KE","Region":"Africa"},{"Description":"Swaziland","Location":"SZ","Region":"Africa"},{"Description":"South Africa","Location":"ZA","Region":"Africa"},{"Description":"Algeria","Location":"DZ","Region":"Africa"},{"Description":"Madagascar","Location":"MG","Region":"Africa"},{"Description":"Cape Verde Islands","Location":"CV","Region":"Africa"},{"Description":"Egypt","Location":"EG","Region":"Africa"},{"Description":"Zimbabwe","Location":"ZW","Region":"Africa"},{"Description":"Angola","Location":"AO","Region":"Africa"},{"Description":"Burundi","Location":"BI","Region":"Africa"},{"Description":"Mauritius","Location":"MU","Region":"Africa"},{"Description":"Cameroon","Location":"CM","Region":"Africa"},{"Description":"Togo","Location":"TG","Region":"Africa"},{"Description":"Cote d Ivoire (Ivory Coast)","Location":"CI","Region":"Africa"},{"Description":"Eritrea","Location":"ER","Region":"Africa"},{"Description":"Mali","Location":"ML","Region":"Africa"},{"Description":"Gambia","Location":"GM","Region":"Africa"},{"Description":"Niger","Location":"NE","Region":"Africa"},{"Description":"Burkina Faso","Location":"BF","Region":"Africa"},{"Description":"Morocco","Location":"MA","Region":"Africa"},{"Description":"Somalia","Location":"SO","Region":"Africa"},{"Description":"Zambia","Location":"ZM","Region":"Africa"},{"Description":"Benin","Location":"BJ","Region":"Africa"},{"Description":"Namibia","Location":"NA","Region":"Africa"}],"Central America and Caribbean":[{"Description":"Panama","Location":"PA","Region":"Central America and Caribbean"},{"Description":"Virgin Islands (U.S.)","Location":"VI","Region":"Central America and Caribbean"},{"Description":"Jamaica","Location":"JM","Region":"Central America and Caribbean"},{"Description":"British Virgin Islands","Location":"VG","Region":"Central America and Caribbean"},{"Description":"Grenada","Location":"GD","Region":"Central America and Caribbean"},{"Description":"Trinidad and Tobago","Location":"TT","Region":"Central America and Caribbean"},{"Description":"Puerto Rico","Location":"PR","Region":"Central America and Caribbean"},{"Description":"Bahamas","Location":"BS","Region":"Central America and Caribbean"},{"Description":"Dominica","Location":"DM","Region":"Central America and Caribbean"},{"Description":"Belize","Location":"BZ","Region":"Central America and Caribbean"},{"Description":"Haiti","Location":"HT","Region":"Central America and Caribbean"},{"Description":"Saint Kitts-Nevis","Location":"KN","Region":"Central America and Caribbean"},{"Description":"Turks and Caicos Islands","Location":"TC","Region":"Central America and Caribbean"},{"Description":"El Salvador","Location":"SV","Region":"Central America and Caribbean"},{"Description":"Montserrat","Location":"MS","Region":"Central America and Caribbean"},{"Description":"Antigua and Barbuda","Location":"AG","Region":"Central America and Caribbean"},{"Description":"Cayman Islands","Location":"KY","Region":"Central America and Caribbean"},{"Description":"Aruba","Location":"AW","Region":"Central America and Caribbean"},{"Description":"Saint Lucia","Location":"LC","Region":"Central America and Caribbean"},{"Description":"Guatemala","Location":"GT","Region":"Central America and Caribbean"},{"Description":"Netherlands Antilles","Location":"AN","Region":"Central America and Caribbean"},{"Description":"Saint Vincent and the Grenadines","Location":"VC","Region":"Central America and Caribbean"},{"Description":"Dominican Republic","Location":"DO","Region":"Central America and Caribbean"},{"Description":"Guadeloupe","Location":"GP","Region":"Central America and Caribbean"},{"Description":"Martinique","Location":"MQ","Region":"Central America and Caribbean"},{"Description":"Costa Rica","Location":"CR","Region":"Central America and Caribbean"},{"Description":"Anguilla","Location":"AI","Region":"Central America and Caribbean"},{"Description":"Honduras","Location":"HN","Region":"Central America and Caribbean"},{"Description":"Nicaragua","Location":"NI","Region":"Central America and Caribbean"},{"Description":"Barbados","Location":"BB","Region":"Central America and Caribbean"}],"Europe":[{"Description":"Portugal","Location":"PT","Region":"Europe"},{"Description":"Macedonia","Location":"MK","Region":"Europe"},{"Description":"Romania","Location":"RO","Region":"Europe"},{"Description":"Iceland","Location":"IS","Region":"Europe"},{"Description":"Denmark","Location":"DK","Region":"Europe"},{"Description":"Norway","Location":"NO","Region":"Europe"},{"Description":"Germany","Location":"DE","Region":"Europe"},{"Description":"Andorra","Location":"AD","Region":"Europe"},{"Description":"Italy","Location":"IT","Region":"Europe"},{"Description":"Finland","Location":"FI","Region":"Europe"},{"Description":"Croatia, Republic of","Location":"HR","Region":"Europe"},{"Description":"Gibraltar","Location":"GI","Region":"Europe"},{"Description":"Montenegro","Location":"ME","Region":"Europe"},{"Description":"Ireland","Location":"IE","Region":"Europe"},{"Description":"Monaco","Location":"MC","Region":"Europe"},{"Description":"Poland","Location":"PL","Region":"Europe"},{"Description":"Jersey","Location":"JE","Region":"Europe"},{"Description":"Bulgaria","Location":"BG","Region":"Europe"},{"Description":"Austria","Location":"AT","Region":"Europe"},{"Description":"Vatican City State","Location":"VA","Region":"Europe"},{"Description":"Estonia","Location":"EE","Region":"Europe"},{"Description":"San Marino","Location":"SM","Region":"Europe"},{"Description":"Spain","Location":"ES","Region":"Europe"},{"Description":"Serbia","Location":"RS","Region":"Europe"},{"Description":"Greece","Location":"GR","Region":"Europe"},{"Description":"France","Location":"FR","Region":"Europe"},{"Description":"Luxembourg","Location":"LU","Region":"Europe"},{"Description":"Hungary","Location":"HU","Region":"Europe"},{"Description":"United Kingdom","Location":"GB","Region":"Europe"},{"Description":"Belarus","Location":"BY","Region":"Europe"},{"Description":"Svalbard and Jan Mayen","Location":"SJ","Region":"Europe"},{"Description":"Switzerland","Location":"CH","Region":"Europe"},{"Description":"Liechtenstein","Location":"LI","Region":"Europe"},{"Description":"Moldova","Location":"MD","Region":"Europe"},{"Description":"Latvia","Location":"LV","Region":"Europe"},{"Description":"Albania","Location":"AL","Region":"Europe"},{"Description":"Sweden","Location":"SE","Region":"Europe"},{"Description":"Czech Republic","Location":"CZ","Region":"Europe"},{"Description":"Lithuania","Location":"LT","Region":"Europe"},{"Description":"Netherlands","Location":"NL","Region":"Europe"},{"Description":"Cyprus","Location":"CY","Region":"Europe"},{"Description":"Guernsey","Location":"GG","Region":"Europe"},{"Description":"Russian Federation","Location":"RU","Region":"Europe"},{"Description":"Malta","Location":"MT","Region":"Europe"},{"Description":"Slovakia","Location":"SK","Region":"Europe"},{"Description":"Ukraine","Location":"UA","Region":"Europe"},{"Description":"Belgium","Location":"BE","Region":"Europe"},{"Description":"Slovenia","Location":"SI","Region":"Europe"},{"Description":"Bosnia and Herzegovina","Location":"BA","Region":"Europe"}],"Middle East":[{"Description":"Turkey","Location":"TR","Region":"Middle East"},{"Description":"Bahrain","Location":"BH","Region":"Middle East"},{"Description":"Qatar","Location":"QA","Region":"Middle East"},{"Description":"Yemen","Location":"YE","Region":"Middle East"},{"Description":"United Arab Emirates","Location":"AE","Region":"Middle East"},{"Description":"Iraq","Location":"IQ","Region":"Middle East"},{"Description":"Oman","Location":"OM","Region":"Middle East"},{"Description":"Kuwait","Location":"KW","Region":"Middle East"},{"Description":"Saudi Arabia","Location":"SA","Region":"Middle East"},{"Description":"Israel","Location":"IL","Region":"Middle East"},{"Description":"Jordan","Location":"JO","Region":"Middle East"},{"Description":"Lebanon","Location":"LB","Region":"Middle East"}],"North America":[{"Description":"Greenland","Location":"GL","Region":"North America"},{"Description":"Mexico","Location":"MX","Region":"North America"},{"Description":"Canada","Location":"CA","Region":"North America"},{"Description":"Saint Pierre and Miquelon","Location":"PM","Region":"North America"},{"Description":"Bermuda","Location":"BM","Region":"North America"}],"Oceania":[{"Description":"Micronesia","Location":"FM","Region":"Oceania"},{"Description":"Wallis and Futuna","Location":"WF","Region":"Oceania"},{"Description":"Australia","Location":"AU","Region":"Oceania"},{"Description":"Kiribati","Location":"KI","Region":"Oceania"},{"Description":"Western Samoa","Location":"WS","Region":"Oceania"},{"Description":"Vanuatu","Location":"VU","Region":"Oceania"},{"Description":"American Samoa","Location":"AS","Region":"Oceania"},{"Description":"Nauru","Location":"NR","Region":"Oceania"},{"Description":"New Caledonia","Location":"NC","Region":"Oceania"},{"Description":"Niue","Location":"NU","Region":"Oceania"},{"Description":"Solomon Islands","Location":"SB","Region":"Oceania"},{"Description":"Cook Islands","Location":"CK","Region":"Oceania"},{"Description":"New Zealand","Location":"NZ","Region":"Oceania"},{"Description":"Tuvalu","Location":"TV","Region":"Oceania"},{"Description":"French Polynesia","Location":"PF","Region":"Oceania"},{"Description":"Guam","Location":"GU","Region":"Oceania"},{"Description":"Fiji","Location":"FJ","Region":"Oceania"},{"Description":"Papua New Guinea","Location":"PG","Region":"Oceania"},{"Description":"Marshall Islands","Location":"MH","Region":"Oceania"},{"Description":"Tonga","Location":"TO","Region":"Oceania"},{"Description":"Palau","Location":"PW","Region":"Oceania"}],"Southeast Asia":[{"Description":"Vietnam","Location":"VN","Region":"Southeast Asia"},{"Description":"Taiwan","Location":"TW","Region":"Southeast Asia"},{"Description":"Hong Kong","Location":"HK","Region":"Southeast Asia"},{"Description":"Brunei Darussalam","Location":"BN","Region":"Southeast Asia"},{"Description":"Thailand","Location":"TH","Region":"Southeast Asia"},{"Description":"Laos","Location":"LA","Region":"Southeast Asia"},{"Description":"Philippines","Location":"PH","Region":"Southeast Asia"},{"Description":"Macau","Location":"MO","Region":"Southeast Asia"},{"Description":"Singapore","Location":"SG","Region":"Southeast Asia"},{"Description":"Malaysia","Location":"MY","Region":"Southeast Asia"},{"Description":"Indonesia","Location":"ID","Region":"Southeast Asia"},{"Description":"Cambodia","Location":"KH","Region":"Southeast Asia"}],"South America":[{"Description":"Paraguay","Location":"PY","Region":"South America"},{"Description":"Falkland Islands (Islas Malvinas)","Location":"FK","Region":"South America"},{"Description":"Suriname","Location":"SR","Region":"South America"},{"Description":"Guyana","Location":"GY","Region":"South America"},{"Description":"French Guiana","Location":"GF","Region":"South America"},{"Description":"Bolivia","Location":"BO","Region":"South America"},{"Description":"Argentina","Location":"AR","Region":"South America"},{"Description":"Ecuador","Location":"EC","Region":"South America"},{"Description":"Chile","Location":"CL","Region":"South America"},{"Description":"Peru","Location":"PE","Region":"South America"},{"Description":"Uruguay","Location":"UY","Region":"South America"},{"Description":"Venezuela","Location":"VE","Region":"South America"},{"Description":"Brazil","Location":"BR","Region":"South America"},{"Description":"Colombia","Location":"CO","Region":"South America"}]}}';
+        $data = json_decode($data,true);
+        $data = $data['data'];
+        $this->ajaxReturn($data);
+    }
+    public function view_getCategoryInfoBySiteIdAndPid(){
+        $data = '{"errCode":0,"errMsg":"","data":[{"id":"264736","CategoryID":"11748","CategoryLevel":"2","CategoryName":"Agriculture &amp; Forestry","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"264756","CategoryID":"11765","CategoryLevel":"2","CategoryName":"Construction","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"264816","CategoryID":"92074","CategoryLevel":"2","CategoryName":"Electrical &amp; Test Equipment","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265054","CategoryID":"11815","CategoryLevel":"2","CategoryName":"Healthcare, Lab &amp; Life Science","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265212","CategoryID":"159693","CategoryLevel":"2","CategoryName":"Fuel &amp; Energy","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265231","CategoryID":"177641","CategoryLevel":"2","CategoryName":"Heavy Equipment","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265266","CategoryID":"177647","CategoryLevel":"2","CategoryName":"Heavy Equipment Attachments","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265294","CategoryID":"41489","CategoryLevel":"2","CategoryName":"Heavy Equipment Parts &amp; Accs","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265315","CategoryID":"61573","CategoryLevel":"2","CategoryName":"Light Equipment &amp; Tools","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265426","CategoryID":"11804","CategoryLevel":"2","CategoryName":"Manufacturing &amp; Metalworking","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265609","CategoryID":"1266","CategoryLevel":"2","CategoryName":"MRO &amp; Industrial Supply","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265813","CategoryID":"25298","CategoryLevel":"2","CategoryName":"Office","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"265963","CategoryID":"19273","CategoryLevel":"2","CategoryName":"Packing &amp; Shipping","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"266004","CategoryID":"26238","CategoryLevel":"2","CategoryName":"Printing &amp; Graphic Arts","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"266062","CategoryID":"11874","CategoryLevel":"2","CategoryName":"Restaurant &amp; Catering","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"266244","CategoryID":"11890","CategoryLevel":"2","CategoryName":"Retail &amp; Services","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"266323","CategoryID":"11759","CategoryLevel":"2","CategoryName":"Websites &amp; Businesses for Sale","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null},{"id":"266333","CategoryID":"26261","CategoryLevel":"2","CategoryName":"Other","CategoryParentID":"12576","sitesId":"2","VariationsEnabled":null}]}';
+        $data = json_decode($data,true);
+        $data = $data['data'];
+        $this->ajaxReturn($data);
+    }
+    public function view_getVariationPicList(){
+        $data = '{"errCode":"","errMsg":"","data":["http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_BW-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_B-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_W-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732-G-360beauty.jpg"]}';
+        $data = json_decode($data,true);
+        $data = $data['data'];
+        $this->ajaxReturn($data);
+    }
+    public function view_getDetailPicList(){
+        $data = '{"errCode":"","errMsg":"","data":["http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_BW-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_B-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_W-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732-G-360beauty.jpg"]}';
+        $data = json_decode($data,true);
+        $data = $data['data'];
+        $this->ajaxReturn($data);
+    }
+    public function view_getMainPicList(){
+        $data = '{"errCode":"","errMsg":"","data":["http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_BW-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_B-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732_W-G-360beauty.jpg","http:\/\/ebayimg.cndirect.com\/newcdn\/v6\/SV020732-G-360beauty.jpg"]}';
+        $data = json_decode($data,true);
+        $data = $data['data'];
+        $this->ajaxReturn($data);
+    }
+    public function view_uploadVariationPic(){
+        $companyId = '2';
+        $spu =  $this->_post("spu",'10006');
+        $upload_dir = "/image/variation/".$companyId."/".$spu."/";
+        $suffixFormat   =   explode('.',$_FILES['Filedata']["name"]);
+        $suffixFormat   =   $suffixFormat[count($suffixFormat)-1];
+        //$name = $spu."_".$this->_post("name").uniqid();
+        $name = $spu."_".basename($_FILES['Filedata']["name"],".".$suffixFormat);
+        $suffixArr = array('jpg','gif','png');
+        $ret = uploadFile('Filedata',$_SERVER['DOCUMENT_ROOT'].$upload_dir,$name,$suffixArr);
+        if($ret!=='Success'){
+            $this->ajaxReturn("",array('40002'=>get_promptmsg(40002).':'.$ret));
+        }else{
+            $suffixFormat   =   explode('.',$_FILES['Filedata']["name"]);
+            $suffixFormat   =   $suffixFormat[count($suffixFormat)-1];
+            $this->ajaxReturn(array("url"=>"http://".$_SERVER['HTTP_HOST'].$upload_dir.$name.".".$suffixFormat));
+        }
+    }
+    private function _getSiteInfo(){
+        return array(
+            "1"=>"美国",
+            "2"=>"英国",
+        );
+    }
+    private function _getAccontInfo(){
+        return array(
+            "1"=>"account1",
+            "2"=>"account2",
+        );
+    }
+    public function view_getShipService(){
+        $data = '{"errCode":0,"errMsg":"","data":{"home":{"EBAY_SHIPPING":[{"Description":"Express Shipping from outside US","ShippingServiceID":"165","ShippingService":"ExpressShippingFromOutsideUS","ServiceType":"Flat","ShippingCarrier":"","ShippingTimeMax":"7","ShippingTimeMin":"4"}]},"inter":{"EXPEDITED":[{"Description":"International Priority Shipping","ShippingServiceID":"50100","ShippingService":"InternationalPriorityShipping","ServiceType":["Flat","Calculated"],"ShippingCarrier":"","ShippingTimeMax":"8","ShippingTimeMin":"6"},{"Description":"aaaa","ShippingServiceID":"50110","ShippingService":"ExpeditedDeliveryToRussia","ServiceType":"Flat","ShippingCarrier":"","ShippingTimeMax":"14","ShippingTimeMin":"7"}]}}}';
+        $data = json_decode($data,true);
+        $data = $data['data'];
+        $this->ajaxReturn($data);
+    }
+    public function view_getAccountBySiteId(){
+        echo $this->ajaxReturn(A("AccountSiteRelation")->act_getList($this->_getCondition(array(array("site_id",0),array("status",1),array("platform",1,"`s`.platform"))),$this->_companyid));
+    }
+}
+?>

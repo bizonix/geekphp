@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>产品列表</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- Modal1 数据抓取 -->
+        <div class="modal fade" style="display:none;" id="fetchProductModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title">产品数据抓取</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group" style="padding:10px 15px;">
+                  	<div>
+                  		<select><option value="">选择平台</option><option value="1">ebay</option><option value="2">速卖通</option><option value="">亚马逊</option></select>
+                  		<select><option value="">单个产品</option><option value="">店铺所有产品</option></select>
+                  	</div>
+                    <div url-add><input name="urlInput" type="text" placeholder="网络图片地址" style="width:90%;"/><a href="javascript:void(0)" onclick="delUrlInput(this)">删除</a></div>
+                    <div><a id="addUrlInput" href="javascript:void(0);">新增</a><span msg-urlInputModal style="color:red;margin:0 20px;width:80%;text-align:center;"></span></div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="startPull" type="button" class="btn btn-primary">抓取</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {literal}
+        <script>
+        	$(function(){
+        		//点击增动作
+        		$("#addUrlInput").on('click',function(){
+        			$(this).parent('div').before($('div[url-add]:last').clone());
+        		});
+        		//展示模态框时 初始化数据
+        		$('input[image-modal]').click(function(){
+        			var newDiv = $('div[url-add]:last').clone();
+        			$('div[url-add]').remove();
+        			$("#addUrlInput").parent('div').before(newDiv);
+        			$('div[url-add] input').val("");
+        			$("#urlInputModal").data('belong',$(this).attr('image-modal'));
+        		});
+        		//点击确定按钮时
+        		$("button[name=startPull]").on("click",function(){
+        			var urlInput = $("input[name=urlInput]");
+        			var urlVal = '';
+        			if(urlInput.size()>0){
+        				if($("#urlInputModal").data('belong') == 'main'){
+        					urlInput.each(function(){
+        						urlVal = $.trim($(this).val());
+        						if(urlVal){
+        							$('div[role-mainImgDiv]').append('<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="'+urlVal+'"><img style="position:absolute;top:0px;right:0px;" src="/images/remove.png" /><img style="max-width:200px;max-height:100px;" name="" src="'+urlVal+'"/></a><p>&nbsp;</p><input type="hidden" name="main_images[]" value="'+urlVal+'" /></div>');
+        						}
+        					});
+            			}else if($("#urlInputModal").data('belong') == 'prop'){
+            				urlInput.each(function(){
+        						urlVal = $.trim($(this).val());
+        						if(urlVal){
+        							$('div[role-propImgDiv]').append('<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="'+urlVal+'"><img style="position:absolute;top:0px;right:0px;" src="/images/remove.png" /><img style="max-width:200px;max-height:100px;" name="" src="'+urlVal+'"/></a><p>&nbsp;</p><input type="hidden" name="extra_images[]" value="'+urlVal+'" /></div>');
+        						}
+        					});
+            			}
+        			}else{
+        				$("span[msg-urlInputModal]").text('请输入需要抓取图片的地址！');
+        			}
+        			$('#urlInputModal').modal('toggle');
+        		});
+        	});
+        	function delUrlInput(obj){
+        		if($('div[url-add]').size()>1){
+        			$(obj).parent('div').remove();
+        		}
+        	}
+        </script>
+        {/literal}
+        <!-- smarty定义的变量 -->
+        <!-- /smarty定义的变量 -->
+        <!-- Button trigger modal -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                     <div class="row-fluid">
+                        {include file="user/publish/publishHead.html"}
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">基础信息</div>
+                                <div class="pull-right"><span class="badge badge-info">{if isset($count)}{$count}{/if}</span></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <div class="table-toolbar">
+                                      <div class="btn-group pull-right">
+                                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-success">工具 <span class="caret"></span></button>
+                                         <ul class="dropdown-menu">
+                                            <li><a target="_blank" data-toggle="modal" data-target="#fetchProductModal" href="#">产品数据抓取</a></li>
+                                            <li><a target="_blank" href="#">一键刊登</a></li>
+                                         </ul>
+                                      </div>
+                                      <form action="#" method="post">
+                                          <div class="btn-group pull-left">
+                                             <select name="source_platform" style="width:100px;" id="selectError">
+                                                <option value=''>来源平台</option>
+                                                {foreach from=$platform key=k item=v}
+                                                  <option {if isset($p_source_platform) && $p_source_platform == $k}selected{/if} value='{$k}'>{$v.platform_cn_name}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="source_shop" style="width:100px;" id="selectError">
+                                                <option value=''>来源店铺</option>
+                                                {foreach from=$sourceShop item=v}
+                                                  <option {if isset($p_source_shop) && $p_source_shop == $v}selected{/if} value='{$v}'>{$v}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="import_type" style="width:100px;" id="selectError">
+                                                <option value=''>导入方式</option>
+                                                {foreach from=$importType key=k item=v}
+                                                  <option {if isset($p_import_type) && $p_import_type == $k}selected{/if} value='{$k}'>{$v}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <input name="spu" type="text" value="{if isset($p_spu)}{$p_spu}{/if}" class="input-small" placeholder="料号">
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <input name="creater" type="text" value="{if isset($p_creater)}{$p_creater}{/if}" class="input-small" placeholder="创建者">
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <button type="submit" title="查询" class="btn btn-success"><i class="icon-search icon-white"></i></button>
+                                          </div>
+                                      </form>
+                                   </div>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></span>#</th>
+                                                <th colspan="2" style="text-align:center;">产品信息</th>
+                                                <th style="text-align:center;">店铺</th>
+                                                <th style="text-align:center;">平台</th>
+                                                <th style="text-align:center;">方式</th>
+                                                <th style="text-align:center;">作者</th>
+                                                <th style="text-align:center;">时间</th>
+                                                <th style="text-align:center;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$goodsBasics item=val}
+                                              <tr class="odd gradeX">
+                                                <td style="text-align:center;"><p align="left"><input type="checkbox">{$val["id"]}</p></td>
+                                                <td style="text-align:center;"><img width="60px;" src="{$val['main_images'][0]}"/></td>
+												<td><p>spu：{if !empty($val['spu'])}{$val['spu']}{else}<span style="color:red;">未知</span>{/if}</p><p>{$val['title']}</p></td>
+                                                <td style="text-align:center;">{$val['source_shop']}</td>
+                                                <td style="text-align:center;">{$val['platform_str']}</td>
+                                                <td style="text-align:center;">{$val["import_type_str"]}</td>
+                                                <td style="text-align:center;">{$val["creater"]}-</td>
+                                                <td style="text-align:center;">{"Y-m-d H:i:s"|date:$val["add_time"]}</td>
+                                                <td>
+                                                  <div class="btn-group pull-right">
+                                                      <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
+                                                      <ul class="dropdown-menu">
+                                                        <li><a name="edit" href="/goodsBasic/goodsBasicEdit/goodsBasicId/{$val['id']}">编辑</a></li>
+                                                        <li><a name="makeWishTemplate" href="/template/templateWishEdit/goodsBasicId/{$val['id']}">制作Wish范本</a></li>
+                                                        <li><a name="operLog" href="/shops/addShopView/shopId/{$val['id']}">操作日志</a></li>
+                                                        <li><a name="delete" role-href="/shops/deleteShop/shopId/{$val['id']}">删除</a></li>
+                                                      </ul>
+                                                   </div>
+                                                </td>
+                                              </tr>
+                                            {/foreach}                                           
+                                        </tbody>
+                                    </table>
+                                    {$page}
+                                    <p>&nbsp;&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        {literal}
+        <script>
+        </script>
+        {/literal}
+    </body>
+
+</html>

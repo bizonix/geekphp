@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>wish范本编辑</title>
+        <meta charsert="utf-8"/>
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <script src="http://source.huanhuan365.com/js/swfupload/swfupload/swfupload.js"></script>
+        <script src="http://source.huanhuan365.com/js/swfupload/js/swfupload.queue.js"></script>  
+        <script src="http://source.huanhuan365.com/js/swfupload/js/fileprogress.js"></script>
+        <script type="text/javascript" src="{$smarty.const.TPL}/public/vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="{$smarty.const.TPL}/public/assets/wishEdit-validation.js"></script>
+        <script type="text/javascript" src="{$smarty.const.TPL}/public/js/uploadBasicInfo.js"></script>
+        <!-- Modal1 手动拉取 -->
+        <div class="modal fade" style="display:none;" id="urlInputModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title">抓取网络图片</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group" style="padding:10px 15px;">
+                    <div url-add><input name="urlInput" type="text" placeholder="网络图片地址" style="width:90%;"/><a href="javascript:void(0)" onclick="delUrlInput(this)">删除</a></div>
+                    <div><a id="addUrlInput" href="javascript:void(0);">新增</a><span msg-urlInputModal style="color:red;margin:0 20px;width:80%;text-align:center;"></span></div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="startPull" type="button" class="btn btn-primary">抓取</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {literal}
+        <script>
+        	$(function(){
+        		//点击增动作
+        		$("#addUrlInput").on('click',function(){
+        			$(this).parent('div').before($('div[url-add]:last').clone());
+        		});
+        		//展示模态框时 初始化数据
+        		$('input[image-modal]').click(function(){
+        			var newDiv = $('div[url-add]:last').clone();
+        			$('div[url-add]').remove();
+        			$("#addUrlInput").parent('div').before(newDiv);
+        			$('div[url-add] input').val("");
+        			$("#urlInputModal").data('belong',$(this).attr('image-modal'));
+        		});
+        		//点击确定按钮时
+        		$("button[name=startPull]").on("click",function(){
+        			var urlInput = $("input[name=urlInput]");
+        			var urlVal = '';
+        			if(urlInput.size()>0){
+        				if($("#urlInputModal").data('belong') == 'main'){
+        					urlInput.each(function(){
+        						urlVal = $.trim($(this).val());
+        						if(urlVal){
+        							$('div[role-mainImgDiv]').append('<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="'+urlVal+'"><img style="position:absolute;top:0px;right:0px;" src="/images/remove.png" /><img style="max-width:200px;max-height:100px;" name="" src="'+urlVal+'"/></a><p>&nbsp;</p><input type="hidden" name="main_images[]" value="'+urlVal+'" /></div>');
+        						}
+        					});
+            			}else if($("#urlInputModal").data('belong') == 'prop'){
+            				urlInput.each(function(){
+        						urlVal = $.trim($(this).val());
+        						if(urlVal){
+        							$('div[role-propImgDiv]').append('<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="'+urlVal+'"><img style="position:absolute;top:0px;right:0px;" src="/images/remove.png" /><img style="max-width:200px;max-height:100px;" name="" src="'+urlVal+'"/></a><p>&nbsp;</p><input type="hidden" name="extra_images[]" value="'+urlVal+'" /></div>');
+        						}
+        					});
+            			}
+        			}else{
+        				$("span[msg-urlInputModal]").text('请输入需要抓取图片的地址！');
+        			}
+        			$('#urlInputModal').modal('toggle');
+        		});
+        	});
+        	function delUrlInput(obj){
+        		if($('div[url-add]').size()>1){
+        			$(obj).parent('div').remove();
+        		}
+        	}
+        </script>
+        {/literal}
+        <!-- /Modal1 选择url -->
+		<!-- Modal2 新增属性 -->
+		<div class="modal fade" style="display:none;" id="addVariantModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title">新增属性</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group" style="padding:10px 15px;">
+                    <div add-variant><input name="variantItem" type="text" placeholder="标签" style="width:20%;"/>&nbsp;&nbsp;<input name="variantDisplayName" type="text" placeholder="显示名" style="width:20%;"/>&nbsp;&nbsp;<input name="variantValue" type="text" placeholder="取值" style="width:40%;"/>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="delVariantInput(this)">删除</a></div>
+                    <div><a id="addVariantInput" href="javascript:void(0);">新增</a><span msg-urlInputModal style="color:red;margin:0 20px;width:80%;text-align:center;"></span></div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="startAdd" type="button" class="btn btn-primary">添加</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {literal}
+        <script>
+        	$(function(){
+        		//点击增动作
+        		$("#addVariantInput").on('click',function(){
+        			$(this).parent('div').before($('div[add-variant]:last').clone());
+        		});
+        		//展示模态框时 初始化数据
+        		$('a[variant-modal]').click(function(){
+        			var newDiv = $('div[add-variant]:last').clone();
+        			$('div[add-variant]').remove();
+        			$("#addVariantInput").parent('div').before(newDiv);
+        			$('div[add-variant] input').val("");
+        		});
+        		//点击确定按钮时
+        		$("button[name=startAdd]").on("click",function(){
+        			var addVariant = $("div[add-variant]");
+        			if(addVariant.size()>0){
+       					addVariant.each(function(){
+       						var variantItem = $.trim($(this).find("input[name=variantItem]").val());
+       						var variantDisplayName = $.trim($(this).find("input[name=variantDisplayName]").val());
+       						var variantValue = $.trim($(this).find("input[name=variantValue]").val());
+       						if(variantItem && variantDisplayName){
+       							var insertAfterObj = $('tr[table-head] td[source-prop]:last');
+       							insertAfterObj.after('<td new-prop>'+variantDisplayName+'/'+variantItem+'&nbsp;<a title="删除" style="font-weight:bolder;" href="javascript:void(0);" onclick="delVariant(this);">-</a></td>');
+       							$('tr[table-var]').find("td:eq("+insertAfterObj.index()+")").after('<td new-prop><input name="comVar['+variantItem+'][]" value="'+variantValue+'" style="width:50px;"></td>');
+       						}
+       					});
+        			}
+        			$('#addVariantModal').modal('toggle');
+        		});
+        	});
+        	function delVariantInput(obj){
+        		if($('div[add-variant]').size()>1){
+        			$(obj).parent('div').remove();
+        		}
+        	}
+        	function delVariant(obj){
+        		var index = $(obj).parents('td').index();
+        		$(obj).parents('td').remove();
+        		$('tr[table-var]').find('td:eq('+index+')').remove();
+        	}
+        </script>
+        {/literal}
+		<!-- /Modal2 新增属性 -->
+		
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                      <!-- smarty定义的变量 -->
+                      {assign var='_platforms' value=PLATFORMS|C}
+                      <!-- /smarty定义的变量 -->
+                     <div class="row-fluid">
+                        {include file="user/publish/publishHead.html"}
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Wish Listing编辑</div>
+                                <input type="hidden" name="loginName" value="{$loginName}" />
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <form class="form-horizontal" action="#" method="post" onsubmit="return false;" id="editTemplateForm">
+                                      <fieldset>
+                                      	<div class="alert alert-error hide">
+											<button class="close" data-dismiss="alert"></button>
+											你有表单信息填写不完整，请完整后提交.
+										</div>
+										<div class="alert alert-success hide">
+											<button class="close" data-dismiss="alert"></button>
+											检测信息完整性成功!
+										</div>
+                                      	<legend>Listing编辑</legend>
+                                      	<div class="control-group">
+                                          <label class="control-label">spu</label>
+                                          <div class="controls">
+                                            <input type="hidden" name="company_id" value="{$lsInfo.main.company_id}"/>
+                                            <input name="id" value="{$lsInfo.main.id}" type="hidden">
+                                            <input name="parent_sku" value="{$lsInfo.main.spu}" type="hidden">
+                                            <label>{$lsInfo.main.spu}</label>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput02">标题/title<span class="required">*</span></label>
+                                          <div class="controls">
+                                            <input name="name" value="{$lsInfo.detail.name}" class="input focused" id="focusedInput02" type="text">
+                                            <span class="help-inline">必填（标题）</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput02">账号<span class="required">*</span></label>
+                                          <div class="controls">
+                                          	<input name="account" value="{$lsInfo.main.account}" type="hidden">
+                                            <label>{if isset($shops[$lsInfo.main.account])}{$shops[$lsInfo.main.account]['shop_account']}{/if}</label>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput03">标签/tags<span class="required">*</span></label>
+                                          <div class="controls">
+                                            <input name="tags" value="{$lsInfo.detail.tags}" class="input focused" id="focusedInput03" placeholder="英文字母" type="text">
+                                            <span class="help-inline">必填 （最多只能输入10个标签）</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput04">商标/brand</label>
+                                          <div class="controls">
+                                            <input name="brand" value="{$lsInfo.detail.brand}" class="input focused" id="focusedInput04" placeholder="输入商标名称" type="text">
+                                            <span class="help-inline">非必填</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput05">产品代码</label>
+                                          <div class="controls">
+                                            <input name="upc" value="{$lsInfo.detail.upc}" class="input focused" id="focusedInput05" placeholder="产品生产代码" type="text">
+                                            <span class="help-inline">非必填（12位数字）</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput06">产品详情链接</label>
+                                          <div class="controls">
+                                            <input name="landing_page_url" value="{$lsInfo.detail.landing_page_url}" class="input focused" id="focusedInput06" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+
+
+                                        <div class="control-group">
+                                          <label class="control-label">sku属性<span class="required">*</span></label>
+                                          <div class="controls">
+                                            <table class="table">
+                                            	<tr table-head>
+                                            		<td source-prop>子料号<span style="color:red;">*</span></td>
+                                            		<td source-prop>库存<span style="color:red;">*</span></td>
+                                            		<td source-prop>价格<span style="color:red;">*</span></td>
+                                            		<td source-prop>运费<span style="color:red;">*</span></td>
+                                            		<td source-prop>颜色 <a class="icon-info-sign" target="_blank" href="http://merchant.wish.com/documentation/colors"></a></td>
+                                            		<td source-prop>尺寸<a class="icon-info-sign" target="_blank" href="http://merchant.wish.com/documentation/sizes"></a></td>
+                                            		<td source-prop>原价</td>
+                                            		<td source-prop>运送时间</td>
+                                            		<td></td>
+                                            	</tr>
+                                            	{if count($lsInfo.detail.variations) > 0}
+                                            	{foreach from=$lsInfo.detail.variations item="var"}
+                                            	<tr table-var>
+                                            		<td><input name="comVar[sku][]" value="{$var.sku}" style="width:100px;" placeholder="WC00123_1"/></td>
+                                            		<td><input name="comVar[inventory][]" value="{$var.inventory}" style="width:50px;" placeholder="500"/></td>
+                                            		<td><input name="comVar[price][]" value="{$var.price}" style="width:50px;" placeholder="0.00"/></td>
+                                            		<td><input name="comVar[shipping][]" value="{$var.shipping}" style="width:50px;" placeholder="0.00"/></td>
+                                            		<td><input name="comVar[color][]" value="{if isset($var.color)}{$var.color}{/if}" style="width:50px;" placeholder="red"/></td>
+                                            		<td><input name="comVar[size][]" value="{if isset($var.size)}{$var.size}{/if}" style="width:50px;" placeholder="L"/></td>
+                                            		<td><input name="comVar[msrp][]" value="{if isset($var.msrp)}{$var.msrp}{/if}" style="width:50px;" placeholder="0.00"/></td>
+                                            		<td><input name="comVar[shipping_time][]" value="{if isset($var.shipping_time)}{$var.shipping_time}{/if}" style="width:50px;" placeholder="7-28"/></td>
+                                            		<td><span onclick="delVariants(this);" class="btn btn-danger btn-mini"><i class="icon-minus icon-white"></i></span></td>
+                                            	</tr>
+                                            	{/foreach}
+                                            	{else}
+                                            	<tr table-var>
+                                            		<td><input name="comVar[sku][]" style="width:100px;" placeholder="WC00123_1"/></td>
+                                            		<td><input name="comVar[inventory][]" style="width:50px;" placeholder="500"/></td>
+                                            		<td><input name="comVar[price][]" style="width:50px;" placeholder="0.00"/></td>
+                                            		<td><input name="comVar[shipping][]" style="width:50px;" placeholder="0.00"/></td>
+                                            		<td><input name="comVar[color][]" style="width:50px;" placeholder="red"/></td>
+                                            		<td><input name="comVar[size][]" style="width:50px;" placeholder="L"/></td>
+                                            		<td><input name="comVar[msrp][]" style="width:50px;" placeholder="0.00"/></td>
+                                            		<td><input name="comVar[shipping_time][]" style="width:50px;" placeholder="7-28"/></td>
+                                            		<td><span onclick="delVariants(this);" class="btn btn-danger btn-mini"><i class="icon-minus icon-white"></i></span></td>
+                                            	</tr>
+                                            	{/if}
+                                            	<tr table-add-button><td colspan="20"><a href="javascript:void(0);" onclick="addVariants();">新增</a></td></tr>
+                                            </table>
+                                          </div>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="control-group">
+                                          <label class="control-label"><p>主图(12以内)<span class="required">*</span></p><p><input image-modal="main" data-toggle="modal" data-target="#urlInputModal" type="button" class="btn btn-primary" style="width:65px;height:29px;" value="网络" /></p><button id="mainImg">上传</button>
+                                          <input id="mainBtnCancel1" style="display:none;" type="button" value="取消所有上传" onclick="swfu1.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+                                          <div class="fieldset flash" id="mainImgProgress"></div>
+                                          </label>
+                                          <div role-mainImgDiv class="controls">
+                                          <div id="showMainImgErr" style="color:red;">至少选择一张主图</div>
+                                          {foreach from=$lsInfo.detail.main_images key=key item=img}
+                                          	<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="{$img}"><img style="max-width:200px;max-height:100px;" name="" src="{$img}"/></a><p>&nbsp;</p><input type="hidden" name="main_images[]" value="{$img}" /></div>
+                                          {/foreach}
+                                          </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="control-group">
+                                          <label class="control-label"><p>属性图(12张以内)</p><p><input image-modal="prop" data-toggle="modal" data-target="#urlInputModal" type="button" class="btn btn-primary" style="width:65px;height:29px;" value="网络" /></p><button id="propImg">上传</button>
+                                          <input id="propBtnCancel1" style="display:none;" type="button" value="取消所有上传" onclick="swfu2.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+                                          <div class="fieldset flash" id="propImgProgress"></div>
+                                          </label>
+                                          <div role-propImgDiv class="controls">
+                                          {foreach from=$lsInfo.detail.extra_images key=key item=img}
+                                          	<div role-propImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="{$img}"><img style="max-width:200px;max-height:100px;" name="" src="{$img}"/></a><p>&nbsp;</p><input type="hidden" name="extra_images[]" value="{$img}" /></div>
+                                          {/foreach}
+                                          </div>
+                                        </div>
+                                        <hr/>
+                                        
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="description">描述</label>
+                                          <div class="controls">
+                                            <textarea id="description" name="description" class="input-xlarge" style="width:90%;height:250px;">{$lsInfo.detail.description}</textarea>
+                                          </div>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-actions">
+                                          <button name="updateListingBtn" class="btn btn-primary">修改在线Listing</button>
+                                          <button type="reset" class="btn">取消</button>
+                                        </div>
+                                      </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+        	  FormValidation.init();
+        	  $('button[name=updateListingBtn]').on('click',function(){
+        		  $('form').data('submitBtn',$(this).attr('name'));
+        	  });
+              //点击自动选中
+              $(':checkbox').click(function(e){
+            	  if($(this).parent('span[shop-span]').attr('shop-span') == 'all'){
+            		  if($(this).prop('checked')){
+            			  $('span[shop-span]').find(':checkbox').prop('checked',true);
+            		  }else{
+            			  $('span[shop-span]').find(':checkbox').prop('checked',false);
+            		  }
+            	  }
+            	  e.stopPropagation();
+           	  });
+              $('span[shop-span]').mouseover(function(){$(this).css('cursor','pointer')}).on('click',function(){
+            	  if($(this).find(':checkbox').prop('checked')){
+            		  if($(this).attr('shop-span') == 'all'){
+            			  $('span[shop-span]').find(':checkbox').prop('checked',false);
+            		  }else{
+            			  $(this).find(':checkbox').prop('checked',false);
+            		  }
+            	  }else{
+            		  if($(this).attr('shop-span') == 'all'){
+            			  $('span[shop-span]').find(':checkbox').prop('checked',true);
+            		  }else{
+            			  $(this).find(':checkbox').prop('checked',true);
+            		  }
+            	  }
+              });
+              
+          });
+          function addVariants(){
+        	  $('tr[table-var]:last').after($('tr[table-var]:last').clone());
+          }
+          function delVariants(obj){
+        	  //最后一个不允许删除
+        	  if($('tr[table-var]').size() > 1){
+        		  $(obj).parents('tr[table-var]').remove();
+        	  }
+          }
+          
+          //刊登动作
+          function submitUpdateListing(){
+        	//判断主图
+        	  if($("input[name='main_images[]']").size() == 0){
+        		  alert('至少上传一张主图');
+        		  return ;
+        	  }
+        	  $.ajax({
+	       	      type  : "POST",
+	       	      async : false,
+	       	      url   : '/wishListing/updateListing',
+	       	      dataType : "json",
+	       	      data : $("#editTemplateForm").serialize(),
+	       	      success : function(ret){
+	       	          if(ret.errCode == '200'){
+	       	      		  location.reload();
+	       	          }else{
+	       	        	  alert(ret.errMsg);
+	       	          }
+	       	      },
+	       	  });
+          }
+          
+          //验证
+          function checkData(){
+        	  var res = handleValidation1();
+        	  if(!res){
+        		  FormValidation.scrollTo();
+        	  }
+        	  return res;
+          }
+          
+        </script>
+        {/literal}
+    </body>
+
+</html>

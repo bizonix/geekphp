@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>订单列表</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                      <!-- smarty定义的变量 -->
+                      {assign var='_platforms' value=PLATFORMS|C}
+                      {if $shop_account}{assign var='title' value='修改'}{else}{assign var='title' value='添加'}{/if}
+                      <!-- /smarty定义的变量 -->
+                     <div class="row-fluid">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="/shops/shopListView">店铺列表</a> <span class="divider">|</span>    
+                                </li>
+                                {if $title=="修改"}
+                                <li>
+                                    <a href="/shops/addShopView">添加店铺</a> <span class="divider">|</span>    
+                                </li>
+                                <li>{$title}店铺</li>
+                                {else}
+                                <li>{$title}店铺</li>
+                                {/if}
+                                
+                            </ul>
+                        </div>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{$title}店铺</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <form class="form-horizontal" action="/shops/addShop" method="post" id="addShopForm">
+                                      <fieldset>
+                                        <legend>{$title}店铺</legend>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput">店铺账号</label>
+                                          <div class="controls">
+                                            <input name="shopAccount" value="{$p_shopAccount}{$shop_account}" class="input focused" id="focusedInput" type="text" value="">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">所属平台</label>
+                                          <div class="controls">
+                                            <select name="platform" id="select01">
+                                              <option value="{$platform}">{$_platforms[$platform]['platformName']}</option>
+                                              {foreach from=$_platforms key=k item=v}
+                                                  {if $k != '0' and $k != $platform}
+                                                    <option value="{$k}">{$v['platformName']}</option>
+                                                  {/if}
+                                              {/foreach}
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">所属团体</label>
+                                          <div class="controls">
+                                            {if !empty($groupInfo)}
+                                              <span class="input uneditable-input">{$groupInfo["cn_name"]}</span>
+                                            {else}
+                                              <span class="input uneditable-input"></span>
+                                              <span class="help-inline"><a href="/group/addGroupView">新建</a></span>
+                                            {/if}
+                                          </div>
+                                        </div>
+                                        
+                                        <div role-token role-2 role-4 class="control-group">
+                                          <label  class="control-label" for="inputError">appKey</label>
+                                          <div class="controls">
+                                            <input name="token[appKey]" value="{$p_token['appKey']}{$token['appKey']}" type="text">
+                                          </div>
+                                        </div>
+                                        <div role-token role-2 class="control-group">
+                                          <label class="control-label" for="inputError">appSecret</label>
+                                          <div class="controls">
+                                            <input name="token[appSecret]" value="{$p_token['appSecret']}{$token['appSecret']}" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+
+                                        <div role-token role-1 class="control-group">
+                                          <label class="control-label" for="inputError">devID</label>
+                                          <div class="controls">
+                                            <input name="token[devID]" value="{$p_token['devID']}{$token['devID']}" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div role-token role-1 class="control-group">
+                                          <label class="control-label" for="inputError">appID</label>
+                                          <div class="controls">
+                                            <input name="token[appID]" value="{$p_token['appID']}{$token['appID']}" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div role-token role-1 class="control-group">
+                                          <label class="control-label" for="inputError">certID</label>
+                                          <div class="controls">
+                                            <input name="token[certID]" value="{$p_token['certID']}{$token['certID']}" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div role-token role-1 class="control-group">
+                                          <label class="control-label" for="inputError">serverUrl</label>
+                                          <div class="controls">
+                                            <input name="token[serverUrl]" value="{if $p_token['serverUrl']}{$p_token['serverUrl']}{elseif $token['serverUrl']}{$token['serverUrl']}{else}https://api.ebay.com/ws/api.dll{/if}" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div role-token role-1 class="control-group">
+                                          <label class="control-label" for="inputError">userToken</label>
+                                          <div class="controls">
+                                            <textarea  name="token[userToken]">
+                                            {$p_token['userToken']}{$token['userToken']}
+                                            </textarea>
+                                          </div>
+                                        </div>
+
+                                        
+                                        <div class="form-actions">
+                                          <button name="saveBtn" class="btn btn-primary">{$title}</button>
+                                          <button type="reset" class="btn">取消</button>
+                                        </div>
+                                      </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+              //添加賬號時失去焦點時的動作
+              $("input[name=shopAccount]").on("blur",function(){
+                  var thisObj = $(this);
+                  if($.trim(thisObj.val()) && $.trim(thisObj.val()) != thisObj.data("value")){
+                    $.ajax({
+                      type  : "POST",
+                      async : false,
+                      url   : '/shops/checkShopIsExist/shopAccount/'+$.trim(thisObj.val())+'/platform/'+$("#select01").val(),
+                      dataType : "json",
+                      success : function(data){
+                        if(data.data == false){
+                            checkInput(thisObj,'success','该平台账号可用');
+                        }else{
+                            checkInput(thisObj,'error','该平台账号已经存在');
+                        }
+                        thisObj.data("value",thisObj.val());
+                      }
+                    });
+                  }
+              });
+              //点击店铺时
+              $("#select01").on("change",function(){
+                  $("div[role-token]").css("display","none");
+                  $("div[role-"+$(this).val()+"]").css("display","block");
+              });
+              $("div[role-token]").css("display","none");
+              $("div[role-"+$("#select01").val()+"]").css("display","block");
+
+              //保存时
+              $("button[name=saveBtn]").on("click",function(){
+                  $.ajax({
+                      type  : "POST",
+                      async : false,
+                      url   : '/shops/addShop',
+                      data  : $("#addShopForm").serialize(),
+                      dataType : "json",
+                      success : function(data){
+                      }
+                  });
+              });
+          });
+          function checkInput(obj,flag,msg){
+              obj.parents(".control-group").removeClass().addClass("control-group "+flag);
+              obj.siblings("span").text(msg);
+          }
+        </script>
+        {/literal}
+        <link href="{$smarty.const.TPL}/public/vendors/chosen.min.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/chosen.jquery.min.js"></script>
+        <script>
+          $(function(){
+              $(".chzn-select").chosen();
+          });
+        </script>
+    </body>
+
+</html>

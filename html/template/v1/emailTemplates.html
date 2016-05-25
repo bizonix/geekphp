@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>emailTemplate</title>
+</head>
+
+<body>
+<div style="float:left;width:100%;height:100%;background:#ececec;">
+	<div style="width:605px;height:auto;margin:40px auto;">
+    	<div style="float:left;width:565px;height:25px;padding:20px;background:#02b4fe;border-top-left-radius:5px;border-top-right-radius:5px;-border-moz-topleft-radius:5px;-border-moz-topright-radius:5px;">
+        	<img src="http://www.weclu.com/images/logo.png" />
+        	<span style="margin-left:500px;margin-bottom:10px;font-size:14px; font-family:微软雅黑;border-bottom:1px dashed #CCCCCC;">联系我们</span>
+        </div>
+        <div style="float:left;width:555px;padding:25px;margin-bottom:0;line-height:25px;font-size:14px; font-family:微软雅黑;border-bottom:1px dashed #CCCCCC;background:white;">
+        	<h3 style="font-size:16px">尊敬的用户，您好：</h3>
+            <p>
+            <!-- 您好，您于 2014-12-23 15:10:02 在华成云商操作申请认证分销商，
+管理员已经处理您的申请 -->
+			{title}
+			</p>
+            <p style='color:#0a8de8;'>
+           <!--  申请结果:已认证<br />
+可分销类目：***** -->
+			{content}
+            </p>
+           <!--  <p>
+            查看更多可分销产品,请点击:<br />
+			<a href="#" target="_blank" style="color:#0a8de8;">http://fenxiao.valsun,cn</a>
+            </p> -->
+            {tips}
+            <p>
+            如无法点击，请手动复制以上链接，粘贴至浏览器打开。<br />
+如果非本人操作，请忽略本邮件。
+            </p>
+        </div>
+        <div style="float:left;width:555px;padding:20px 25px 0 25px;background:white;line-height:25px;font-size:14px;color:#6d6868;font-family:微软雅黑;border-bottom:1px dashed #CCCCCC;">
+            <a href="http://www.weclu.com" target="_blank" style="float:left;width:320px;height:40px;line-height:40px;text-align:center;color:white; text-decoration:none;margin-left:120px;background:#ff9e01;border-radius:5px;-border-moz-radius:5px;">前往</a>
+            <p style="float:left;width:100%;text-align:center;">
+            这是一封系统邮件，请勿直接回复。
+            </p>
+        </div>
+        <div style="float:left;width:100%;background:white;line-height:25px;font-size:12px;color:#6d6868;font-family:微软雅黑;border-bottom-left-radius:5px;border-bottom-right-radius:5px;-border-moz-bottomleft-radius:5px;-border-moz-bottomright-radius:5px;">
+            <p style="margin-left:90px;">
+            版权所有Copyright©深圳市维库网络科技<br />
+			地址:深圳市龙岗区平湖镇华南城1号交易广场6楼 联系QQ:1961455598
+			</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>站点账号映射</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+        <link href="{$smarty.const.TPL}/public/vendors/chosen.min.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- smarty定义的变量 -->
+        <!-- /smarty定义的变量 -->
+        <!-- /Modal4 -->
+        <div  name="modifyHtml">
+          <div>
+            <div class="control-group">
+              <label class="control-label" >站点:</label>
+              <div class="controls">
+                {html_options  options=$siteInfo name=site_id class="form-control chzn-select"}
+                <span class="help-inline"></span>
+              </div>
+            </div>
+             <div class="control-group">
+              <label class="control-label" >账号:</label>
+              <div class="controls">
+                {html_options  options=$shopInfo name=shop_id class="form-control chzn-select"}
+                <span class="help-inline"></span>
+              </div>
+            </div>
+             <div class="control-group">
+              <label class="control-label" >状态</label>
+              <div class="controls">
+                {html_options  options=$isLimited name=status class="form-control chzn-select"}
+                <span class="help-inline"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div  name="addHtml">
+          <div>
+            <div class="control-group">
+              <label class="control-label" >站点:</label>
+              <div class="controls">
+                {html_options  options=$siteInfo name=site_id class="form-control chzn-select"}
+                <span class="help-inline"></span>
+              </div>
+            </div>
+             <div class="control-group">
+              <label class="control-label" >账号:</label>
+              <div class="controls">
+                {html_options  options=$shopInfo name=shop_id class="form-control chzn-select"}
+                <span class="help-inline"></span>
+              </div>
+            </div>
+             <div class="control-group">
+              <label class="control-label" >状态</label>
+              <div class="controls">
+                {html_options  options=$isLimited name=status class="form-control chzn-select"}
+                <span class="help-inline"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div  name="delHtml">
+          <div>
+            确定删除吗？
+          </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                     <div class="row-fluid">
+                        {include file="user/publish/publishHead.html"}
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">范本列表</div>
+                                <div class="pull-right"><span class="badge badge-info"></span></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom: 150px;">
+                                   <div class="table-toolbar">
+                                      <div class="btn-group pull-right">
+                                         <button class="btn btn-primary" data-target="#add" name="add" data-toggle="modal">新增</button>
+                                      </div>
+                                      <form action="" method="post">
+                                          <div class="btn-group pull-left">
+                                            站点:
+                                            {html_options  options=$siteInfo name=site_id class="form-control chzn-select" selected="{$p_site_id}" onchange='this.form.submit()'}
+                                            状态{html_options  options=$isLimited name=status class="form-control chzn-select" selected="{$p_status}" onchange='this.form.submit()'}
+                                          </div>
+                                      </form>
+                                   </div>
+                                    
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></span>#</th>
+                                                <th>id</th>
+                                                <th>站点</th>
+                                                <th>账号</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          {foreach from=$dataList item=val}
+                                              <tr class="even gradeC" style="border-top:none;">
+                                                <td><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></td>
+                                                <td >{$val['id']}</td>
+                                                <td >{$siteInfo[$val['site_id']]}</td>
+                                                <td >{$shopInfo[$val['shop_id']]}</td>
+                                                <td >{$isLimited[$val['status']]}</td>
+                                                <td data-id="{$val['id']}" data-spu="{$val['spu']}">
+                                                  <li data-target="#modify" name="modify" class="btn btn-info" data-toggle="modal" data-id='{$val['id']}' >修改</li>
+                                                  <li data-target="#del" name="del" class="btn btn-info" data-toggle="modal" data-id='{$val['id']}' >删除</li>
+                                                </td>
+                                              </tr> 
+                                          {/foreach}                                    
+                                        </tbody>
+                                    </table>
+                                    {$page}
+                                    <p>&nbsp;&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        <link href="{$smarty.const.TPL}/public/vendors/datepicker.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/bootstrap-datepicker.js"></script>
+        <script src="{$smarty.const.TPL}/public/vendors/chosen.jquery.min.js"></script>
+        <script src="{$smarty.const.TPL}/public/js/modal.js"></script>
+        <script src="{$smarty.const.TPL}/public/js/common.js"></script>
+        {literal}
+        <script>
+        $(function() {
+            $('form select').chosen();
+            initDialog();
+            $("[name='modify']").on("click",function(){
+              var id = $(this).data("id");
+              $.ajax({
+                type  : "POST",
+                async : false,
+                url   : '/accountSiteRelation/getSingleData/',
+                dataType : "json",
+                data : {"id":id},
+                success : function(ret){
+                  setDialogValue(ret.data);
+                },
+              });
+            });
+            $("[name='del']").on("click",function(){
+              var id = $(this).data("id");
+              $("#del").data("id",id);
+            })
+        });
+        function setDialogValue(data){
+          $("#modify [name='site_id']").val(data['site_id']);
+          $("#modify [name='shop_id']").val(data['shop_id']);
+          $("#modify [name='status']").val(data['status']);
+          $("#modify select").trigger("liszt:updated");
+          $("#modify select").chosen();
+        }
+        function getHtml(obj){
+          var html = obj.html();
+          obj.remove();
+          return html;
+        }
+        function initDialog(){
+          setModal("add","修改",getHtml($("div[name='addHtml']")));
+          setModal("modify","修改",getHtml($("div[name='modifyHtml']")));
+          setModal("del","删除",getHtml($("div[name='delHtml']")));
+          $("#add select").chosen({width: "80%"});
+          $("#modify select").chosen({width: "80%"});
+
+          $("#del [name='footer-submit']").on("click",function(){
+            var id =  $("#del").data("id");
+            $.ajax({
+              type  : "POST",
+              async : false,
+              url   : '/accountSiteRelation/delData/',
+              dataType : "json",
+              data : {"id":id},
+              success : function(ret){
+                if(ret.data==true){
+                  alert_success("删除成功");
+                  location.reload();
+                }else{
+                  alert_failed("删除失败");
+                }
+              },
+            });
+          });
+
+          $("#add [name='footer-submit']").on("click",function(){
+            var siteId = $("#add [name='site_id']").val();
+            var shopId = $("#add [name='shop_id']").val();
+            var status = $("#add [name='status']").val();
+            $.ajax({
+              type  : "POST",
+              async : false,
+              url   : '/accountSiteRelation/addData/',
+              dataType : "json",
+              data : {"site_id":siteId,"shop_id":shopId,"status":status},
+              success : function(ret){
+                if(ret.data==true){
+                  alert_success("新增成功");
+                  location.reload();
+                }else{
+                  alert_failed("新增失败");
+                }
+              },
+            });
+          });
+
+          $("#modify [name='footer-submit']").on("click",function(){
+            var siteId = $("#modify [name='site_id']").val();
+            var shopId = $("#modify [name='shop_id']").val();
+            var status = $("#modify [name='status']").val();
+            var id =  $("#modify").data("id");
+            $.ajax({
+              type  : "POST",
+              async : false,
+              url   : '/accountSiteRelation/updateData/',
+              dataType : "json",
+              data : {"id":id,"site_id":siteId,"shop_id":shopId,"status":status},
+              success : function(ret){
+                if(ret.data==true){
+                  alert_success("更新成功");
+                  location.reload();
+                }else{
+                  alert_failed("更新失败");
+                }
+              },
+            });
+          });
+        }
+        </script>
+        {/literal}
+    </body>
+
+</html>

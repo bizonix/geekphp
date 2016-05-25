@@ -1,0 +1,65 @@
+
+<div class="content-mid-left">
+    <div class="sidebar">
+        <ul>
+            <!--前台导航-->
+            <li class="sidebar-first myrenzheng{if ($mod eq 'sucAuthentication') || ($mod eq 'distributorBasicInformation')} sidebar-first-select myrenzheng_hover {/if} ">
+                <a class="auth" href="#">认证分销商</a>
+            </li>
+            <li class="sidebar-second">
+                <a {if ($mod eq 'sucAuthentication') && ($act eq 'index')}class="sidebar-second-select"{/if} href="../index.php?mod=sucAuthentication&act=index">基本信息</a><br />
+                <a {if ($mod eq 'distributorBasicInformation') && ($act eq 'addShop')}class="sidebar-second-select"{/if} href="../index.php?mod=distributorBasicInformation&act=addShop">添加店铺</a><br/>
+                <a {if ($mod eq 'distributorBasicInformation') && ($act eq 'shopInfo')}class="sidebar-second-select"{/if} href="../index.php?mod=distributorBasicInformation&act=shopInfo">店铺列表</a>
+            </li>
+            <li class="sidebar-first myshouquan{if $mod eq 'myEmpower'} myshouquan_hover sidebar-first-select{/if}">
+                <a class="accr" href="#">我的授权</a>
+            </li>
+            <li class="sidebar-second">
+                <a {if ($mod eq 'myEmpower') && ($act eq 'index')}class="sidebar-second-select"{/if} href="../index.php?mod=myEmpower&act=index">我的授权</a><br />
+            </li>
+            <li class="sidebar-first mydingdan{if ($mod eq 'orderManage') or ($mod eq 'orderImport')} mydingdan_hover sidebar-first-select{/if}">
+                <a class="accr" href="#">我的订单</a>
+            </li>
+            <li class="sidebar-second">
+                <a {if ($mod eq 'orderManage') && ($act eq 'list')}class="sidebar-second-select"{/if} href="../index.php?mod=orderManage&act=list">订单列表</a><br />
+                <a {if ($mod eq 'orderImport') && ($act eq 'index')}class="sidebar-second-select"{/if} href="../index.php?mod=orderImport&act=index">订单导入</a><br />
+                <a {if ($mod eq 'orderManage') && ($act eq 'otherAdjustmentDetailed') }class="sidebar-second-select"{/if} href="index.php?mod=orderManage&act=otherAdjustmentDetailed">其他费用调整</a>
+            </li>
+            <li class="sidebar-first  myzhangdan {if $mod eq 'myBill'} myzhangdan_hover sidebar-first-select{/if}">
+                <a class="accr" href="#">我的账单</a>
+            </li>
+            <li class="sidebar-second">
+            	<a {if ($mod eq 'myBill')&&($act eq 'index')}class="sidebar-second-select"{/if} href="../index.php?mod=myBill&act=index&billId=&billStatus=%23%23%23&submit=查询">我的账单</a>
+            </li>
+            <li class="sidebar-first myzhanghu{if $mod eq 'capitalManagement'} myzhanghu_hover sidebar-first-select{/if} ">
+                <a class="accr" href="#">我的账户</a>
+            </li>
+            <li class="sidebar-second">
+                <a {if ($mod eq 'capitalManagement') && ($act eq 'index')}class="sidebar-second-select"{/if} href="../index.php?mod=capitalManagement&act=index">我的账户</a><br />
+                <a {if ($mod eq 'capitalManagement') && ($act eq 'list')}class="sidebar-second-select"{/if} href="../index.php?mod=capitalManagement&act=list">充值列表</a><br />
+                <a {if ($mod eq 'capitalManagement') && ($act eq 'uploadRechargeVoucher')}class="sidebar-second-select"{/if} href="../index.php?mod=capitalManagement&act=uploadRechargeVoucher">上传充值凭证</a><br />
+            </li>
+            <li class="sidebar-first  mychanpin{if ($mod eq 'product')} mydingdan_hover sidebar-first-select{/if}">
+                <a class="accr" href="#">我的产品</a>
+            </li>
+            <li class="sidebar-second">
+                <a {if ($mod eq 'product')}class="sidebar-second-select"{/if} href="/index.php?mod=product&act=list">我的产品列表</a><br />
+            </li>
+
+            <li class="sidebar-first myapi{if $mod eq 'api'} myapi_hover sidebar-first-select{/if} ">
+                <a href="#">我的API</a>
+            </li>
+            <li class="sidebar-second">
+                <a {if ($mod eq 'api') && ($act eq 'myApi')}class="sidebar-second-select"{/if} href="../index.php?mod=api&act=myApi">我的API</a><br />
+            </li>
+            
+            <li class="sidebar-first pass{if ($mod eq 'basicInfor')} pass_hover sidebar-first-select {/if} ">
+                <a class="password" href="#">修改密码</a>
+            </li>
+            <li class="sidebar-second">
+                <a {if ($mod eq 'basicInfor') && ($act eq 'changePwd')}class="sidebar-second-select"{/if} href="../index.php?mod=basicInfor&act=changePwd">修改密码</a><br />
+            </li>
+            
+        </ul>
+    </div>
+</div>

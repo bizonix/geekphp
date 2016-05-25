@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>订单列表</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- smarty定义的变量 -->
+        {assign var='_orderSellerShipStatus' value=ORDER_SELLER_SHIPPMENT_STATUS|C}
+        {assign var='_orderHandleStatus' value=ORDERHANDLESTATUS|C}
+        {assign var='_platforms' value=PLATFORMS|C}
+        {assign var='ORDER_FEE' value=ORDER_FEE|C}
+        <!-- /smarty定义的变量 -->
+        <!-- Button trigger modal -->
+        <!-- Modal1 手动拉取 -->
+        <div class="modal fade" style="display:none;" id="handlePull" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">速卖通订单拉取</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <div class="btn-group">
+                       <select name="shopId" style="width:100px;" id="selectError">
+                          <option value='0'>店铺</option>
+                          {foreach from=$shops key=key item=val}
+                            <option value='{$key}' {if $key == $p_shopId}selected{/if}>{$val['shop_account']}</option>
+                          {/foreach}
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                       <select name="orderStatus" style="width:200px;" id="selectError">
+                          <option value=''>订单状态</option>
+                          <option value='ALL'>全部状态</option>
+                          {foreach from=$_platforms['0']['orderStatus'] key=key item=val}
+                            <option value='{$key}'{if $key==$p_shopId}selected{/if}>{$val}</option>
+                          {/foreach}
+                        </select>
+                    </div>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;Start <input type="text" name="startTime" class="form-control input-small datepicker" placeholder="Search">&nbsp;&nbsp;&nbsp;
+                    End <input type="text" name="endTime" class="form-control input-small datepicker" placeholder="Search">
+                  </div>
+                  <div name="returnCode" class="form-group">
+
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="startPull" type="button" class="btn btn-primary">拉取</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {literal}
+        <script type="text/javascript">
+            $(function(){
+                $("button[name=startPull]").on("click",function(){
+                    var thisDialogObj = $(this).parents(".modal-dialog");
+                    var shopId = thisDialogObj.find("select[name=shopId]").val();
+                    var orderStatus = thisDialogObj.find("select[name=orderStatus]").val();
+                    var startTime = $.trim(thisDialogObj.find("input[name=startTime]").val());
+                    var endTime = $.trim(thisDialogObj.find("input[name=endTime]").val());
+                    var str  = '';
+                    if(shopId > 0 && orderStatus && startTime && endTime){
+                      thisDialogObj.find("div[name=returnCode]").text("正在抓取订单...");
+                        $.ajax({
+                            type  : "POST",
+                            async : false,
+                            url   : '/order/fechOrders/',
+                            dataType : "json",
+                            data : {"shopId":shopId,"orderStatus":orderStatus,"startTime":startTime,"endTime":endTime},
+                            success : function(data){
+                                var code = data.errCode;
+                                var msg  = data.errMsg;
+                                var data = data.data;
+                                var success = 0;
+                                var error = 0;
+                                if(code == 200){
+                                    if(data){
+                                        var thisStr = ''
+                                        for(var k in data){
+                                          var  result = '';
+                                          if(data[k][0] == "200"){
+                                              success++;
+                                              result = '<span style="color:green">'+data[k][1]+'</span>';
+                                          }else{
+                                              error++;
+                                              result = '<span style="color:red">'+data[k][1]+'</span>';
+                                          }
+                                          thisStr   += k + '&nbsp;&nbsp;&nbsp;处理结果&nbsp;&nbsp;&nbsp;' + result+"<br/>";
+                                        }
+                                        str = "成功处理 "+success+" 个订单，"+error+" 个处理失败！<br/>"+thisStr;
+                                    }else{
+                                        str = '抓取订单发生异常！';
+                                    }
+                                }else{
+                                    str = '<span style="color:red">'+msg+'</span>';
+                                }
+                                thisDialogObj.find("div[name=returnCode]").html(str);
+                            }
+                        });
+                    }else{
+                      if(shopId == 0) str += '<p style="color:red">未选择店铺</p>';
+                      if(!orderStatus) str += '<p style="color:red">未选择要抓取的订单状态</p>';
+                      if(!startTime) str += '<p style="color:red">未选择起始时间</p>';
+                      if(!endTime) str += '<p style="color:red">未选择终止时间</p>';
+                        thisDialogObj.find("div[name=returnCode]").html(str);
+                    }
+                });
+            });
+        </script>
+        {/literal}
+        <!-- /Modal1 -->
+        <!-- Modal2 批量推送 -->
+        <div role-modal class="modal fade" style="display:none;" id="pushTogether" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">订单推送</h4>
+              </div>
+              <div class="modal-body" style="text-align:center;">
+                  <div class="control-group">
+                    <label class="control-label">已选择订单</label><br/>
+                    <div class="controls">
+                      <textarea style="width:400px;" name="orderSysIds">未选择订单</textarea>
+                    </div>
+                    <div role-name="orderSysIds"></div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="beginPush" type="button" class="btn btn-primary">后台推送</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+            $(function(){
+                $("button[name=beginPush]").on("click",function(){
+                    var orderSysIds = $("#pushTogether").find("textarea[name=orderSysIds]").val();
+                    if(orderSysIds != '未选择订单' || orderSysIds){
+                        $.ajax({
+                            type  : "POST",
+                            async : false,
+                            url   : '/order/pushOrders/orderSysIds/'+orderSysIds,
+                            dataType : "json",
+                            success : function(data){
+                                var str = '';
+                                if(data.errCode == '200'){
+                                    var data = data.data;
+                                    if(data){
+                                        for(var k in data){
+                                          var  result = '';
+                                          if(data[k][0] == "200"){
+                                              result = '<span style="color:green">'+data[k][1]+'</span>';
+                                          }else{
+                                              result = '<span style="color:red">'+data[k][1]+'</span>';
+                                          }
+                                          str   += k + '&nbsp;&nbsp;&nbsp;推送返回结果&nbsp;&nbsp;&nbsp;' + result+"<br/>";
+                                        }
+                                    }
+                                }else{
+                                    str = data.errMsg;
+                                }
+                                $("#pushTogether").find("div[role-name=orderSysIds]").html(str);
+                            }
+                        });
+                    }
+                });
+            })
+        </script>
+        <!-- /Modal2 -->
+        <!-- Modal3 标记发货 -->
+        <div class="modal fade" style="display:none;" id="sellershipmentDiv" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">标记发货</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" action="#" method="post">
+                  <div class="control-group">
+                    <label class="control-label">订单号</label>
+                    <div class="controls" name="orderId"></div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="select02">运输方式</label>
+                    <div class="controls">
+                      <select name="receiveCompany" id="select02" class="chzn-select">
+                          <option>数据加载中...</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">跟踪号</label>
+                    <div class="controls">
+                      <input class="input" name="trackingNumber" type="text" value="">
+                      <input name="platformId" type="hidden" value="">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">备注</label>
+                    <div class="controls">
+                      <textarea name="description"></textarea>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">发货类型</label>
+                    <div class="controls">
+                      <input type="radio" name="sendType" checked="checked" value="all"> 全部发货  <input type="radio" name="sendType" value="part">部分发货
+                    </div>
+                  </div>
+                  <div role-name="otherTransport" style="display:none;" class="control-group">
+                    <label class="control-label">追踪网址</label>
+                    <div class="controls">
+                      <input class="input" name="transportUrl" placeholder="只有第三方物流才填写" type="text" value="">
+                    </div>
+                  </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="startSellership" type="button" class="btn btn-primary">标记发货</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {literal}
+        <script type="text/javascript">
+            $(function(){
+                //开始标记发货
+                $("button[name=startSellership]").on("click",function(){
+                    var orderId         = $("#sellershipmentDiv").find("div[name=orderId]").text();
+                    var trackingNumber  = $("#sellershipmentDiv").find("input[name=trackingNumber]").val();
+                    var transportType   = $("#select02").val();
+                    var description     = $("#sellershipmentDiv").find("textarea[name=description]").val();
+                    var sendType        = $("#sellershipmentDiv").find("input[name=sendType]").val();
+                    var transportUrl    = $("#sellershipmentDiv").find("input[name=transportUrl]").val();
+                    var platformId      = $("#sellershipmentDiv").find("input[name=platformId]").val();
+                    $.ajax({
+                        type  : "POST",
+                        async : false,
+                        url   : '/order/sellersShippment/',
+                        dataType : "json",
+                        data : {"platformId":platformId,"orderId":orderId,"trackingNumber":trackingNumber,"transportType":transportType,"description":description,"sendType":sendType,"transportUrl":transportUrl},
+                        success : function(data){
+                            var code = data.errCode;
+                            var msg  = data.errMsg;
+                            var data = data.data;
+                            if(code == 200){
+                                location.reload();
+                            }else{
+                                alert(msg);
+                            }
+                        },
+                        error : function(){
+                            alert("网络错误");
+                        }
+                    });
+                });
+                $("a[role-name=sellerShip]").on("click",function(){
+                    var orderId         = $(this).parents("ul").attr("role-order-id");
+                    var trackingNumber  = $(this).parents("ul").attr("role-track-number");
+                    var transportType   = $(this).parents("ul").attr("role-transport-type");
+                    var platformId      = $(this).parents("ul").attr("role-platform-id");
+                    $("#sellershipmentDiv").find("div[name=orderId]").text(orderId);
+                    $("#sellershipmentDiv").find("input[name=trackingNumber]").val(trackingNumber);
+                    $("#sellershipmentDiv").find("input[name=platformId]").val(platformId);
+                    setTimeout(function(){getPlatformCarrier(transportType,platformId);},500);
+                    
+                });
+                //选择运输方式时
+                $("#select02").on("change",function(){
+                    if($(this).val() == "other"){
+                        $("div[role-name=otherTransport]").show();
+                    }else{
+                        $("div[role-name=otherTransport]").hide();
+                    }
+                });
+            });
+            function getPlatformCarrier(currentCarrier,platformId){
+                if(!$("#select02").data("isExit") || $("#select02").data("platformId") != platformId){
+                    $.ajax({
+                        type  : "POST",
+                        async : false,
+                        url   : '/public/getPlatformCarrier/',
+                        dataType : "json",
+                        data : {"platformId":platformId},
+                        success : function(data){
+                            var code = data.errCode;
+                            var msg  = data.errMsg;
+                            var data = data.data;
+                            if(code == 200){
+                                var  result = '';
+                                var selected = '';
+                                for(var k in data){
+                                    if(data[k]["serviceName"] == currentCarrier){
+                                        selected = 'selected';
+                                    }else{
+                                        selected = '';
+                                    }
+                                    result += '<option '+selected+' value="'+data[k]["serviceName"]+'">'+data[k]["displayName"]+'</option>';
+                                }
+                                result += '<option value="other">其他</option>';
+                                $("#select02").data({"isExit":true,"platformId":platformId}).html(result);
+                            }else{
+                                alert(msg);
+                            }
+                        },
+                        error : function(){
+                            alert("网络错误");
+                        }
+                    });
+                }else if(currentCarrier){
+                    $("#select02").find("option").each(function(){
+                        if($(this).text() == currentCarrier){
+                            $("#select02").val($(this).val());
+                            exit;
+                        }
+                    });
+                }
+            }
+        </script>
+        {/literal}
+        <!-- /Modal3 -->
+        <!-- Modal4 批量推送 -->
+        <div role-modal class="modal fade" style="display:none;" id="mergeOrder" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">订单合并</h4>
+              </div>
+              <div class="modal-body" style="text-align:center">
+                  <div class="control-group">
+                    <label class="control-label">已选择订单</label><br/>
+                    <div class="controls">
+                      <textarea style="width:400px;" name="orderSysIds">未选择订单</textarea>
+                    </div>
+                    <div role-name="orderSysIds"></div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="beginMerge" type="button" class="btn btn-primary">确定</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+            $(function(){
+                $("button[name=beginMerge]").on("click",function(){
+                    var orderSysIds = $("#mergeOrder").find("textarea[name=orderSysIds]").val();
+                    if(orderSysIds != '未选择订单'){
+                        $.ajax({
+                            type  : "POST",
+                            async : false,
+                            url   : '/order/mergeOrders/orderSysIds/'+orderSysIds,
+                            dataType : "json",
+                            success : function(data){
+                                var str = '';
+                                if(data.errCode == '200'){
+                                    var data = data.data;
+                                    if(data){
+                                        for(var k in data){
+                                          var  result = '';
+                                          if(data[k][0] == "200"){
+                                              result = '<span style="color:green">'+data[k][1]+'</span>';
+                                          }else{
+                                              result = '<span style="color:red">'+data[k][1]+'</span>';
+                                          }
+                                          str   += k + '&nbsp;&nbsp;&nbsp;合并返回结果&nbsp;&nbsp;&nbsp;' + result+"<br/>";
+                                        }
+                                    }
+                                }else{
+                                    str = data.errMsg;
+                                }
+                                $("#mergeOrder").find("div[role-name=orderSysIds]").html(str);
+                            }
+                        });
+                    }
+                });
+            })
+        </script>
+        <!-- /Modal4 -->
+       
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                     <div class="row-fluid">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <ul class="breadcrumb">
+                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                    <li>
+                                        {if $g_handleStatus == 1}未处理({if $orderStatics['1']}{$orderStatics['1']}{else}0{/if}){else}<a href="/order/queryOrderlist/handleStatus/1">未处理({if $orderStatics['1']}{$orderStatics['1']}{else}0{/if})</a>{/if} <span class="divider">|</span>
+                                    </li>
+                                    <li>
+                                        {if $g_handleStatus == 2}推送失败({if $orderStatics['2']}{$orderStatics['2']}{else}0{/if}){else}<a href="/order/queryOrderlist/handleStatus/2">推送失败({if $orderStatics['2']}{$orderStatics['2']}{else}0{/if})</a>{/if} <span class="divider">|</span>
+                                    </li>
+                                    <li>
+                                        {if $g_handleStatus == 17}异常需修改({if $orderStatics['17']}{$orderStatics['17']}{else}0{/if}){else}<a href="/order/queryOrderlist/handleStatus/17">异常需修改({if $orderStatics['17']}{$orderStatics['17']}{else}0{/if})</a>{/if} <span class="divider">|</span>
+                                    </li>
+                                    <li>
+                                        {if $g_sellerShipStatus == '0'}未标记({$unsellerShipCount}){else}<a href="/order/queryOrderlist/sellerShipStatus/0">未标记({$unsellerShipCount})</a>{/if} <span class="divider">|
+                                    </li>
+                                    <li>
+                                        {if $g_handleStatus == 12}已发货({if $orderStatics['12']}{$orderStatics['12']}{else}0{/if}){else}<a href="/order/queryOrderlist/handleStatus/12">已发货({if $orderStatics['12']}{$orderStatics['12']}{else}0{/if})</a>{/if}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">订单列表</div>
+                                <div class="pull-right"><span class="badge badge-info">{$count}</span></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                   <div class="table-toolbar">
+                                      <div class="btn-group pull-right">
+                                         <button data-toggle="dropdown" class="btn dropdown-toggle btn-success">工具 <span class="caret"></span></button>
+                                         <ul class="dropdown-menu">
+                                            <li data-toggle="modal" data-target="#handlePull"><a href="#">手动拉取</a></li>
+                                            <li name="multplyPush" data-toggle="modal" data-target="#pushTogether"><a href="#">批量推送</a></li>
+                                            <li name="mergeOrder" data-toggle="modal" data-target="#mergeOrder"><a href="#">订单合并</a></li>
+                                            <!--<li><a href="#">查看操作日志</a></li>
+                                            <li><a href="#">导出</a></li>
+                                            <li><a href="#">导入</a></li>
+                                            <li><a href="#">打印</a></li>-->
+                                         </ul>
+                                      </div>
+                                      <form action="/order/queryOrderlist" method="post">
+                                          <div class="btn-group pull-left">
+                                             <select name="platformId" style="width:95px;" id="selectError">
+                                                <option value='0'>平台</option>
+                                                {foreach from=$platforms key=key item=val}
+                                                  <option value='{$key}' {if $key == $p_platformId}selected{/if}>{$val['platform_cn_name']}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="shopId" style="width:95px;" id="selectError">
+                                                <option value='0'>店铺</option>
+                                                {foreach from=$shops key=key item=val}
+                                                  <option value='{$key}' {if $key == $p_shopId}selected{/if}>{$val['shop_account']}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="comeFrom" style="width:95px;" id="selectError">
+                                                <option value='0'>来源公司</option>
+                                                {foreach from=$comeFrom key=key item=val}
+                                                    <option value='{$key}' {if $key == $p_comeFrom}selected{/if}>{$companys[$key]['cn_name']}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="deliveryFrom" style="width:95px;" id="selectError">
+                                                <option value='0'>去向公司</option>
+                                                {foreach from=$deliveryFrom key=key item=val}
+                                                    <option value='{$key}' {if $key == $p_deliveryFrom}selected{/if}>{$companys[$key]['cn_name']}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="sellerShipStatus" style="width:95px;" id="selectError">
+                                                <option value=''>标记发货</option>
+                                                {foreach from=$_orderSellerShipStatus key=key item=val}
+                                                  <option value='{$key}' {if $key == '0' && $p_sellerShipStatus == '0'}selected{/if}>{$val}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <select name="handleStatus" style="width:95px;" id="selectError">
+                                                <option value=''>处理状态</option>
+                                                {foreach from=$_orderHandleStatus key=key item=val}
+                                                  <option value='{$key}' {if $key == $p_handleStatus}selected{/if}>{$val}({if isset($orderStatics[$key])}{$orderStatics[$key]}{else}0{/if})</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <input name="orderSysId" type="text" value="{$p_orderSysId}" class="input-small" placeholder="系统编号">
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <input name="orderId" type="text" value="{$p_orderId}" class="input-small" placeholder="订单号">
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <button type="submit" title="查询" class="btn btn-success"><i class="icon-search icon-white"></i></button>
+                                          </div>
+                                      </form>
+                                   </div>
+                                    
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></span>#</th>
+                                                <th>产品与负责人</th>
+                                                <th title="“红色”代表毛利率<5%，“黄色”代表毛利率<10%，“绿色代表毛利绿>=10%，“黑色”代表未计算">金额(元)?</th>
+                                                <th>数量</th>
+                                                <th>店铺</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$orderList item=val}
+                                              {assign var="detail" value=$val['simple_detail']|json_decode:true}
+                                              <tr class="odd gradeX" style="border-bottom:none;">
+                                                <td colspan="10"><span><input name="orderSysId" class="uniform_on" type="checkbox" value="{$val['id']}"></span> &nbsp;&nbsp;
+                                                  <span>系统ID:{$val['id']}{if !empty($val['new_order_sys_id'])}<span style="color:red;">({$val['new_order_sys_id']})</span>{/if}</span>&nbsp;&nbsp;
+                                                  <span>下单: {"Y-m-d H:i:s"|date:$val['gmt_create']} </span>&nbsp;&nbsp;
+                                                  <span>售: {$detail['item_currency_code']} {$detail['item_total_pay']}*(1-{$ORDER_FEE['platfrom_handle_rate'][$val['source_platform']]*100}%-{$ORDER_FEE['pay_handle_rate'][$val['source_platform']]*100}%)={$detail['item_currency_code']} {"%.2f"|sprintf:($detail['item_total_pay']*(1-$ORDER_FEE['platfrom_handle_rate'][$val['source_platform']]-$ORDER_FEE['pay_handle_rate'][$val['source_platform']]))}</span>&nbsp;&nbsp;
+                                                  <span class="pull-right">抓取：{"Y-m-d H:i:s"|date:$val['create_time']}</span>
+                                                </td>
+                                              </tr>
+                                              <tr class="even gradeC" style="border-top:none;">
+                                                  <td style="text-align:center;"><img width="50px" src="{"\\"|str_replace:"":$detail['item_img']}" alt=""></td>
+                                                  <td width="40%">
+                                                    <p>订单号:{$val['order_id']}</p>
+                                                    <a target="_blank" href="{"\\"|str_replace:"":$detail['item_url']}">{$detail['item_name']}</a>
+                                                  </td>
+                                                  <td>
+                                                    {assign var='shou' value=$detail['item_total_pay']*$ORDER_FEE['exchange_rate']*(1-$ORDER_FEE['platfrom_handle_rate'][$val['source_platform']]-$ORDER_FEE['pay_handle_rate'][$val['source_platform']])}
+                                                    {assign var='gu' value=$detail['orderFee']['forecastInfo']['total_fee']}
+                                                    {assign var='shi' value=$detail['orderFee']['actualInfo']['total_fee']}
+                                                    {assign var='rate' value=(($shou-$shi)/$shou)}
+                                                    <p>售:<span style="font-weight:bolder;color:{if $rate<0.05}#CE4844{elseif $rate<0.1}#C4A703{elseif empty($shi)}black{elseif $rate>=0.1 && $rate<=1}green{/if};">{"%.2f"|sprintf:$shou}</span></p>
+                                                    <p>估:<span>{"%.2f"|sprintf:$gu}</span></p>
+                                                    <p>实:{"%.2f"|sprintf:$shi}</p>
+                                                    {if $shi}
+                                                    <p>利:{"%.2f"|sprintf:($shou-$shi)}</p>
+                                                    <p>率:{"%.2f"|sprintf:($rate*100)}%</p>
+                                                    {/if}
+                                                  </td>
+                                                  <td class="center"> {$detail['item_count']}</td>
+                                                  <td class="center"><p>{$shops[$val["shop_id"]]["shop_account"]}</p><p>{$_platforms[$val['source_platform']]['platformName']}</p>
+                                                  {if $val['tracking_number']}
+                                                  <p style="color:green;">{$val['tracking_number']}</p>{/if}
+                                                  <a target="_blank" href="/OrderDetails/getOrderDetails/orderId/{$val['id']}">查看详情</a>
+                                                  </td>
+                                                  <td class="center">
+                                                  <p style="color:{if in_array($val['handle_status'],array(1,2,4,15,16,17))}red{elseif in_array($val['handle_status'],array(5,12,14))}green{else}black{/if};">{$_orderHandleStatus[$val['handle_status']]}</p>
+                                                  <p style="color:{if in_array($val['seller_ship_status'],array(0,3))}red{elseif $val['seller_ship_status'] == 1}green{else}blue{/if};">{$_orderSellerShipStatus[$val['seller_ship_status']]}</p>
+                                                  <p>来源：{$companys[$val['come_from']]['cn_name']}</p>
+                                                  <p>去向：{$companys[$val['delivery_from']]['cn_name']}</p>
+                                                  </td>
+                                                  <td>
+                                                    <div class="btn-group pull-right">
+                                                        <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu" role-order-id="{$val['order_id']}" role-orderSysId="{$val['id']}" role-track-number="{$val['tracking_number']}" role-transport-type="{$val['transport_type']}" role-platform-id="{$val['source_platform']}">
+                                                          <li><a name="check" data-toggle="modal" data-target="#pushTogether" href="#">推送发货</a></li>
+                                                          <li><a role-name="updateOrder" href="/OrderDetails/getOrderDetails/orderId/{$val['id']}">修改</a></li>
+                                                          <li><a data-toggle="modal" data-target="#sellershipmentDiv"  role-name="sellerShip" href="#">标记发货</a></li>
+                                                          <li><a role-name="operateStatus" role-status="4" href="#">加入异常</a></li>
+                                                          <li><a role-name="operateStatus" role-status="5" href="#">加入回收站</a></li>
+                                                          <li><a role-name="deleteOrder" href="#">删除</a></li>
+                                                        </ul>
+                                                     </div>
+                                                  </td>
+                                              </tr> 
+                                            {/foreach}   
+                                            {if $count == 0}
+                                              {if $shops|count == 0}
+                                                  <tr><td style="text-align:center;" colspan="10"><p>您还未添加店铺，<a href="/shops/addShopView">去添加</a></p></td></tr>
+                                              {else}
+                                                  <tr><td style="text-align:center;" colspan="10"><p>未获取到订单记录</p></td></tr>  
+                                              {/if}                
+                                            {/if}
+                                        </tbody>
+                                    </table>
+                                    {$page}
+                                    <p>&nbsp;&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        <link href="{$smarty.const.TPL}/public/vendors/datepicker.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/bootstrap-datepicker.js"></script>
+        {literal}
+        <script>
+        $(function() {
+            $(".datepicker").datepicker();
+
+            $("a[name=check]").on("click",function(){
+                $("textarea[name=orderSysIds]").val($(this).parents("ul").attr("role-orderSysId"));
+                $("div[role-name=orderSysIds]").html();
+            });
+            $("li[name=multplyPush],li[name=mergeOrder]").on("click",function(){
+                var str = '';
+                $("input[name=orderSysId]").each(function(){
+                    if($(this)[0].checked) str += $(this).val()+",";
+                });
+                if(!str) str = '未选择订单';
+                $("textarea[name=orderSysIds]").val(str);
+                $("div[role-name=orderSysIds]").html();
+            });
+            $("input[name=checkAll]").on("click",function(){
+                if($(this)[0].checked) $("input[name=orderSysId]").prop("checked",true);
+                else $("input[name=orderSysId]").prop("checked",false);
+            });
+
+            //删除订单
+            $("a[role-name=deleteOrder]").on("click",function(){
+                if(confirm("确定要删除该订单吗？")){
+                      var orderId = $(this).parents("ul").attr("role-orderSysId");
+                      $.ajax({
+                          type  : "POST",
+                          async : false,
+                          url   : '/order/deleteOrders/',
+                          dataType : "json",
+                          data : {"ordersId":orderId},
+                          success : function(data){
+                              var code = data.errCode;
+                              var msg  = data.errMsg;
+                              var data = data.data;
+                              if(code == 200){
+                                  if(data[orderId][0] == 200){
+                                      location.reload();
+                                  }else{
+                                      alert(data[orderId][1]);
+                                  }
+                              }else{
+                                  alert(msg);
+                              }
+                          }
+                      });
+                }
+            });
+
+            //改变订单状态
+            $("a[role-name=operateStatus]").on("click",function(){
+                if(confirm("确定要"+$(this).text()+"吗？")){
+                      var orderId = $(this).parents("ul").attr("role-orderSysId");
+                      $.ajax({
+                          type  : "POST",
+                          async : false,
+                          url   : '/order/updateHandleStatus/',
+                          dataType : "json",
+                          data : {"ordersId":orderId,"handleStatus":$(this).attr("role-status")},
+                          success : function(data){
+                              var code = data.errCode;
+                              var msg  = data.errMsg;
+                              var data = data.data;
+                              if(code == 200){
+                                  if(data[orderId][0] == 200){
+                                      location.reload();
+                                  }else{
+                                      alert(data[orderId][1]);
+                                  }
+                              }else{
+                                  alert(msg);
+                              }
+                          }
+                      });
+                }
+            });
+            //回收站
+        });
+        </script>
+        {/literal}
+    </body>
+
+</html>

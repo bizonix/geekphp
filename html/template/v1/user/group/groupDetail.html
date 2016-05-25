@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>订单列表</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                      <!-- smarty定义的变量 -->
+                      {assign var='_platforms' value=PLATFORMS|C}
+                      <!-- /smarty定义的变量 -->
+                     <div class="row-fluid">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>团体信息 <span class="divider">|</span></li>
+                                <li>
+                                    <a href="/group/groupMemberAdmin">成员管理</a> <span class="divider">|</span>    
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">团体详情</div>
+                            </div>
+                            <div class="row" style="margin:5px 15px;padding:5px;">
+                              <div>
+                                <a href="/group/updateGroupView"><button name="updateBtn" class="btn btn-danger pull-right">修改</button></a>
+                              </div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <form class="form-horizontal" action="/shops/addShop" method="post" id="addShopForm">
+                                      <fieldset>
+                                        <div class="control-group">
+                                          <label class="control-label">名称</label>
+                                          <div class="controls">
+                                            <span>{$cn_name}</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">英文名</label>
+                                          <div class="controls">
+                                            <span>{$en_name}</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">简称</label>
+                                          <div class="controls">
+                                            <span>{$short_name}</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">责任人</label>
+                                          <div class="controls">
+                                            <span>{$legal_person}</span>
+                                          </div>
+                                        </div>                                        
+                                        <div class="control-group">
+                                          <label  class="control-label">团体类型</label>
+                                          <div class="controls">
+                                            <span>{if $type == 1}公司{elseif $type == 2}团队{elseif $type == 3}个人{/if}</span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">地址</label>
+                                          <div class="controls">
+                                            <span>{$address}</span>
+                                          </div>
+                                        </div>   
+                                        <div class="control-group">
+                                          <label class="control-label">创建时间</label>
+                                          <div class="controls">
+                                            <span>{"Y-m-d H:i:s"|date:$add_time}</span>
+                                          </div>
+                                        </div>
+                                        
+                                      </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+              //添加賬號時失去焦點時的動作
+              $("input[name=shopAccount]").on("blur",function(){
+                  var thisObj = $(this);
+                  if($.trim(thisObj.val()) && $.trim(thisObj.val()) != thisObj.data("value")){
+                    $.ajax({
+                      type  : "POST",
+                      async : false,
+                      url   : '/shops/checkShopIsExist/shopAccount/'+$.trim(thisObj.val())+'/platform/'+$("#select01").val(),
+                      dataType : "json",
+                      success : function(data){
+                        if(data.data == false){
+                            checkInput(thisObj,'success','该平台账号可用');
+                        }else{
+                            checkInput(thisObj,'error','该平台账号已经存在');
+                        }
+                        thisObj.data("value",thisObj.val());
+                      }
+                    });
+                  }
+              });
+              //点击店铺时
+              $("#select01").on("change",function(){
+                  $("div[role-token]").css("display","none");
+                  $("div[role-"+$(this).val()+"]").css("display","block");
+              });
+              $("div[role-token]").css("display","none");
+              $("div[role-"+$("#select01").val()+"]").css("display","block");
+
+              //保存时
+              $("button[name=saveBtn]").on("click",function(){
+                  $.ajax({
+                      type  : "POST",
+                      async : false,
+                      url   : '/shops/addShop',
+                      data  : $("#addShopForm").serialize(),
+                      dataType : "json",
+                      success : function(data){
+                      }
+                    });
+              });
+          });
+          function checkInput(obj,flag,msg){
+              obj.parents(".control-group").removeClass().addClass("control-group "+flag);
+              obj.siblings("span").text(msg);
+          }
+        </script>
+        {/literal}
+        <link href="{$smarty.const.TPL}/public/vendors/chosen.min.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/chosen.jquery.min.js"></script>
+        <script>
+          $(function(){
+              $(".chzn-select").chosen();
+          });
+        </script>
+    </body>
+
+</html>

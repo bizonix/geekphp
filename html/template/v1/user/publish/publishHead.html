@@ -1,0 +1,15 @@
+    <div class="navbar-inner">
+        <ul class="breadcrumb">
+            <i class="icon-chevron-left hide-sidebar">
+              <a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+            <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+            <li>
+               <a href="/goodsBasic/goodsBasic" {if $mod=='goodsBasic'}style="color:#000"{/if}> 基础信息</a><span class="divider">|</span>
+               <a href="/template/list" {if $mod=='template'}style="color:#000"{/if}> 范本列表</a><span class="divider">|</span>
+            </li>  
+            <li><a href="/listing/list" {if $mod=='listing'}style="color:#000"{/if}>listing列表</a><span class="divider">|</span></li>
+            <li><a href="/shops/addShopView" {if $mod=='shops'}style="color:#000"{/if}>店铺模板</a><span class="divider">|</span></li> 
+            <li><a href="/accountSiteRelation/list" {if $mod=='accountSiteRelation'}style="color:#000"{/if}>店铺站点映射</a><span class="divider">|</span></li>
+            <li><a href="/descTmp/list" {if $mod=='descTmp'}style="color:#000"{/if}>类目管理</a></li>
+        </ul>
+    </div>

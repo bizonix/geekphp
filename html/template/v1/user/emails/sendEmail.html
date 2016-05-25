@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>发送邮件</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <div class="span9">
+                  <div class="row-fluid">
+                    <div class="span12" id="content">
+                        <div class="row-fluid">
+                            <div class="navbar">
+                              <div class="navbar-inner">
+                                  <ul class="breadcrumb">
+                                      <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                      <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                      <li>发送邮件</li> <span class="divider">|</span>
+                                      <li><a href="/emails/emailTemplates">邮件模板</a></li>
+                                  </ul>
+                              </div>
+                            </div>
+                            <!-- block -->
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">邮件管理</div>
+                                </div>
+                                <div class="block-content collapse in">
+                                  <div class="span12">
+                                      <form action="/emails/sendEmail" method="post" class="form-horizontal">
+                                        <fieldset>
+                                          <legend>联系买家</legend>
+                                          <div class="control-group">
+                                            <label class="control-label" for="typeahead">收件人 </label>
+                                            <div class="controls">
+                                            <p><input name="receiver" type="text" class="span10"></p>
+                                            <p>
+                                              选择店铺中买家： 
+                                              <select name="shop">
+                                                  <option value="#">选择店铺买家</option>
+                                                {foreach from=$shops item=val}
+                                                  <option value="{$val['id']}">{$val['shop_account']}</option>
+                                                {/foreach}
+                                                  <option value="all">选择所有</option>
+                                              </select>
+                                            </p>
+                                            <p>
+                                              选择模板： 
+                                              <select name="templateId">
+                                                  <option value="#">选择邮件模板</option>
+                                                {foreach from=$templates item=val}
+                                                  <option value="{$val['id']}">{$val['title']}</option>
+                                                {/foreach}
+                                              </select>
+                                            </p>
+                                            </div>
+                                          </div>
+                                          <div class="control-group">
+                                            <label class="control-label" for="typeahead">抄送人 </label>
+                                            <div class="controls">
+                                            <input name="copyReceiver" type="text" class="span10">
+                                            </div>
+                                          </div>
+                                          <div class="control-group">
+                                            <label class="control-label" for="typeahead">邮箱主题 </label>
+                                            <div class="controls">
+                                            <input name="title" type="text" class="span10">
+                                            </div>
+                                          </div>
+                                          <div class="control-group">
+                                            <label class="control-label" for="textarea2">邮件内容</label>
+                                            <div class="controls">
+                                            <textarea name="content" class="span10" id="tinymce_full"></textarea>
+                                            </div>
+                                          </div>
+                                          <div class="control-group">
+                                            <label class="control-label" for="textarea2">方式</label>
+                                            <div class="controls">
+                                              <label class="uniform">
+                                                <input type="checkbox" name="sendType[]" value="1" checked="checked"/> 发送邮件
+                                                <input type="checkbox" name="sendType[]" value="2" /> 保存为模板邮件
+                                              </label>
+                                            </div>
+                                          </div>
+                                          <div class="form-actions">
+                                            <button type="submit" class="btn btn-primary">发送邮件</button>
+                                            <button type="reset" class="btn">取消</button>
+                                          </div>
+                                        </fieldset>
+                                      </form>
+                                  </div>
+                                </div>
+                            </div>
+                            <!-- /block -->
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        <script type="text/javascript" src="{$smarty.const.TPL}/public/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
+        {literal}
+        <script type="text/javascript">
+            $(function(){
+                $("select[name=shop]").on("change",function(){
+                    if($(this).val() != "#"){
+                        $("input[name=receiver]").val($(this).find('option:selected').text());
+                        $(":checkbox").prop("checked", true).attr("readonly","readonly");
+                        $(":submit").text("加入邮件发送队列");
+                    }else{
+                        $("input[name=receiver]").val('');
+                        $(":checkbox").removeAttr("readonly");
+                        $(":checkbox:eq(1)").prop("checked",false);
+                        $(":submit").text("发送邮件");
+                    }
+                });
+            });
+            $(function(){
+                $("select[name=templateId]").on("change",function(){
+                    if($(this).val() != "#"){
+                        $.ajax({
+                            type  : "POST",
+                            async : false,
+                            url   : '/emails/emailTemplates/',
+                            dataType : "json",
+                            data : {"templateId":$(this).val()},
+                            success : function(data){
+                                var code = data.errCode;
+                                var msg  = data.errMsg;
+                                var data = data.data;
+                                if(code == 200){
+                                    $("input[name=title]").val(data.templateInfo.title);
+                                    tinymce.get("tinymce_full").setContent(data.templateInfo.content);
+                                }else{
+                                    alert(msg);
+                                }
+                            },
+                            error : function(){
+                                alert("网络错误");
+                            }
+                        });
+                    }
+                });
+            });
+        // Tiny MCE
+            tinymce.init({
+                  selector: "#tinymce_full",
+                  plugins: [
+                      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                      "searchreplace wordcount visualblocks visualchars code fullscreen",
+                      "insertdatetime media nonbreaking save table contextmenu directionality",
+                      "emoticons template paste textcolor"
+                  ],
+                  toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                  toolbar2: "print preview media | forecolor backcolor emoticons",
+                  image_advtab: true,
+                  height: '300px',
+                  templates: [
+                    {title: '邮件模板 1', content: '邮件模板 1'},
+                    {title: '邮件模板 2', content: '邮件模板 2'}
+                ]
+            });
+
+        </script>
+        {/literal}
+    </body>
+
+</html>

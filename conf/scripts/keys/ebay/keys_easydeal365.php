@@ -1,0 +1,10 @@
+<?php
+	$siteID =0;
+	$production  = false;
+	$compatabilityLevel = 765;
+	$devID		="c979de22-fe99-4d93-b417-940c637d38bb";
+	$appID		="Shenzhen-f583-48e8-95ed-0f88fabff4ee";
+	$certID		="45c0312b-ed8d-4274-b037-1107e1d63d25";
+	$serverUrl	="https://api.ebay.com/ws/api.dll";
+	$userToken ='AgAAAA**AQAAAA**aAAAAA**N5LnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AFkIuhC5eGoASdj6x9nY+seQ**J+gBAA**AAMAAA**KjHEtotOcfPT3RUwcTY+5A6buDbKBuHhkR2Wd4kIFYzMfIS7v4HNd/j6TFVSVSZgYNoxjGP73KKEc+sBVSM0t9mgwMuK8mlju4HdiOSn47MG9XGP5OM4AbBQLwnL5e8lrM1rSRWgTSFab4cGQ/T6fY8HePSvOr5F9wYAwBLOAOF3mPBVWhP8a47tVT8Rga9GsEpZW97WraEzlq/y7CyxmUIX4aRUnNsuW3dYRvzgITnlwIC+zTMYztdLJQ5/3VH7NMi2zi60J2kizoLE+Pph1V16VtpG3ZbojRjHya6n7+rNAY/WZPIGJ4cNYqBj8MA1S+OGxDtBQtFn3UCwKXYAEr8txGeZofhI6LY5VRYhVYeUdoJ8G4ZYi9UiLjN1USYPiY42Qg3Qzva8CnorMLFcR8Mx1eLKuD7bzdkEVC2iAGj1kXKlmNKrLMXFd8ZnJAqeiV+50WznVkxS08a+3FzmkQehBBNuusPrJvuJP7BA5gRx5P6mFnBkHHA7Irv1IxkltwQtwZutjqgJT4yMwCQm6mIjJOwL2B3zpmL0cpC4q7T6RvGC7jOOwjs+JDVL5NBmNhTvDZbL/Ku7RpaO0Sv1+zi+ZasfO52s117PNs14fjR18nMyvOugqn54voyG1yOpS5g4blFd2yDkMUp/aocuJSqOjnVgYDAssYL1Tm3dm5jW05OV++cKasfwPgXe1UrDybEml2tMMk6w48oLtdo5rCpIIOEsXkYHLv8o8BFbzbJam6KufJ0lfBiuz38Knjx6';
+?>

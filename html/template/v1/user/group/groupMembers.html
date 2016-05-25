@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>团体成员</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- smarty定义的变量 -->
+        <!-- /smarty定义的变量 -->
+        <!-- Button trigger modal -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                     <div class="row-fluid">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li><a href="/group/groupDetailView">团体信息</a> <span class="divider">|</span></li>
+                                <li>成员管理</li>
+                            </ul>
+                        </div>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">成员列表</div>
+                                <div class="pull-right"><span class="badge badge-info">{$count}</span></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+                                  <p>&nbsp;</p>
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></span>#</th>
+                                                <th style="text-align:center;">成员名</th>
+                                                <th style="text-align:center;">状态</th>
+                                                <th style="text-align:center;">权限</th>
+                                                <th style="text-align:center;">加入时间</th>
+                                                <th style="text-align:center;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$members item=val}
+                                              <tr class="odd gradeX">
+                                                <td style="text-align:center;">{$val["id"]}</td>
+                                                <td style="text-align:center;">{$val["member_name"]}</td>
+                                                <td style="text-align:center;">{if $val["member_status"] == 1}申请中{elseif $val["member_status"] == 2}通过{else}不通过{/if}</td>
+                                                <td style="text-align:center;">所有</td>
+                                                <td style="text-align:center;">{"Y-m-d H:i:s"|date:$val["add_time"]}</td>
+                                                <td>
+                                                  <div class="btn-group pull-right">
+                                                      <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
+                                                      <ul class="dropdown-menu">
+                                                      {if $val["member_status"] == 1}
+                                                        <li><a href="/group/updateMemberStatus/memberId/{$val["member_id"]}/status/2">通过</a></li>
+                                                        <li><a href="/group/updateMemberStatus/memberId/{$val["member_id"]}/status/3">不通过</a></li>
+                                                      {elseif $val["member_status"] == 2}
+                                                        <li><a href="/group/updateMemberStatus/memberId/{$val["member_id"]}/status/3">不通过</a></li>
+                                                      {elseif $val["member_status"] == 3}
+                                                        <li><a href="/group/updateMemberStatus/memberId/{$val["member_id"]}/status/2">通过</a></li>
+                                                      {/if}
+                                                        <li><a name="check" href="#">成员信息</a></li>
+                                                        <li><a role-name="updatePower" href="#">修改权限</a></li>
+                                                        <li><a role-name="deleteShop" role-href="#">删除</a></li>
+                                                      </ul>
+                                                   </div>
+                                                </td>
+                                              </tr>
+                                            {/foreach}                                           
+                                        </tbody>
+                                    </table>
+                                    {$page}
+                                    <p>&nbsp;&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        {literal}
+        <script>
+        $(function(){
+            $("a[role-name=deleteShop]").on("click",function(){
+                if(confirm("确定要删除该店铺吗？")){
+                    location.href=$(this).attr("role-href");
+                }
+            });
+        });
+        </script>
+        {/literal}
+    </body>
+
+</html>

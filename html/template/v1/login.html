@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="msapplication-TileColor" content="#5bc0de" />
+    <meta name="msapplication-TileImage" content="/assets/img/metis-tile.png" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/lib/font-awesome/css/font-awesome.min.css">
+    <!-- Metis core stylesheet -->
+    <link rel="stylesheet" href="/assets/css/main.min.css">
+    <link rel="stylesheet" href="/assets/lib/animate.css/animate.min.css">
+  </head>
+  <body class="login" style="font-family:微软雅黑;">
+    <div class="form-signin">
+      <div class="text-center">
+        <img src="/assets/img/logo.png" alt="Metis Logo">
+      </div>
+      <hr>
+      <div class="tab-content">
+        <div id="login" class="tab-pane{if $act=='login' || $act=='checkEmail' || $act=='activeUser'} active{/if}">
+          <form action="/login/loginPost" method="post">
+            <p class="text-muted text-center">
+              请输入用户名和密码
+            </p>
+            {if isset($activeMsg)}
+            <p style="color:red;text-align:center;">{$activeMsg}</p>
+            {/if}
+            <input name="loginName" type="text" placeholder="用户名或邮箱(6-16位)" required="required" class="form-control top">
+            <input name="loginPwd" type="password" placeholder="密码" required="required" class="form-control bottom">
+            
+            <div name="showMsgDiv" style="border:none;color:red;text-align:center;font-size:14px;padding-bottom:10px;display:none;"></div>
+            <button name="loginBtn" class="btn btn-lg btn-primary btn-block" type="button">登录</button>
+          </form>
+        </div>
+        <div id="forgot" class="tab-pane{if $act=='forget'} active{/if}">
+          <form action="/login/forget" method="post">
+            <p class="text-muted text-center">输入可用邮箱</p>
+            <input name="email" type="email" required="required" placeholder="mail@domain.com" class="form-control">
+            <br>
+            <div name="showMsgDiv" style="border:none;color:red;text-align:center;font-size:14px;padding-bottom:10px;display:none;"></div>
+            <button name="forgetBtn" class="btn btn-lg btn-danger btn-block" type="button">密码</button>
+          </form>
+        </div>
+        <div id="newPwd" class="tab-pane{if $act=='newPwd'} active{/if}">
+          <form action="#">
+            <p class="text-muted text-center">输入新密码</p>
+            <input name="newPwd" type="password" required="required" placeholder="密码" class="form-control middle">
+            <input name="newPwdRetype" type="password" required="required" placeholder="重输密码" class="form-control bottom">
+            <div name="showMsgDiv" style="border:none;color:red;text-align:center;font-size:14px;padding-bottom:10px;display:none;"></div>
+            <button name="updateBtn" class="btn btn-lg btn-danger btn-block" type="button">修改</button>
+          </form>
+        </div>
+        <div id="signup" class="tab-pane{if $act=='register'} active{/if}">
+          <form action="/login/registerd" method="post">
+            <input name="userName" type="text" placeholder="用户名(6-16位)" required="required" title="字母开头,6-16位字母或下划线或数字组合" class="form-control top">
+            <input name="email" type="email" placeholder="mail@domain.com" required="required" class="form-control middle">
+            <input name="userPwd" type="password" required="required" placeholder="密码" class="form-control middle">
+            <input name="userPwdRetype" type="password" required="required" placeholder="重输密码" class="form-control bottom">
+            <img  title="点击刷新" src="/images/verify.php" align="absbottom" onclick="this.src='/images/verify.php?'+Math.random();"/>&nbsp;&nbsp;&nbsp;
+            <label>验证码：</label>
+            <input type="text" name="checkCode" required="required" style="width:80px;height:30px;"/>
+            <div name="showMsgDiv" style="border:none;color:red;text-align:center;font-size:14px;padding-bottom:10px;display:none;"></div>
+            <button class="btn btn-lg btn-success btn-block" name="registed" type="button">注册</button>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div class="text-center">
+        <ul class="list-inline">
+          <li> <a class="text-muted" href="#login" data-toggle="tab">登录</a></li>
+          <li> <a class="text-muted" href="#forgot" data-toggle="tab">忘记密码</a>  </li>
+          <li> <a class="text-muted" href="#signup" data-toggle="tab">注册</a>  </li>
+          <li> <a class="text-muted" href="/index/index">返回</a>  </li>
+        </ul>
+      </div>
+    </div>
+    <script src="/assets/lib/jquery/jquery.min.js"></script>
+    <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+          $('.list-inline li > a').click(function() {
+            var activeForm = $(this).attr('href') + ' > form';
+            //console.log(activeForm);
+            $(activeForm).addClass('animated fadeIn');
+            //set timer to 1 seconds, after that, unload the animate animation
+            setTimeout(function() {
+              $(activeForm).removeClass('animated fadeIn');
+            }, 1000);
+          });
+
+        $('input[name=userPwd],input[name=userPwdRetype]').on('blur',function(){
+            if($.trim($('input[name=userPwd]').val()) && $.trim($('input[name=userPwdRetype]').val())){
+                if($.trim($('[name=userPwd]').val()) != $.trim($('[name=userPwdRetype]').val())){
+                    showMsg('两次密码不一致');
+                }else{
+                    hideMsg();
+                }
+            }
+        });
+        //提交登录按钮时
+        $("button[name=loginBtn]").on("click",function(){
+            loginStart($(this));
+        });
+        //提交注册按钮时
+        $("button[name=registed]").on("click",function(){
+            registedStart($(this));
+        });
+        //提交忘记密码按钮时
+        $("button[name=forgetBtn]").on("click",function(){
+            forgetPwd($(this));
+        });
+        //提交修改密码按钮时
+        $("button[name=updateBtn]").on("click",function(){
+            updatePwd($(this));
+        });
+        //回车按钮动作
+        $("input").keyup(function(e){
+            if(e.keyCode==13){
+                var obj = $(".active").find(":button");
+                if (obj.attr("name") == 'loginBtn'){
+                    loginStart(obj);
+                }
+                if(obj.attr("name") == 'registed'){
+                    registedStart(obj);
+                }
+                if(obj.attr("name") == 'forgetBtn'){
+                    forgetPwd(obj);
+                }
+                if(obj.attr("name") == 'updateBtn'){
+                    updatePwd(obj);
+                }
+            }
+        });
+
+        //验证注册用户名
+        $("input[name=userName],input[name=email]").on("blur",function(){
+            if($(".active").attr("id") == "login" || $(".active").attr("id") == "signup"){
+                var thisVal = $.trim($(this).val());
+                if($(this).data("latestVal") == thisVal) return;
+                $(this).data("latestVal",thisVal);
+                if(thisVal){
+                    $.ajax({
+                        type  : "GET",
+                        async : false,
+                        url   : '/login/check/'+$(this).attr("name")+'/'+thisVal,
+                        dataType : "json",
+                        success : function(data){
+                            if(data.errCode != 200){
+                                showMsg(data.errMsg);
+                            }else{
+                                hideMsg();
+                            }
+                        },
+                        error: function(){
+                            showMsg('访问网络失败！');
+                        }
+                    });
+                }else{
+                    showMsg('用户名为必填项');
+                }
+            }
+        });
+
+        function showMsg(msg){
+            var showMsgDiv  = $(".active").find('div[name=showMsgDiv]');
+            showMsgDiv.html(msg).show(500);
+        }
+        function hideMsg(){
+            var showMsgDiv  = $(".active").find('div[name=showMsgDiv]');
+            showMsgDiv.hide(500);
+        }
+        //登录动作
+        function loginStart(obj) {
+            if(checkIsFull()){
+                  $.ajax({
+                      type  : "POST",
+                      async : false,
+                      url   : '/login/loginPost',
+                      dataType : "json",
+                      data : obj.parents("form").serialize(),
+                      success : function(data){
+                          if(data.errCode == 200){
+                              location.href="/dashboard/index";
+                          }else{
+                              showMsg(data.errMsg);
+                          }
+                      },
+                      error: function(){
+                          showMsg('访问网络失败！');
+                      }
+                  });
+            }
+        }
+        //注册动作
+        function registedStart(obj){
+            if(checkIsFull()){
+                  $.ajax({
+                      type  : "POST",
+                      async : false,
+                      url   : '/login/registerd',
+                      dataType : "json",
+                      data : obj.parents("form").serialize(),
+                      success : function(data){
+                          if(data.errCode == 200){
+                              showMsg("恭喜你，注册成功，马上去邮箱激活吧！");
+                          }else{
+                              showMsg(data.errMsg);
+                          }
+                      },
+                      error: function(){
+                          showMsg('访问网络失败！');
+                      }
+                  });
+            }
+        }
+        //忘记密码动作
+        function forgetPwd(obj){
+            if(checkIsFull()){
+                $.ajax({
+                    type  : "POST",
+                    async : false,
+                    url   : '/login/forgetPost',
+                    dataType : "json",
+                    data : obj.parents("form").serialize(),
+                    success : function(data){
+                        if(data.data.status == true){
+                            if(data.data.address){
+                                showMsg("<a target='_blank' href='"+data.data.address+"'>去邮箱验证</a>");
+                            }else{
+                                showMsg("验证邮件已发送，去邮箱验证");
+                            }
+                        }else{
+                            showMsg(data.errMsg);
+                        }
+                    },
+                    error: function(){
+                        showMsg('访问网络失败！');
+                    }
+                });
+            }
+        }
+        //修改密码动作
+        function updatePwd(obj){
+            if(checkIsFull()){
+                $.ajax({
+                    type  : "POST",
+                    async : false,
+                    url   : '/login/updatePwd',
+                    dataType : "json",
+                    data : obj.parents("form").serialize(),
+                    success : function(data){
+                        if(data.errCode == "200"){
+                            location.href="/login/login";
+                        }else{
+                            showMsg(data.errMsg);
+                        }
+                    },
+                    error: function(){
+                        showMsg('访问网络失败！');
+                    }
+                });
+            }
+        }
+
+        //执行提交前的验证操作
+        function checkIsFull(){
+            var msg='';
+            $(".active").find("input[required=required]").each(function(){
+                if(!msg){
+                    var thisVal = $.trim($(this).val());
+                    switch($(this).attr("name")){
+                      case "userName":
+                      case "loginName":
+                          if(!thisVal){
+                            msg = '未输入用户名！';
+                          }else if(0){
+                            msg = '用户名输入不正确！';
+                          }
+                        break;
+                      case "email": 
+                          if(!thisVal){
+                            msg = '未输入邮箱！';
+                          }
+                        break;
+                      case "userPwd":
+                      case "loginPwd":
+                      case "newPwd":
+                          if(!thisVal){
+                            msg = '密码未填写！';
+                          }
+                        break;
+                      case "userPwdRetype":
+                      case "newPwdRetype":
+                          if(!thisVal){
+                            msg = '重输密码未填写！';
+                          }
+                        break;
+                      case "checkCode":
+                          if(!thisVal){
+                            msg = '请输入验证码！';
+                          }
+                        break;
+                    }
+                }
+            });
+            if(msg){
+                showMsg(msg);
+                return false;
+            }else{
+                hideMsg();
+                return true;
+            }
+        }
+        function submitBeforeCheck(){
+
+        }
+
+      });
+    </script>
+  </body>
+</html>

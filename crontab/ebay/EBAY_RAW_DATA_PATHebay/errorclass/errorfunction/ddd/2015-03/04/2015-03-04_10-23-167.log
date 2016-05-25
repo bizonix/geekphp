@@ -1,0 +1,1132 @@
+##############################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>1</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:28.537Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380977263753-562389958025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-20T20:45:04.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>712071</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-20T18:22:36.000Z</PaidTime><ShippedTime>2015-01-20T20:45:03.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>2</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:30.511Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380977263753-562333103025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-20T00:00:20.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>712038</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-19T19:59:58.000Z</PaidTime><ShippedTime>2015-01-20T00:00:20.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>3</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:32.498Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380958312274-566532013025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-30T22:45:04.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>716437</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-30T20:33:41.000Z</PaidTime><ShippedTime>2015-01-30T22:45:04.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>4</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:34.227Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131427626501-1062600042003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-01T16:55:01.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Incomplete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725163</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>5</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:36.557Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380683363792-557911444025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T17:03:31.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>707475</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-07T23:00:53.000Z</PaidTime><ShippedTime>2015-01-08T00:53:37.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>6</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:38.391Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131239100459-1043565201003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-16T01:02:45.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>710517</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-15T12:49:52.000Z</PaidTime><ShippedTime>2015-01-16T01:02:45.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>7</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:41.534Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380977561539-562564622025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-20T14:45:34.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>712331</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-20T11:52:43.000Z</PaidTime><ShippedTime>2015-01-20T14:45:34.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>8</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:43.256Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141304460989-1080363847004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-02-09T12:47:09.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>715114</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-02-09T11:28:56.000Z</PaidTime><ShippedTime>2015-02-09T12:47:09.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>9</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:46.202Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131370031077-1050687103003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-02-01T08:45:38.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>716970</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-02-01T06:30:41.000Z</PaidTime><ShippedTime>2015-02-01T08:45:37.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>10</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:47.969Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131211548821-1042739655003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-14T01:00:08.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>709613</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-13T10:36:52.000Z</PaidTime><ShippedTime>2015-01-14T01:00:07.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>11</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:50.082Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380853653847-562198362025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-20T00:00:05.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>711958</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-19T13:09:17.000Z</PaidTime><ShippedTime>2015-01-20T00:00:05.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>12</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:51.968Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141161922846-1075302398004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-17T01:03:22.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>710945</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-16T14:46:45.000Z</PaidTime><ShippedTime>2015-01-17T01:03:22.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>13</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:53.734Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131092646286-1049922206003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-30T14:45:39.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>716326</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-30T12:00:27.000Z</PaidTime><ShippedTime>2015-01-30T14:45:39.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>14</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:55.631Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>381014688733-563888247025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-24T00:45:43.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>713805</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-23T23:37:29.000Z</PaidTime><ShippedTime>2015-01-24T00:45:43.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>15</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:57.400Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141402956370-1078324194004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-23T04:46:01.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>713450</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-23T03:02:45.000Z</PaidTime><ShippedTime>2015-01-23T04:46:01.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>16</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:21:59.306Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>381064163578-560253053025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-14T10:03:40.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>710001</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-14T07:30:46.000Z</PaidTime><ShippedTime>2015-01-14T10:03:40.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>17</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:01.063Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131367930810-1049158100003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-28T16:45:44.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>715576</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-28T14:37:29.000Z</PaidTime><ShippedTime>2015-01-28T16:45:43.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>18</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:02.740Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141244872964-1073516741004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-13T01:26:21.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>709246</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-12T11:20:05.000Z</PaidTime><ShippedTime>2015-01-13T01:26:20.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>19</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:04.751Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380780796689-562541124025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-20T10:45:05.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>712273</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-20T09:44:54.000Z</PaidTime><ShippedTime>2015-01-20T10:45:04.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>20</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:06.683Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>380958153777-577833330025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:09.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725656</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T14:20:13.000Z</PaidTime><ShippedTime>2015-03-03T18:45:09.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>21</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:08.484Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131257937149-1063520636003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:15.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725659</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T14:43:13.000Z</PaidTime><ShippedTime>2015-03-03T18:45:15.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>22</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:10.376Z</Timestamp><Ack>Success</Ack><Version>911</Version><Build>E911_CORE_APIXO_17416960_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>381059057859-560296173025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-01-15T01:26:30.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>710106</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-01-14T11:49:04.000Z</PaidTime><ShippedTime>2015-01-15T01:26:30.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>23</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:12.078Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>131313452757-1063512287003</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:18.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725655</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T14:15:56.000Z</PaidTime><ShippedTime>2015-03-03T18:45:17.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>24</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:13.704Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141334835876-1096158195004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:22.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725649</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T13:48:22.000Z</PaidTime><ShippedTime>2015-03-03T18:45:21.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>25</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:15.365Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141334835876-1096164862004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:25.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725654</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T14:09:19.000Z</PaidTime><ShippedTime>2015-03-03T18:45:24.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>26</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:17.225Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>381118278874-577838576025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:12.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725658</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T14:42:21.000Z</PaidTime><ShippedTime>2015-03-03T18:45:12.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>27</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:20.281Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>381099482224-577844215025</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:37.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725662</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T15:02:55.000Z</PaidTime><ShippedTime>2015-03-03T18:45:36.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>28</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:21.912Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141516769523-1096158424004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:34.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725650</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T13:48:10.000Z</PaidTime><ShippedTime>2015-03-03T18:45:33.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  #################################################################################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken>AgAAAA**AQAAAA**aAAAAA**MojnUQ**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AEkICjD5OKpQ6dj6x9nY+seQ**J+gBAA**AAMAAA**j/TkaXLF/w3zv+FnwuaFIedPpZ/Q7K45cB9aIzu3mWMLFY9h/wewKQh6AGmYBnYOGjAnDxkee8g0JCus8arGJU338tnJ8rxzEdGx9BrFVaRGI8+1vzZAYW04lu3PTlotvan0mIP6H2OzbrQ7871ob3N7KaqSBcDeYYQGLwbHX8n+rK26Dl8umlZQW8aKSNb2qk3ZFB3HqlnDk65WgbxUpQrQalcvA+J0sEoNO6ThIQNJttTmtVPsF4cx5lBJmx7peWrHJvcv6ABiD6QmtC78OAa/j/68iZ2mD+CDgU/OhlC17S2DpdzHTHpL8A2X88y1KSL7VRKpUB77MS+MgybSVrNkMkI4eeVktjkal+OFAHnXfnWOfevc8UJRqSMSeyBv54+hoi+llEpsqcrVBPxkMGbjoD3zv3wOpHb+NOSU/DKCXRP5qIc0rF4kqSL72MDHu4SJCA4Oc4mPrQwQ2grqIAwq675zsPC1Bt3TDrvyEtfNfBAiydQKrmv1h5TvbvSDAuvIkDNMJi7TtG0Kl7cJ/7SBO+RhQX0Xyp+PaXlfMEKAfubSSFIlwoiwivm+sg0YcB2TC8Fi35vkO3sFFkfzVTPE8NGTfJ9NZOnkToAzBMCSd3NoJ50ZNjCMGzaJqYJdnsmhxSzfDxmud48RT3e7QxYsqZrRflbMsAFIICt0U5EzuoD52DX8XrMdH9bUU9+Woy5fkYl8YG6x7QAQSl++CTcHKzFfwATbLHtAdJuhg9jJ30aPD97MM3HCnZv+16xO</eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-03T16:23:16</ModTimeFrom>
+				<ModTimeTo>2015-03-04T02:23:16</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>1</EntriesPerPage>
+					<PageNumber>29</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+<?xml version="1.0" encoding="UTF-8"?>
+<GetOrdersResponse xmlns="urn:ebay:apis:eBLBaseComponents"><Timestamp>2015-03-04T02:22:23.646Z</Timestamp><Ack>Success</Ack><Version>907</Version><Build>E907_CORE_APIXO_17363599_R1</Build><PaginationResult><TotalNumberOfPages>183</TotalNumberOfPages><TotalNumberOfEntries>183</TotalNumberOfEntries></PaginationResult><HasMoreOrders>true</HasMoreOrders><OrderArray><Order><OrderID>141491252136-1096160215004</OrderID><CheckoutStatus><eBayPaymentStatus>NoPaymentFailure</eBayPaymentStatus><LastModifiedTime>2015-03-03T18:45:28.000Z</LastModifiedTime><PaymentMethod>PayPal</PaymentMethod><Status>Complete</Status><IntegratedMerchantCreditCardEnabled>false</IntegratedMerchantCreditCardEnabled></CheckoutStatus><TransactionArray><Transaction><ShippingDetails><SellingManagerSalesRecordNumber>725651</SellingManagerSalesRecordNumber></ShippingDetails></Transaction></TransactionArray><PaidTime>2015-03-03T13:54:19.000Z</PaidTime><ShippedTime>2015-03-03T18:45:28.000Z</ShippedTime></Order></OrderArray><ReturnedOrderCountActual>1</ReturnedOrderCountActual></GetOrdersResponse>
+
+##############################################  responseBody end  ###################################################

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>平台方式管理</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+        <link href="{$smarty.const.TPL}/public/assets/DT_bootstrap.css" rel="stylesheet" media="screen">
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <!-- smarty定义的变量 -->
+        <!-- /smarty定义的变量 -->
+        <!-- Button trigger modal -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+					  <div class="row-fluid">
+						<div class="navbar">
+							<div class="navbar-inner">
+								<ul class="breadcrumb">
+									<i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+									<i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+									<li>
+										<a href="/adminSystemSet/systemTransport" {if $act=="systemTransport"}style="color:gray;"{/if}>系统运输方式</a> <span class="divider">|</span>	
+									</li>
+									<li>
+										<a href="/adminSystemSet/platformTransport" {if $act=="platformTransport"}style="color:gray;"{/if}>平台运输方式</a> <span class="divider">|</span>	
+									</li>
+									<li class="active"></li>
+								</ul>
+							</div>
+						</div>
+					 </div>
+					 <!-- Modal1 新增运输方式 -->
+					<div class="modal fade" style="display:none;" id="addDiv" tabindex="-1" role="dialog" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+							<h4 class="modal-title" id="myModalLabel">新增平台运输方式</h4>
+						  </div>
+						  <div class="modal-body">
+							<form class="form-horizontal" action="#" method="post">
+							  <div class="control-group">
+								<label class="control-label">平台运输方式</label>
+								<div class="controls">
+								  <input class="input disabled" name="serviceName" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">平台运输方式显示名</label>
+								<div class="controls">
+								  <input class="input" name="displayName" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="select01">所属平台</label>
+								<div class="controls">
+								  <select name="platformId" id="select01" class="chzn-select">
+									{foreach from=$platforms key=key item=val}
+									  <option value='{$key}'>{$val['platform_cn_name']}</option>
+									{/foreach}
+								  </select>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="select02">映射运输方式</label>
+								<div class="controls">
+								  <select name="carrierId" id="select02" class="chzn-select">
+									<option value="0">未设置</option>
+									{foreach from=$sysCarriers item=val}
+									<option value="{$val['id']}">{$val["carrier_name_cn"]}</option>
+									{/foreach}
+								  </select>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">物流公司名称</label>
+								<div class="controls">
+								  <input class="input" name="logisticsCompany" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">跟踪号规则</label>
+								<div class="controls">
+								  <input class="input" name="trackingNoRegex" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">排序号</label>
+								<div class="controls">
+								  <input class="input" name="recommendOrder" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">最小处理时间</label>
+								<div class="controls">
+								  <input class="input" name="minProcessDay" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">最大处理时间</label>
+								<div class="controls">
+								  <input class="input" name="maxProcessDay" type="text" value="">
+								</div>
+							  </div>
+							  </form>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button name="startAdd" type="button" class="btn btn-primary">新增</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					{literal}
+					<script type="text/javascript">
+						$(function(){
+							//开始新增
+							$("button[name=startAdd]").on("click",function(){
+								$.ajax({
+									type  : "POST",
+									async : false,
+									url   : '/adminSystemSet/addPlatformTransport',
+									dataType : "json",
+									data : $("#addDiv").find("form").serialize(),
+									success : function(data){
+										var code = data.errCode;
+										var msg  = data.errMsg;
+										var data = data.data;
+										if(code == 200){
+											location.reload();
+										}else{
+											alert(msg);
+										}
+									},
+									error : function(){
+										alert("网络错误");
+									}
+								});
+							});
+						});
+					</script>
+					{/literal}
+					 <!-- Modal2 修改运输方式 -->
+					<div class="modal fade" style="display:none;" id="updateDiv" tabindex="-1" role="dialog" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+							<h4 class="modal-title" id="myModalLabel">修改平台运输方式</h4>
+						  </div>
+						  <div class="modal-body">
+							<form class="form-horizontal" action="#" method="post">
+							  <div class="control-group">
+								<label class="control-label">平台运输方式</label>
+								<div class="controls">
+								  <input class="input disabled" name="serviceName" type="text" value="">
+								  <input class="input disabled" name="sysCarrierId" type="hidden" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">平台运输方式显示名</label>
+								<div class="controls">
+								  <input class="input" name="displayName" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="select01">所属平台</label>
+								<div class="controls">
+								  <select name="platformId" id="select01" class="chzn-select">
+									{foreach from=$platforms key=key item=val}
+									  <option value='{$key}'>{$val['platform_cn_name']}</option>
+									{/foreach}
+								  </select>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label" for="select02">映射运输方式</label>
+								<div class="controls">
+								  <select name="carrierId" id="select02" class="chzn-select">
+									<option value="0">未设置</option>
+									{foreach from=$sysCarriers item=val}
+									<option value="{$val['id']}">{$val["carrier_name_cn"]}</option>
+									{/foreach}
+								  </select>
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">物流公司名称</label>
+								<div class="controls">
+								  <input class="input" name="logisticsCompany" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">跟踪号规则</label>
+								<div class="controls">
+								  <input class="input" name="trackingNoRegex" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">排序号</label>
+								<div class="controls">
+								  <input class="input" name="recommendOrder" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">最小处理时间</label>
+								<div class="controls">
+								  <input class="input" name="minProcessDay" type="text" value="">
+								</div>
+							  </div>
+							  <div class="control-group">
+								<label class="control-label">最大处理时间</label>
+								<div class="controls">
+								  <input class="input" name="maxProcessDay" type="text" value="">
+								</div>
+							  </div>
+							  </form>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button name="startUpdate" type="button" class="btn btn-primary">修改</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					{literal}
+					<script type="text/javascript">
+						$(function(){
+							//开始更新
+							$("button[name=startUpdate]").on("click",function(){
+								$.ajax({
+									type  : "POST",
+									async : false,
+									url   : '/adminSystemSet/updatePlatformTransport',
+									dataType : "json",
+									data : $("#updateDiv").find("form").serialize(),
+									success : function(data){
+										var code = data.errCode;
+										var msg  = data.errMsg;
+										var data = data.data;
+										if(code == 200){
+											location.reload();
+										}else{
+											alert(msg);
+										}
+									},
+									error : function(){
+										alert("网络错误");
+									}
+								});
+							});
+						});
+					</script>
+					{/literal}
+                     <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">平台运输方式 </div>
+                                <div class="pull-right"><span class="badge badge-info">{$count}</span></div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12" style="padding-bottom:50px;">
+									<div class="table-toolbar">
+                                      <div class="btn-group pull-right">
+                                         <a href="#"><button data-toggle="modal" data-target="#addDiv" class="btn btn-success">新增 <i class="icon-plus icon-white"></i></button></a>
+                                      </div>
+                                      <form action="/adminSystemSet/platformTransport" method="post">
+                                          <div class="btn-group pull-left">
+                                             <select name="platformId" style="width:100px;" id="selectError">
+                                                <option value='0'>---平台---</option>
+                                                {foreach from=$platforms key=key item=val}
+                                                  <option value='{$key}' {if $key == $p_platformId}selected{/if}>{$val['platform_cn_name']}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="serviceName" style="width:150px;" id="selectError">
+                                                <option value=''>---平台运输方式---</option>
+                                                {foreach from=$serviceName item=val}
+                                                  <option value='{$val}' {if $val == $p_serviceName}selected{/if}>{$val}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                             <select name="logisticsCompany" style="width:120px;" id="selectError">
+                                                <option value=''>---物流公司---</option>
+                                                {foreach from=$logisticsCompany item=val}
+                                                  <option value='{$val}' {if $val == $p_logisticsCompany}selected{/if}>{$val}</option>
+                                                {/foreach}
+                                              </select>
+                                          </div>
+                                          <div class="btn-group pull-left">
+                                              <button type="submit" title="查询" class="btn btn-success"><i class="icon-search icon-white"></i></button>
+                                          </div>
+                                      </form>
+                                   </div>
+                                   <br/><br/>
+                                    
+                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="checkAll" class="uniform_on" type="checkbox" value="option1"></span>#</th>
+                                                <th style="text-align:center;">平台</th>
+												<th style="text-align:center;">平台运输方式</th>
+												<th style="text-align:center;">平台运输方式显示</th>
+												<th style="text-align:center;">物流公司</th>
+                                                <th style="text-align:center;">映射运输方式</th>
+                                                <th style="text-align:center;">时间</th>
+												<th style="text-align:center;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {foreach from=$carriers item=v}
+                                              <tr class="even gradeC" style="border-top:none;">
+                                                  <td style="text-align:center;">{$v["id"]}</td>
+												  <td style="text-align:center;">{$platforms[$v["platformId"]]['platform_cn_name']}</td>
+												  <td style="text-align:center;">{$v["serviceName"]}</td>
+												  <td style="text-align:center;">{$v["displayName"]}</td>
+												  <td style="text-align:center;">{$v["logisticsCompany"]}</td>
+												  <td style="text-align:center;">{$v["carrier_name_cn"]}</td>
+												  <td style="text-align:center;"><p>修改：{'Y-m-d H:i:s'|date:$v["update_time"]}</p><p>时间：{'Y-m-d H:i:s'|date:$v["add_time"]}</p></td>
+												  <td style="text-align:center;" role-id='{$v["id"]}' role-platformId='{$v["platformId"]}' role-carrierId='{$v["carrierId"]}' role-recommendOrder='{$v["recommendOrder"]}' role-trackingNoRegex='{$v["trackingNoRegex"]}' role-logisticsCompany='{$v["logisticsCompany"]}'  role-minProcessDay='{$v["minProcessDay"]}' role-maxProcessDay='{$v["maxProcessDay"]}' role-serviceName='{$v["serviceName"]}' role-displayName='{$v["displayName"]}'><a role-name="updateBtn" data-toggle="modal" data-target="#updateDiv" href="#">修改</a>&nbsp;|&nbsp;<a role-name="deleteBtn" href="#">删除</a></td>
+                                              </tr> 
+                                            {/foreach}                                           
+                                        </tbody>
+                                    </table>
+                                    {$page}
+                                    <p>&nbsp;&nbsp;</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        <link href="{$smarty.const.TPL}/public/vendors/datepicker.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/bootstrap-datepicker.js"></script>
+        {literal}
+        <script>
+        $(function() {
+            //点击修改操作时
+			$("a[role-name=updateBtn]").on("click",function(){
+				var id					= $(this).parents("td").attr("role-id");
+				var platformId			= $(this).parents("td").attr("role-platformId");
+				var carrierId			= $(this).parents("td").attr("role-carrierId");
+				var recommendOrder      = $(this).parents("td").attr("role-recommendOrder");
+				var trackingNoRegex     = $(this).parents("td").attr("role-trackingNoRegex");
+				var logisticsCompany    = $(this).parents("td").attr("role-logisticsCompany");
+				var minProcessDay		= $(this).parents("td").attr("role-minProcessDay");
+				var maxProcessDay		= $(this).parents("td").attr("role-maxProcessDay");
+				var serviceName			= $(this).parents("td").attr("role-serviceName");
+				var displayName			= $(this).parents("td").attr("role-displayName");
+				$("#updateDiv").find("input[name=sysCarrierId]").val(id);
+				$("#updateDiv").find("select[name=platformId]").val(platformId);
+				$("#updateDiv").find("select[name=carrierId]").val(carrierId);
+				$("#updateDiv").find("input[name=recommendOrder]").val(recommendOrder);
+				$("#updateDiv").find("input[name=trackingNoRegex]").val(trackingNoRegex);
+				$("#updateDiv").find("input[name=logisticsCompany]").val(logisticsCompany);
+				$("#updateDiv").find("input[name=minProcessDay]").val(minProcessDay);
+				$("#updateDiv").find("input[name=maxProcessDay]").val(maxProcessDay);
+				$("#updateDiv").find("input[name=serviceName]").val(serviceName);
+				$("#updateDiv").find("input[name=displayName]").val(displayName);
+			});
+			//点击删除操作时
+			$("a[role-name=deleteBtn]").on("click",function(){
+				var id	= $(this).parents("td").attr("role-id");
+				if(confirm("确定要删除？")){
+					$.ajax({
+						type  : "POST",
+						async : false,
+						url   : '/adminSystemSet/deletePlatformTransport',
+						dataType : "json",
+						data : {"sysCarrierId":id},
+						success : function(data){
+							var code = data.errCode;
+							var msg  = data.errMsg;
+							var data = data.data;
+							if(code == 200){
+								location.reload();
+							}else{
+								alert(msg);
+							}
+						},
+						error : function(){
+							alert("网络错误");
+						}
+					});
+				}
+			});
+        });
+        </script>
+        {/literal}
+    </body>
+
+</html>

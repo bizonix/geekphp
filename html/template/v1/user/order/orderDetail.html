@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>订单列表</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                      <!-- smarty定义的变量 -->
+                      {assign var='_orderHandleStatus' value=ORDERHANDLESTATUS|C}
+                      {assign var='_platforms' value=PLATFORMS|C}
+                      {assign var="simpleDetail" value=$mainData['simple_detail']|json_decode:true}
+                      {assign var="productList" value=$detailData['childOrderList']|json_decode:true}
+                      {assign var="orderAmount" value=$detailData['orderAmount']|json_decode:true}
+                      {assign var="receiptAddress" value=$detailData['receiptAddress']|json_decode:true}
+                      {assign var="orderDeclarationContent" value=$detailData['orderDeclarationContent']|json_decode:true}
+                      {assign var="buyerInfo" value=$detailData['buyerInfo']|json_decode:true}
+                      {assign var="orderMsgList" value=$detailData['orderMsgList']|json_decode:true}
+                      <!-- /smarty定义的变量 -->
+                     <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">订单列表<span class="divider">&nbsp;>&nbsp;</span> </div>
+                                <div class="muted pull-left">订单详情 </div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div class="row" style="margin:5px 15px;padding:5px;">
+                                      <div class="span8">
+                                        订单处理状态：
+                                        <span style="font-weight:bolder;color:red;">{$_orderHandleStatus[$mainData['handle_status']]} </span>
+                                        {if $mainData['note']}<p style="color:red;text-indent:2em;">({$mainData['note']})</p>{/if}
+                                      </div>
+                                      <div class="span4">
+                                        <div class="pull-right"><button name="contactBuyerBtn" data-toggle="modal" data-target="#contactBuyerDiv" class="btn btn-success pull-right">联系买家</button></div>
+                                        <!--<div class="btn-group pull-right">
+                                          <button data-toggle="dropdown" class="btn dropdown-toggle">操作 <span class="caret"></span></button>
+                                           <ul class="dropdown-menu">
+                                              <li><a href="#">推送至{$companys[$mainData['company_id']]['short_name']}</a></li>
+                                              {if $mainData['delivery_from'] != $mainData['company_id']}
+                                              <li><a href="#">推送至{$companys[$mainData['delivery_from']]['short_name']}</a></li>
+                                              {/if}
+                                              <li><a data-toggle="modal" data-target="#updateOrder" href="#">修改订单</a></li>
+                                              <li><a href="#">废弃订单</a></li>
+                                           </ul>
+                                         </div>-->
+                                      </div>
+                                    </div>
+                                    <hr/>
+                                    <h5>产品信息 <button name="updateBtn" data-toggle="modal" data-target="#updateOrder" class="btn btn-danger pull-right">修改</button></h5>
+                                    <table class="table table-striped table-bordered">
+                                      <tr><th>订单sku/原商品编码</th><th>单价</th><th>运费</th><th>数量</th><th>状态</th><th>物流信息</th></tr>
+                                        {foreach from=$productList key=k item=v}
+                                          <tr>
+                                            <td width="50%">
+                                              <div class="media">
+                                                <a class="media-left pull-left" href="#">
+                                                  <img src="{$v['productImgUrl']}" alt="">
+                                                </a>
+                                                <div class="media-body">
+                                                  <p class="media-heading">商品编码:{$v['productAttributes']['itemId']} / SKU:{$v['productAttributes']['sku']}</p>
+                                                  <a target="_blank" href="{$v['productAttributes']['skuUrl']}">{$v['productAttributes']['itemTitle']}
+                                                  {assign var='otherAttributes' value=$v['otherAttributes']}
+                                                  {foreach from=$otherAttributes key=kk item=vv}
+                                                      {if $vv}【{$kk}:{$vv}】{/if}
+                                                  {/foreach}</a>
+                                                </div>
+                                              </div>
+                                            </td>
+                                            <td>{$v['productAttributes']['itemPrice']}{$orderAmount['symbol']}</td>
+                                            <td>{$v['productAttributes']['shippingFee']}{$orderAmount['symbol']}</td>
+                                            <td>{$v['lotNum']}</td>
+                                            <td>
+                                              <p>{$_platforms['0']['orderStatus'][$_platforms[$mainData['source_platform']]['orderStatus'][$mainData['order_status']]]}</p>
+                                              <p>备注：{if empty($v['memo'])}无{else}<span style="color:red;">{$v['memo']}</span>{/if}</p>
+                                            </td>
+                                            {if $k == 0}
+                                            <td name="transportType" rowspan="{$v['productCount']}">
+                                            <p>平台运输方式：{$platformCarriers[$mainData['transport_type']]["displayName"]}</p>
+                                            <p>发货运输方式：{if $detailData['shipping_type']}{$carriers[$detailData['shipping_type']]['carrier_name_cn']}【{$detailData['shipping_type']}】{else}无{/if}</p>
+                                            </td>
+                                            {/if}
+                                        {/foreach}
+                                      </tr>
+                                    </table>
+                                    <h5>订单系统表现</h5>
+                                    <table class="table table-striped table-bordered">
+                                    <tr><th>系统号</th><th>订单编号</th><th>状态</th><th>来源</th><th>时间</th><th>所属</th><th>去向</th></tr>
+                                      <tr>
+                                        <td role-orderSysId>{$mainData['id']}</td>
+                                        <td>{$mainData['order_id']}</td>
+                                        <td>
+                                          <p>处理状态：{$_orderHandleStatus[$mainData['handle_status']]}</p>
+                                        </td>
+                                        <td>
+                                          <p>店铺：{$mainData['source_account']}</p>
+                                          <p>平台：{$_platforms[$mainData['source_platform']]['platformName']}</p>
+                                          <p>进入方式：系统抓取{$_source[$mainData['source']]}</p>
+                                        </td>
+                                        <td>
+                                          <p>进入系统：{"Y-m-d H:i:s"|date:$mainData['create_time']}</p>
+                                          <p>修改时间：{if !empty($mainData['update_time'])}{"Y-m-d H:i:s"|date:$mainData['update_time']}{else}无{/if}</p>
+                                          <p>处理时间：{if !empty($mainData['update_time'])}{"Y-m-d H:i:s"|date:$mainData['delivery_time']}{else}无{/if}</p>
+                                        </td>
+                                        <td>
+                                          <p>组织：{$companys[$mainData['company_id']]['short_name']}</p>
+                                          <p>用户：{$mainData['user_name']}</p>
+                                        </td>
+                                        <td>
+                                          <p>{$companys[$mainData['delivery_from']]['short_name']}</p>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <h5>平台订单总额</h5>
+                                    <table class="table table-striped table-bordered">
+                                    <tr><th>产品价格</th><th>运费</th><th>订单总额</th><th>预计可得</th><th>留言</th><th>纠纷</th><th>资金冻结</th></tr>
+                                      <tr>
+                                        <td>{$v['productAttributes']['itemPrice']}{$orderAmount['symbol']}</td>
+                                        <td>{$v['productAttributes']['shippingFee']}{$orderAmount['symbol']}</td>
+                                        <td>{$orderAmount['amount']}{$orderAmount['symbol']}</td>
+                                        <td>{$orderAmount['actualAmount']}{$orderAmount['symbol']}</td>
+                                        <td>{if empty($orderMsgList)}无{else}{$orderMsgList|var_dump}{/if}</td>
+                                        <td>无</td>
+                                        <td>无</td>
+                                      </tr>
+                                    </table>
+                                    <h5>订单处理预估费用（元）</h5>
+                                    <table class="table table-striped table-bordered">
+                                    <tr><th>产品价格</th><th>运费</th><th>订单处理费</th><th>包材费</th><th>总费用</th></tr>
+                                      <tr>
+                                        <td>{$simpleDetail['orderFee']['forecastInfo']['goods_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['forecastInfo']['shipping_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['forecastInfo']['order_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['forecastInfo']['package_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['forecastInfo']['total_fee']}</td>
+                                      </tr>
+                                      <tr><td colspan="5">
+                                        <table class="table table-bordered"><tr><td>sku</td><td>数量</td><td>货本价</td><td>产品重</td><td>包材重</td><td>包材费</td><td>包材类型</td><td>分摊运费</td></tr>
+                                        {foreach from=$simpleDetail['orderFee']['skuNumPrice'] key=k item=v}
+                                          <tr>
+                                          <td>{$v['sku']}</td><td>{$v['num']}</td>
+                                          <td>{$v['dpPrice']}</td><td>{$v['goodWeight']}</td>
+                                          <td>{$v['packageWeight']}</td><td>{$v['packageFee']}</td>
+                                          <td>{$v['packageType']}</td><td>{$v['sku_shippint_fee']}</td>
+                                          </tr>
+                                        {/foreach}
+                                        </table>
+                                      </td></tr>
+                                    </table>
+                                    <h5>订单处理实际费用（元）</h5>
+                                    <table class="table table-striped table-bordered">
+                                    <tr><th>产品价格</th><th>运费</th><th>订单处理费</th><th>包材费</th><th>总费用</th></tr>
+                                      <tr>
+                                        <td>{$simpleDetail['orderFee']['actualInfo']['goods_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['actualInfo']['shipping_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['actualInfo']['order_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['actualInfo']['package_fee']}</td>
+                                        <td>{$simpleDetail['orderFee']['actualInfo']['total_fee']}</td>
+                                      </tr>
+                                    </table>
+                                    <h5>买家信息 <button name="updateBtn" data-toggle="modal" data-target="#updateReceipt" class="btn btn-danger pull-right">修改</button></h5>
+                                    <table class="table table-striped table-bordered">
+                                      <tr><th>收件人</th><th>地址</th><th>邮编</th><th>联系方式</th></tr>
+                                      <tr>
+                                      <td>
+                                        <p>姓名: {if empty($receiptAddress['contactPerson'])}{$buyerInfo['userName']}{else}{$receiptAddress['contactPerson']}{/if}</p>
+                                        <p>买家国家:{$buyerInfo['country']}</p>
+                                      </td>
+                                      <td>
+                                        <p>国家：{$receiptAddress['country']}</p>
+                                        <p>省/州：{$receiptAddress['province']}</p>
+                                        <p>城市：{$receiptAddress['city']}</p>
+                                        <p>地址1: {if !empty($receiptAddress['address1'])}{$receiptAddress['address1']}{else}---{/if}</p>
+                                        <p>地址2: {if !empty($receiptAddress['address2'])}{$receiptAddress['address2']}{else}---{/if}</p>
+                                        <p>地址3：{if !empty($receiptAddress['address3'])}{$receiptAddress['address3']}{else}---{/if}</p>
+                                      </td>
+                                      <td>{$receiptAddress['zip']}</td>
+                                      <td>
+                                        <p>手机：{$receiptAddress['mobileNo']}</p>
+                                        <p>电话：{$receiptAddress['phoneNumber']}</p>
+                                        <p>email: {$buyerInfo['email']}</p>
+                                      </td></tr>
+                                    </table>
+                                    <h5>报关信息 <button name="updateBtn" data-toggle="modal" data-target="#updateDeclaration" class="btn btn-danger pull-right">修改</button></h5>
+                                    <table class="table table-striped table-bordered">
+                                      <tr><th>币种</th><th>报关类型</th><th>物品</th></tr>
+                                      <tr>
+                                      <td>
+                                        <p>{$orderDeclarationContent['Currency']}</p>
+                                      </td>
+                                      <td><p>{$orderDeclarationContent['CustomsType']}</p></td>
+                                      <td>
+                                        {if $orderDeclarationContent['OrderCustom']|count}
+                                          <table class="table table-striped table-bordered">
+                                            <tr><td>数量</td><td>中文描述</td><td>英文</td><td>重量</td><td>总价值</td></tr>
+                                            {foreach from=$orderDeclarationContent['OrderCustom'] item=val}
+                                            <tr>
+                                              <td>{$val['Quantity']}</td>
+                                              <td>{$val['DescriptionCn']}</td>
+                                              <td>{$val['DescriptionEn']}</td>
+                                              <td>{$val['Weight']}</td>
+                                              <td>{$val['Value']}</td>
+                                            </tr>
+                                            {/foreach}
+                                          </table>
+                                        {/if}
+                                      </td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <!--/.fluid-container-->
+        <!-- Button trigger modal -->
+        <link href="{$smarty.const.TPL}/public/vendors/chosen.min.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/chosen.jquery.min.js"></script>
+        <script>
+          $(function(){
+              $(".chzn-select").chosen();
+          });
+        </script>
+
+        <!-- Modal1 手动拉取 -->
+        <form id="updateOrderInfo" class="form-horizontal">
+        <div class="modal fade" id="updateOrder" tabindex="-100" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">订单修改</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="control-group">
+                    <label class="control-label">订单编号</label>
+                    <div class="controls">
+                      <input class="input disabled" name="orderId" type="text" value="{$mainData['order_id']}">
+                      <input type="hidden" name="orderSysId" value="{$mainData['id']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="select01">订单去向</label>
+                    <div class="controls">
+                      <select name="receiveCompany" id="select01" class="chzn-select">
+                        <option value="{$companys[$mainData['delivery_from']]['id']}">{$companys[$mainData['delivery_from']]['cn_name']}</option>
+                        {foreach from=$companys key=k item=v}
+                          {if $v['id'] != $mainData['delivery_from']}
+                            <option value="{$k}">{$v['cn_name']}</option>
+                          {/if}
+                        {/foreach}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="select02">平台运输方式</label>
+                    <div class="controls">
+                      <select name="transportType" id="select02" class="chzn-select">
+                        {foreach from=$platformCarriers key=k item=v}
+                        <option value="{$k}" {if $mainData['transport_type'] == $k && $k}selected{/if}>{$v['displayName']}</option>
+                        {/foreach}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="select03">发货运输方式</label>
+                    <div class="controls">
+                      <select name="shippingType" id="select03" class="chzn-select">
+                        {foreach from=$carriers key=k item=v}
+                        <option value="{$k}" {if $detailData['shipping_type'] == $k && $k}selected{/if}>{$v['carrier_name_cn']}</option>
+                        {/foreach}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">国家</label>
+                    <div class="controls">
+                      <input class="input" name="countrySn" type="text" value="{$receiptAddress['country']}">
+                    </div>
+                  </div>
+                  {if $productList|count > 0}
+                  {foreach from=$productList key=k item=v}
+                  <div class="control-group" role-sku-div>
+                      <div class="controls">
+                        <p class="media-heading">商品编码:<input name="childOrderList[{$k}][productAttributes][itemId]" class="input" style="width:110px" type="text" value="{$v['productAttributes']['itemId']}"> <a href="#" role-name="addProduct">新增</a>|<a href="#" role-name="delProduct">删除</a></p>
+                        SKU: <input name="childOrderList[{$k}][productAttributes][sku]" class="input" style="width:120px" type="text" value="{$v['productAttributes']['sku']}">&nbsp;&nbsp;<input name="childOrderList[{$k}][lotNum]" class="input-small"  style="width:20px" type="text" value="{$v['lotNum']}">
+                      </div><br/>
+                      <label class="control-label" for="disabledInput">商品备注</label>
+                      <div class="controls">
+                        <textarea name="childOrderList[{$k}][memo]" value="{$v['productAttributes']['memo']}">{$v['memo']}</textarea> 
+
+                        <input type="hidden" name="childOrderList[{$k}][productAttributes][itemPrice]" value="{$v['productAttributes']['itemPrice']}"/>
+                        <input type="hidden" name="childOrderList[{$k}][productAttributes][skuUrl]" value="{$v['productAttributes']['skuUrl']}"/>
+                        <input type="hidden" name="childOrderList[{$k}][productAttributes][itemTitle]" value="{$v['productAttributes']['itemTitle']}"/>
+                        <input type="hidden" name="childOrderList[{$k}][productAttributes][shippingFee]" value="{$v['productAttributes']['shippingFee']}"/>
+                        {foreach from=$v['otherAttributes'] key=kk item=vv}
+                        <input type="hidden" name="childOrderList[{$k}][otherAttributes][{$kk}]" value="{$vv}"/>
+                        {/foreach}
+                      </div>
+                  </div>
+                  {/foreach}
+                  {else}
+                  <div class="control-group" role-sku-div>
+                      <div class="controls">
+                        <p class="media-heading">商品编码:<input name="childOrderList[0][productAttributes][itemId]" class="input" style="width:110px" type="text" value=""> <a href="#" role-name="addProduct">新增</a>|<a href="#" role-name="delProduct">删除</a></p>
+                        SKU: <input name="childOrderList[0][productAttributes][sku]" class="input" style="width:120px" type="text" value="">&nbsp;&nbsp;<input name="childOrderList[0][lotNum]" class="input-small"  style="width:20px" type="text" value="">
+                      </div><br/>
+                      <label class="control-label" for="disabledInput">商品备注</label>
+                      <div class="controls">
+                        <textarea name="childOrderList[0][memo]" value=""></textarea> 
+                      </div>
+                  </div>
+                  {/if}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="updateSave" type="button" class="btn btn-primary">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+              $("#updateOrder").css("display","none");
+              //点击新增时
+              $("a[role-name=addProduct]").on("click",function(){
+                  var skuDiv = $(this).parents("div[role-sku-div]");
+                  var last   = $("div[role-sku-div]").last();
+                  skuDiv.clone(true).insertAfter(last);
+                  resetSkuName();
+              });
+              //点击删除时
+              $("a[role-name=delProduct]").on("click",function(){
+                  if($("div[role-sku-div]").length>1){
+                      $(this).parents("div[role-sku-div]").remove();
+                      resetSkuName();
+                  }else{
+                      alert("产品不能为空！");
+                  }
+              });
+              $("button[name=updateSave]").on("click",function(){
+                  $.ajax({
+                    type  : "POST",
+                    async : false,
+                    url   : '/orderDetails/updateOrderInfos',
+                    dataType : "json",
+                    data  : $("#updateOrderInfo").serialize(),
+                    success : function(data){
+                      if(data.errCode == '200'){
+                          location.reload();
+                      }else{
+                          alert(data.errMsg);
+                      }
+                    }
+                  });
+              });
+
+
+          });
+          function resetSkuName(){
+              $("div[role-sku-div]").each(function(k){
+                  $(this).find("input").each(function(){
+                      $(this).attr("name",$(this).attr("name").replace(/\d+/g,k));
+                  });
+                  $(this).find("textarea").attr("name",$(this).find("textarea").attr("name").replace(/\d+/g,k));
+              });
+          }
+        </script>
+        {/literal}
+        <!-- /Modal1 -->
+
+        <!-- Modal2 联系买家 -->
+        <form class="form-horizontal">
+        <div style="display:none;" class="modal fade" id="contactBuyerDiv" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">联系买家</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="control-group">
+                    <label class="control-label">订单号</label>
+                    <div class="controls">
+                      <textarea name="buyerEmail">{$buyerInfo['email']}</textarea>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="select04">选择模板</label>
+                    <div class="controls">
+                      <select name="receiveCompany" id="select04">
+                          <option value="">数据加载中...</option>
+                      </select>
+                      <a href="/emails/index" target="_blank">添加模板</a>
+                    </div>
+                  </div>
+                  <div name="retCode" style="text-align:center;"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" name="startSendEmail" class="btn btn-primary">发送邮件</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+        {literal}
+        <script type="text/javascript">
+            $("button[name=contactBuyerBtn]").on("click",function(){
+                setTimeout(function(){getEmailTemplates();},500);
+            });
+            //开始发送邮件
+            $("button[name=startSendEmail]").on("click",function(){
+                var emails = $("#contactBuyerDiv").find("textarea[name=buyerEmail]").val();
+                var templateId = $("#select04").val();
+                if(!templateId){
+                    alert("请选择模板！");
+                    return;
+                }
+                var str = '';
+                $.ajax({
+                    type  : "POST",
+                    async : false,
+                    url   : '/emails/sendEmailToBuyers/',
+                    dataType : "json",
+                    data : {"emails": emails,"templateId": templateId,"orderSysId":$.trim($("td[role-orderSysId]").text())},
+                    success : function(data){
+                        var code = data.errCode;
+                        var msg  = data.errMsg;
+                        var data = data.data;
+                        if(code == 200){
+                            str = '<p style="color:green;">邮件发送成功！</p>';
+                            $("#contactBuyerDiv").find("div[name=retCode]").html(str);
+                        }else{
+                            str = '<p style="color:red;">'+msg+'</p>';
+                            $("#contactBuyerDiv").find("div[name=retCode]").html(str);
+                        }
+                    },
+                    error : function(){
+                        str = '<p style="color:red;">网络错误</p>';
+                        $("#contactBuyerDiv").find("div[name=retCode]").html(str);
+                    }
+                });
+            });
+
+            function getEmailTemplates(){
+                    $.ajax({
+                        type  : "POST",
+                        async : false,
+                        url   : '/emails/getEmailTemplates/',
+                        dataType : "json",
+                        data : {"page":1},
+                        success : function(data){
+                            var code = data.errCode;
+                            var msg  = data.errMsg;
+                            var data = data.data;
+                            if(code == 200){
+                                var  result = '';
+                                for(var k in data['templates']){
+                                    result += '<option value="'+data['templates'][k]["id"]+'">'+data['templates'][k]["title"]+'</option>';
+                                }
+                                if(data['templates'].length == 10){
+                                    result += '<option value="more">加载更多</option>';
+                                }else if(data['templates'].length == 0){
+                                    result += '未添加模板';
+                                }
+                                $("#select04").data("isExit",true).html(result);
+                            }else{
+                                alert(msg);
+                            }
+                        },
+                        error : function(){
+                            alert("网络错误");
+                        }
+                    });
+            }
+        </script>
+        {/literal}
+        <!-- /Modal1 -->
+        
+        <!-- Modal2 修改买家信息 -->
+        <form id="updateReceiptInfo" class="form-horizontal">
+        <div style="display:none;" class="modal fade" id="updateReceipt" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">修改买家地址信息</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="control-group">
+                    <label class="control-label">收件人</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[contactPerson]" type="text" value="{$receiptAddress['contactPerson']}">
+                      <input type="hidden" name="orderSysId" value="{$mainData['id']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">国家</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[country]" type="text" value="{$receiptAddress['country']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">省/州</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[province]" type="text" value="{$receiptAddress['province']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">城市</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[city]" type="text" value="{$receiptAddress['city']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">地址1</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[address1]" type="text" value="{$receiptAddress['address1']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">地址2</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[address2]" type="text" value="{$receiptAddress['address2']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">地址3</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[address3]" type="text" value="{$receiptAddress['address3']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">邮编</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[zip]" type="text" value="{$receiptAddress['zip']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">手机</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[mobileNo]" type="text" value="{$receiptAddress['mobileNo']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">电话</label>
+                    <div class="controls">
+                      <input class="input" name="receiptAddress[phoneNumber]" type="text" value="{$receiptAddress['phoneNumber']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">email</label>
+                    <div class="controls">
+                      <input class="input" name="buyerInfo[userName]" type="hidden" value="{$buyerInfo['userName']}">
+                      <input class="input" name="buyerInfo[email]" type="text" value="{$buyerInfo['email']}">
+                      <input class="input" name="buyerInfo[country]" type="hidden" value="{$buyerInfo['country']}">
+                    </div>
+                  </div>
+                  
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="updateReceiptAddr" type="button" class="btn btn-primary">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+              $("button[name=updateReceiptAddr]").on("click",function(){
+                  $.ajax({
+                    type  : "POST",
+                    async : false,
+                    url   : '/orderDetails/updateReceiptAddr',
+                    dataType : "json",
+                    data  : $("#updateReceiptInfo").serialize(),
+                    success : function(data){
+                      if(data.errCode == '200'){
+                          location.reload();
+                      }else{
+                          alert("操作失败");
+                      }
+                    }
+                  });
+              });
+          });
+
+        </script>
+        {/literal}
+        <!-- /Modal2 -->
+        <!-- Modal3 修改报关 -->
+        <form id="updateDeclarationInfo" class="form-horizontal">
+        <div style="display:none;" class="modal fade" id="updateDeclaration" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                <h4 class="modal-title" id="myModalLabel">修改买家地址信息</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="control-group">
+                    <label class="control-label">货币类型</label>
+                    <div class="controls">
+                      <select name="orderDeclarationContent[Currency]">
+                        <option value="USD">USD</option>
+                        <option value="CAD">CAD</option>
+                        <option value="AUD">AUD</option>
+                        <option value="GBP">GBP</option>
+                        <option value="EUR">EUR</option>
+                        <option value="HKD">HKD</option>
+                      </select>
+                      <input type="hidden" name="orderSysId" value="{$mainData['id']}">
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">报关类型</label>
+                    <div class="controls">
+                      <input name="orderDeclarationContent[CustomsType]" {if $orderDeclarationContent['CustomsType'] == "礼物"}checked{/if} type="radio" value="礼物">礼物 
+                      <input name="orderDeclarationContent[CustomsType]" {if $orderDeclarationContent['CustomsType'] == "文件"}checked{/if}  type="radio" value="文件">文件 
+                      <input name="orderDeclarationContent[CustomsType]" {if $orderDeclarationContent['CustomsType'] == "商业样本"}checked{/if}  type="radio" value="商业样本">商业样本
+                      <input name="orderDeclarationContent[CustomsType]" {if !in_array($orderDeclarationContent['CustomsType'],array("礼物","文件","商业样本"))}checked{/if}  type="radio" value="elseType">其他
+                      <input class="input input-small" name="elseType" type="text" value="{if !in_array($orderDeclarationContent['CustomsType'],array("礼物","文件","商业样本"))}{$orderDeclarationContent['CustomsType']}{/if}">
+                    </div>
+                  </div>
+                  {if $orderDeclarationContent['OrderCustom']|count}
+                    {foreach from=$orderDeclarationContent['OrderCustom'] key=k item=v}
+                    <div class="control-group" role-product-div>
+                        <div class="controls">
+                          <p class="media-heading">中文名:<input name="orderDeclarationContent[OrderCustom][{$k}][DescriptionCn]" class="input" style="width:110px" type="text" value="{$v['DescriptionCn']}"><a href="#" role-name="addProducts">新增</a>|<a href="#" role-name="delProducts">删除</a></p>
+                          <p>英文: <input name="orderDeclarationContent[OrderCustom][{$k}][DescriptionEn]" class="input" style="width:120px" type="text" value="{$v['DescriptionEn']}"></p>
+                          <p>数量：<input name="orderDeclarationContent[OrderCustom][{$k}][Quantity]" class="input-small"  style="width:20px" type="text" value="{$v['Quantity']}">
+                          总重量：<input name="orderDeclarationContent[OrderCustom][{$k}][Weight]" class="input-small"  style="width:20px" type="text" value="{$v['Weight']}">
+                          总价值：<input name="orderDeclarationContent[OrderCustom][{$k}][Value]" class="input-small"  style="width:20px" type="text" value="{$v['Value']}"></p>
+                        </div>
+                    </div>
+                    {/foreach}
+                  {else}
+                    <div class="control-group" role-product-div>
+                        <div class="controls">
+                          <p class="media-heading">中文名:<input name="orderDeclarationContent[OrderCustom][0][DescriptionCn]" class="input" style="width:110px" type="text" value=""> <a href="#" role-name="addProducts">新增</a>|<a href="#" role-name="delProducts">删除</a></p>
+                          <p>英文: <input role-flag="" name="orderDeclarationContent[OrderCustom][0][DescriptionEn]" class="input" style="width:120px" type="text" value=""></p>
+                          <p>数量：<input name="orderDeclarationContent[OrderCustom][0][Quantity]" class="input-small"  style="width:20px" type="text" value="">
+                          总重量：<input name="orderDeclarationContent[OrderCustom][0][Weight]" class="input-small"  style="width:20px" type="text" value="">
+                          总价值：<input name="orderDeclarationContent[OrderCustom][0][Value]" class="input-small"  style="width:20px" type="text" value=""></p>
+                        </div>
+                    </div>
+                  {/if}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button name="updateDeclaration" type="button" class="btn btn-primary">保存</button>
+              </div>
+          </div>
+        </div>
+        </form>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+              //点击新增时
+              $("a[role-name=addProducts]").on("click",function(){
+                  var skuDiv = $(this).parents("div[role-product-div]");
+                  var last   = $("div[role-product-div]").last();
+                  skuDiv.clone(true).insertAfter(last);
+                  resetName();
+              });
+              //点击删除时
+              $("a[role-name=delProducts]").on("click",function(){
+                  if($("div[role-product-div]").length>1){
+                      $(this).parents("div[role-product-div]").remove();
+                      resetName();
+                  }else{
+                      alert("产品不能为空！");
+                  }
+              });
+              $("button[name=updateDeclaration]").on("click",function(){
+                  $.ajax({
+                    type  : "POST",
+                    async : false,
+                    url   : '/orderDetails/updateDeclaration',
+                    dataType : "json",
+                    data  : $("#updateDeclarationInfo").serialize(),
+                    success : function(data){
+                      if(data.errCode == '200'){
+                          location.reload();
+                      }else{
+                          alert("操作失败");
+                      }
+                    }
+                  });
+              });
+          });
+          
+          function resetName(){
+              $("div[role-product-div]").each(function(k){
+                  $(this).find("input").each(function(){
+                      $(this).attr("name",$(this).attr("name").replace(/\d+/g,k));
+                  });
+              });
+          }
+
+        </script>
+        {/literal}
+        <!-- /Modal3 -->
+        
+    </body>
+
+</html>

@@ -1,0 +1,24 @@
+<div class="row-fluid">
+    {if isset($o_success) && !empty($o_success)}
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>操作成功</h4>{$o_success}
+    </div>
+    {elseif isset($o_error) && !empty($o_error)}
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>操作失败</h4>{$o_error}
+    </div>
+    {/if}
+    {if (isset($o_success) && !empty($o_success)) or (isset($o_error) && !empty($o_error))}
+        <script type="text/javascript">
+            $(function(){
+                setTimeout(function(){
+                    if($(".alert").length > 0){
+                        $(".alert").hide('500');
+                    }
+                },3000);
+            });
+        </script>
+    {/if}
+ </div>

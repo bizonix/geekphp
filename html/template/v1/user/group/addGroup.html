@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>添加团体</title>
+        <meta charsert="utf-8"/>
+        <!-- Bootstrap -->
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                      <!-- smarty定义的变量 -->
+                      {if $cn_name}{assign var='title' value='修改'}{else}{assign var='title' value='创建'}{/if}
+                      <!-- /smarty定义的变量 -->
+                     <div class="row-fluid">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>{$title}团体</li> <span class="divider">|</span>
+                                <li>
+                                    <a href="/group/groupListView">加入团体</a>     
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">团体</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                     <form class="form-horizontal" action="/group/addGroupPost" method="post" id="addShopForm">
+                                      <fieldset>
+                                        <legend>{$title}团体</legend>
+                                        <div class="control-group">
+                                          <label class="control-label">名称</label>
+                                          <div class="controls">
+                                            <input name="cn_name" value="{$p_cn_name}{$cn_name}" class="input focused" type="text" value="">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">英文名</label>
+                                          <div class="controls">
+                                            <input name="en_name" value="{$p_en_name}{$en_name}" class="input focused" type="text" value="">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">简称</label>
+                                          <div class="controls">
+                                            <input name="short_name" class="input focused" type="text" value="{$p_short_name}{$short_name}">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">法人</label>
+                                          <div class="controls">
+                                            <input name="legal_person" value="{$p_legal_person}{$legal_person}" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">类型</label>
+                                          <div class="controls">
+                                            <select name="type">
+                                                <option value="1">公司</option>
+                                                <option value="2">团队</option>
+                                                <option value="3">个人</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label">团体地址</label>
+                                          <div class="controls">
+                                              <textarea name="address" placeholder="团体详细地址">{$p_address}{$address}</textarea>
+                                              <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div class="form-actions">
+                                          <button name="saveBtn" class="btn btn-primary">{$title}</button>
+                                          <button type="reset" class="btn">取消</button>
+                                        </div>
+                                      </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        <script type="text/javascript">
+          $(function(){
+              $("input,textarea").on("blur",function(){
+                  if(!$.trim($(this).val())){
+                     checkInput($(this),'error','该内容不能为空！');
+                  }
+              });
+              //添加賬號時失去焦點時的動作
+              $("input[name=cn_name],input[name=en_name]").on("blur",function(){
+                  var thisObj = $(this);
+                  if($.trim(thisObj.val()) && $.trim(thisObj.val()) != thisObj.data("value")){
+                    $.ajax({
+                      type  : "POST",
+                      async : false,
+                      url   : '/group/checkGroupIsExit/'+$(this).attr("name")+'/'+$.trim(thisObj.val()),
+                      dataType : "json",
+                      success : function(data){
+                        if(data.data == false){
+                            checkInput(thisObj,'success','该团体名可用');
+                        }else{
+                            checkInput(thisObj,'error','该团体名已经存在');
+                        }
+                        thisObj.data("value",thisObj.val());
+                      }
+                    });
+                  }
+              });
+              //保存時
+              $("button[name=saveBtn]").on("click",function(){
+                  var ret = checkInput($("input,textarea"),'error','该内容不能为空！');
+                  if(ret){
+                      $.ajax({
+                          type  : "POST",
+                          async : false,
+                          url   : '/group/addGroupPost',
+                          data  : $("#addShopForm").serialize(),
+                          dataType : "json",
+                          success : function(data){
+                              alert(data);
+                          }
+                      });
+                  }
+              });
+          });
+          function checkInput(obj,flag,msg){
+              var retData = true;
+              obj.each(function(){
+                  if(!$.trim($(this).val())){
+                      $(this).parents(".control-group").removeClass().addClass("control-group "+flag);
+                      $(this).siblings("span").text(msg);
+                      retData = false;
+                  }
+              });
+              return retData;
+          }
+        </script>
+        <link href="{$smarty.const.TPL}/public/vendors/chosen.min.css" rel="stylesheet" media="screen">
+        <script src="{$smarty.const.TPL}/public/vendors/chosen.jquery.min.js"></script>
+        <script>
+          $(function(){
+              $(".chzn-select").chosen();
+          });
+        </script>
+    </body>
+
+</html>

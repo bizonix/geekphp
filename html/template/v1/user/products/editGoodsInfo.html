@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>编辑产品</title>
+        <meta charsert="utf-8"/>
+    </head>
+    
+    <body>
+        {include file="headerInner.html"}
+        <script src="http://source.huanhuan365.com/js/swfupload/swfupload/swfupload.js"></script>
+        <script src="http://source.huanhuan365.com/js/swfupload/js/swfupload.queue.js"></script>  
+        <script src="http://source.huanhuan365.com/js/swfupload/js/fileprogress.js"></script>
+        <script src="{$smarty.const.TPL}/public/js/uploadProducts.js"></script>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                {include file="user/leftNav.html"}
+                <!--/span-->
+                <div class="span9" id="content">
+                      {include file="user/secondHead.html"}
+                      <!-- smarty定义的变量 -->
+                      {assign var='_platforms' value=PLATFORMS|C}
+                      {if $shop_account}{assign var='title' value='修改'}{else}{assign var='title' value='添加'}{/if}
+                      <!-- /smarty定义的变量 -->
+                     <div class="row-fluid">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="/shops/shopListView">产品列表</a> <span class="divider">|</span>    
+                                </li>
+                                {if $title=="修改"}
+                                <li>
+                                    <a href="/shops/addShopView">添加产品</a> <span class="divider">|</span>    
+                                </li>
+                                <li>{$title}产品</li>
+                                {else}
+                                <li>{$title}产品</li>
+                                {/if}
+
+                            </ul>
+                        </div>
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{$title}产品</div>
+                                <input type="hidden" name="loginName" value="{$loginName}" />
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <form class="form-horizontal" action="/userProducts/editGoodsPost" method="post" id="editProductsForm">
+                                      <fieldset>
+                                        <legend>{$title}产品</legend>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput01">SPU</label>
+                                          <div class="controls">
+                                            <input type="hidden" name="id" value="{$goodsInfo['id']}" />
+                                            <input type="hidden" name="companyId" value="{$goodsInfo['companyId']}" />
+                                            <input name="spu" value="{$goodsInfo['spu']}" class="input focused" id="focusedInput01" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput02">SKU</label>
+                                          <div class="controls">
+                                            <input name="sku" value="{$goodsInfo['sku']}" class="input focused" id="focusedInput02" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput03">产品标题</label>
+                                          <div class="controls">
+                                            <input name="goodsName" value="{$goodsInfo['goodsName']}" class="input-xlarge" id="focusedInput03" type="text">
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="selectError01">所属类别</label>
+                                          <div class="controls">
+                                            {if isset($goodsInfo['goodsCategory'])}<p>{$goodsInfo['goodsCategory']}</p>{/if}
+                                            <select role-category name="category[]" style="width:100px;">
+                                              <option value="#">--选择--</option>
+                                              {foreach from=$cateGoryArr key=k item=v}
+                                                {if $v['pid'] == 0}
+                                                <option value='{$k}'>{$v['name']}</option>
+                                                {/if}
+                                              {/foreach}
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label">产品备注</label>
+                                          <div class="controls">
+                                            <textarea name="goodsNote" class="input-xlarge">{$goodsInfo['goodsNote']}</textarea>
+                                            <span class="help-inline"></span>
+                                          </div>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="control-group">
+                                          <label class="control-label"><p>主图</p><button id="mainImg">上传</button>
+                                          <input id="mainBtnCancel1" style="display:none;" type="button" value="取消所有上传" onclick="swfu1.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+                                          <div class="fieldset flash" id="mainImgProgress"></div>
+                                          </label>
+                                          <div role-mainImgDiv class="controls">
+                                            <div style="cursor:pointer;margin:5px;display:inline-block;"><img style="max-width:200px;max-height:100px;" name="" src="/images/image_preview.jpg"/><p>&nbsp;</p></div>
+                                            {foreach from=$goodsInfo['images'] key=key item=img}
+                                              {if $key|stripos:"G" !== false}<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="{$img}"><img style="max-width:200px;max-height:100px;" name="" src="{$img}"/></a><p>{$key}</p><input type="hidden" name="mainImgName[]" value="{$key}" /></div>{/if}
+                                            {/foreach}
+                                          </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="control-group">
+                                          <label class="control-label"><p>属性图</p><button id="propImg">上传</button>
+                                          <input id="propBtnCancel1" style="display:none;" type="button" value="取消所有上传" onclick="swfu2.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+                                          <div class="fieldset flash" id="propImgProgress"></div>
+                                          </label>
+                                          <div role-propImgDiv class="controls">
+                                            <div style="cursor:pointer;margin:5px;display:inline-block;"><img style="max-width:200px;max-height:100px;" name="" src="/images/image_preview.jpg"/><p>&nbsp;</p></div>
+                                            {foreach from=$goodsInfo['images'] key=key item=img}
+                                              {if $key|stripos:"G" === false}<div role-propImg style="margin:5px;display:inline-block;"><img role-remove style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="{$img}"><img style="max-width:200px;max-height:100px;" name="" src="{$img}"/></a><p>{$key}</p><input type="hidden" name="propImgName[]" value="{$key}" /></div>{/if}
+                                            {/foreach}
+                                          </div>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput05">重量</label>
+                                          <div class="controls">
+                                            <input name="goodsWeight"  id="focusedInput05" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsWeight']}">
+                                          </div>
+                                          <label class="control-label" for="focusedInput06">库存&nbsp;&nbsp;</label>
+                                          <div class="controls">
+                                            <input name="goodsStock" id="focusedInput06" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsStock']}">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput07">售价</label>
+                                          <div class="controls">
+                                            <input name="sellerPrice" id="focusedInput07" class="input input-small pull-left" type="text" value="{$goodsInfo['sellerPrice']}">
+                                          </div>
+                                          <label class="control-label" for="focusedInput08">分销价&nbsp;&nbsp;</label>
+                                          <div class="controls">
+                                            <input name="fenxiaoPrice" id="focusedInput08" class="input input-small pull-left" type="text" value="{$goodsInfo['fenxiaoPrice']}">
+                                          </div>
+                                          <label class="control-label" for="focusedInput09">采购价&nbsp;&nbsp;</label>
+                                          <div class="controls">
+                                            <input name="goodsCost" id="focusedInput09" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsCost']}">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput10">颜色</label>
+                                          <div class="controls">
+                                            <input name="goodsColor" id="focusedInput10" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsColor']}">
+                                          </div>
+                                          <label class="control-label" for="focusedInput11">尺码&nbsp;&nbsp;</label>
+                                          <div class="controls">
+                                            <input name="goodsSize" id="focusedInput11" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsSize']}">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput12">长</label>
+                                          <div class="controls">
+                                            <input name="goodsLength" id="focusedInput12" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsLength']}">
+                                          </div>
+                                          <label class="control-label" for="focusedInput13">宽&nbsp;&nbsp;</label>
+                                          <div class="controls">
+                                            <input name="goodsWidth" id="focusedInput13" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsWidth']}">
+                                          </div>
+                                          <label class="control-label" for="focusedInput14">高&nbsp;&nbsp;</label>
+                                          <div class="controls">
+                                            <input name="goodsHeight" id="focusedInput14" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsHeight']}">
+                                          </div>
+                                        </div>
+
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="selectError02">状态</label>
+                                          <div class="controls">
+                                            <select name="goodsStatus" style="width:100px;" id="selectError02">
+                                              {foreach from=PRODUCTS_STATUS|C key=k item=v}
+                                                <option {if $p_goodsStatus == $k}selected{/if} value='{$k}'>{$v}</option>
+                                              {/foreach}
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="selectError03">是否新品</label>
+                                          <div class="controls">
+                                            <select name="isNew" style="width:100px;" id="selectError03">
+                                                <option {if $p_isNew == $k}selected{/if} value='1'>是</option>
+                                                <option {if $p_isNew == $k}selected{/if} value='0'>否</option>
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="selectError04">是否海关备案</label>
+                                          <div class="controls">
+                                            <select name="isCustomsRecord" style="width:100px;" id="selectError04">
+                                                <option {if $p_isCustomsRecord == $k}selected{/if} value='1'>是</option>
+                                                <option {if $p_isCustomsRecord == $k}selected{/if} value='0'>否</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput15">产品排序</label>
+                                          <div class="controls">
+                                            <input name="goodsSort" id="focusedInput15" class="input input-small pull-left" type="text" value="{$goodsInfo['goodsSort']}">
+                                          </div>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-actions">
+                                          <button name="saveBtn" class="btn btn-primary">{$title}</button>
+                                          <button type="reset" class="btn">取消</button>
+                                        </div>
+                                      </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                </div>
+            </div>
+            {include file="footerInner.html"}
+        </div>
+        {literal}
+        <script type="text/javascript">
+          $(function(){
+              changeCategory();
+          });
+          function changeCategory(){
+              //添加賬號時失去焦點時的動作
+              $("select[role-category]").on("change",function(){
+                  var thisObj = $(this);
+                  if(thisObj.val() != '#'){
+                      $.ajax({
+                          type  : "POST",
+                          async : false,
+                          url   : '/userProducts/getCategoryByPid/pid/'+thisObj.val(),
+                          dataType : "json",
+                          success : function(data){
+                                var data = eval(data.data);
+                                if(thisObj.nextAll('select').size()){
+                                    thisObj.nextAll('select').remove();
+                                }
+                                if(!$.isEmptyObject(data)){
+                                    var str = '<select role-category name="category[]" style="width:100px;margin-left:10px;">';
+                                    str += '<option value="#">--选择--</option>';
+                                    for(var i in data){
+                                        str += '<option value="'+i+'">'+data[i]['name']+'</option>';
+                                    }
+                                    str += '</select>';
+                                    thisObj.after(str);
+                                    changeCategory();
+                                }
+                            }
+                      });
+                  }
+                  
+              });
+          }
+        </script>
+        {/literal}
+    </body>
+
+</html>

@@ -1,0 +1,152 @@
+<!-- Modal1 Url数据抓取 -->
+<div class="modal fade" style="display:none;" id="fetchUrlTemplateModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+        <h4 class="modal-title">Url抓取范本数据</h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group" style="padding:10px 15px;">
+          	<div>
+          		<select name="platform"><option value="">选择平台</option><option value="1">ebay</option><option value="2">速卖通</option><option value="3">亚马逊</option><option value="4">Wish</option></select>
+          		<select name="flag"><option value="single">单个产品</option><option value="all">店铺所有产品</option></select>
+          	</div>
+            <div url-add><input name="urlInput" type="text" placeholder="网络图片地址" style="width:90%;"/><a href="javascript:void(0)" onclick="delUrlInput(this)">删除</a></div>
+            <div><a id="addUrlInput" href="javascript:void(0);">新增</a><span msg-urlInputModal style="color:red;margin:0 20px;width:80%;text-align:center;"></span></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button name="startPull" type="button" class="btn btn-primary">抓取</button>
+      </div>
+    </div>
+  </div>
+</div>
+{literal}
+<script>
+	$(function(){
+		//点击增动作
+		$("#addUrlInput").on('click',function(){
+			$(this).parent('div').before($('div[url-add]:last').clone());
+		});
+		//展示模态框时 初始化数据
+		$('input[image-modal]').click(function(){
+			var newDiv = $('div[url-add]:last').clone();
+			$('div[url-add]').remove();
+			$("#addUrlInput").parent('div').before(newDiv);
+			$('div[url-add] input').val("");
+			$("#urlInputModal").data('belong',$(this).attr('image-modal'));
+		});
+		//点击确定按钮时
+		$("button[name=startPull]").on("click",function(){
+			var urlInput = $("input[name=urlInput]");
+			var urlVal = '';
+			if(urlInput.size()>0){
+				if($("#urlInputModal").data('belong') == 'main'){
+					urlInput.each(function(){
+						urlVal = $.trim($(this).val());
+						if(urlVal){
+							$('div[role-mainImgDiv]').append('<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="'+urlVal+'"><img style="position:absolute;top:0px;right:0px;" src="/images/remove.png" /><img style="max-width:200px;max-height:100px;" name="" src="'+urlVal+'"/></a><p>&nbsp;</p><input type="hidden" name="main_images[]" value="'+urlVal+'" /></div>');
+						}
+					});
+    			}else if($("#urlInputModal").data('belong') == 'prop'){
+    				urlInput.each(function(){
+						urlVal = $.trim($(this).val());
+						if(urlVal){
+							$('div[role-propImgDiv]').append('<div role-mainImg style="margin:5px;display:inline-block;"><img role-remove onclick="deleteImg(this);" style="position: absolute;" src="/images/remove.png"/><a target="_blank" href="'+urlVal+'"><img style="position:absolute;top:0px;right:0px;" src="/images/remove.png" /><img style="max-width:200px;max-height:100px;" name="" src="'+urlVal+'"/></a><p>&nbsp;</p><input type="hidden" name="extra_images[]" value="'+urlVal+'" /></div>');
+						}
+					});
+    			}
+			}else{
+				$("span[msg-urlInputModal]").text('请输入需要抓取图片的地址！');
+			}
+			$('#urlInputModal').modal('toggle');
+		});
+	});
+	function delUrlInput(obj){
+		if($('div[url-add]').size()>1){
+			$(obj).parent('div').remove();
+		}
+	}
+</script>
+{/literal}
+
+<!-- Modal Api抓取范本数据 -->
+<div class="modal fade" style="display:none;" id="fetchApiTemplateModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+        <h4 class="modal-title">Api抓取范本数据</h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group" style="padding:10px 15px;">
+          	<div>
+          		<select name="platform"><!-- <option value="">选择平台</option><option value="1">ebay</option><option value="2">速卖通</option><option value="3">亚马逊</option> -->
+          			<option selected value="4">Wish</option>
+          		</select>
+          		<select name="flag">
+          			<option value="single">手动输入Api</option>
+          			<!-- <option value="all">店铺所有产品</option> -->
+          		</select>
+          	</div>
+            <div role-4>appkey: &nbsp;&nbsp;<input name="appKey" type="text" placeholder="app key" style="width:80%;"/></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button name="submit" href-data="/template/apiToTp" type="button" class="btn btn-primary">抓取</button>
+      </div>
+    </div>
+  </div>
+</div>
+{literal}
+<script>
+	$(function(){
+		//点击增动作,初始化模态框
+        $("#select01").on("change",function(){
+            $("div[role-token]").css("display","none");
+            $("div[role-"+$(this).val()+"]").css("display","block");
+        });
+        $("div[role-token]").css("display","none");
+        $("div[role-"+$("#select01").val()+"]").css("display","block");
+        
+        //点击抓取时
+		$('#fetchApiTemplateModal').find('button[name=submit]').on('click',function(){
+			var platform = '4';
+			var appkey = $.trim($('#fetchApiTemplateModal').find('input[name=appKey]').val());
+			var startTime = '2015-03-01';
+			if(appkey){
+				$.ajax({
+		   	      type  : "POST",
+		   	      async : false,
+		   	      url   : $(this).attr('href-data'),
+		   	      dataType : "json",
+		   	      data : {'platform' : platform , 'flag' : 'appkey' ,'appkey' : appkey,'startTime' : startTime},
+		   	      success : function(ret){
+		    	     var str = '';
+		             if(ret.errCode == '200'){
+		                 var data = ret.data;
+		                 if(data){
+		                     for(var k in data){
+		                       if(data[k][0] == "200"){
+		                       	str += '<span style="color:green">'+k+'=>'+data[k][1]+'</span>';
+		                       }else{
+		                       	str += '<span style="color:red">'+k+'=>'+data[k][1]+'</span>';
+		                       }
+		                     }
+		                 }
+		             }else{
+		                 str = '<span style="color:red">'+ret.errMsg+'</span>';
+		             }
+		             $("#importShopListingModal").find("div[role-name=ls_res]").html(str);
+		   	      }
+		   	  	});
+			}
+		});
+	});
+</script>
+{/literal}
+<!-- end modal -->
+

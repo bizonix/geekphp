@@ -1,0 +1,156 @@
+<!-- Modal 批量上下架 -->
+<div class="modal fade" style="display:none;" id="batchOnlineOfflineModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+          <div class="control-group">
+            <label class="control-label">已选择listing</label>
+            <div class="controls">
+              <textarea placeholder="请输入listing编号" name="lsIds" class="input-xlarge" style="width:97%;height:60px;"></textarea>
+            </div>
+            <div role-name="ls_res" style="text-align:center"></div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button name="submit" type="button" class="btn btn-primary">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+{literal}
+<script>
+	$(function(){
+		//点击增动作,初始化模态框
+		$("a[data-target=#batchOnlineOfflineModal]").on('click',function(){
+			$('#batchOnlineOfflineModal').find('.modal-title').text($(this).text());
+			$('#batchOnlineOfflineModal').find('button[name=submit]').attr('href-data',$(this).attr('href-data'));
+			//展示模态框时 初始化数据
+			var lsIdStr = '';
+			$(':checkbox[name=ls_id]:checked').each(function(){
+				lsIdStr += $(this).val()+',';
+			});
+			$('#batchOnlineOfflineModal').find('textarea[name=lsIds]').val(lsIdStr);
+		});
+		//点击确定按钮
+		$('#batchOnlineOfflineModal').find('button[name=submit]').on('click',function(){
+			$.ajax({
+       	      type  : "POST",
+       	      async : false,
+       	      url   : $(this).attr('href-data'),
+       	      dataType : "json",
+       	      data : {'lsIds' : $("#batchOnlineOfflineModal").find('textarea[name=lsIds]').val()},
+       	      success : function(ret){
+	     	      var str = '';
+	              if(ret.errCode == '200'){
+	                  var data = ret.data;
+	                  if(data){
+	                      for(var k in data){
+	                        if(data[k][0] == "200"){
+	                        	str += '<span style="color:green">'+k+'=>'+data[k][1]+'</span>';
+	                        }else{
+	                        	str += '<span style="color:red">'+k+'=>'+data[k][1]+'</span>';
+	                        }
+	                      }
+	                  }
+	              }else{
+	                  str = '<span style="color:red">'+ret.errMsg+'</span>';
+	              }
+	              $("#batchOnlineOfflineModal").find("div[role-name=ls_res]").html(str);
+       	      }
+       	  	});
+		});
+	});
+</script>
+{/literal}
+<!-- end modal -->
+
+<!-- Modal 批量导入店铺listing -->
+<div class="modal fade" style="display:none;" id="importShopListingModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+        <h4 class="modal-title">同步店铺Listing</h4>
+      </div>
+      <div class="modal-body">
+          <select name="platform" style="width:100px;">
+            <option value=''>平台</option>
+            {foreach from=$platforms key=k item=v}
+              <option {if '4' == $k}selected{/if} value='{$k}'>{$v.platform_cn_name}</option>
+            {/foreach}
+          </select>
+          <select name="account" style="width:100px;">
+            <option value=''>店铺</option>
+            {foreach from=$shops key=k item=v}
+              <option role-platform="{$v.platform}" value='{$k}'>{$v.shop_account}</option>
+            {/foreach}
+          </select>
+          <input type="text" name="startTime" placeholder="起始更新时间"/>
+          <div role-name="ls_res" style="text-align:center"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button name="submit" href-data="/listing/synShopListing" type="button" class="btn btn-primary">同步</button>
+      </div>
+    </div>
+  </div>
+</div>
+{literal}
+<script>
+	$(function(){
+		//点击增动作,初始化模态框
+		$("#importShopListingModal").find('select[name=platform]').on('change',function(){
+			var findObj = $("#importShopListingModal").find('select[name=account]');
+			findObj.find('option:eq(0)').prop("selected", 'selected');
+			findObj.find('option[role-platform='+$(this).val()+']').css('display','block');
+			findObj.find('option[role-platform!='+$(this).val()+']').css('display','none');
+		});
+		//点击确定按钮
+		$('#importShopListingModal').find('button[name=submit]').on('click',function(){
+			var platform 	= $('#importShopListingModal').find('select[name=platform]').val();
+			var account	 	= $('#importShopListingModal').find('select[name=account]').val();
+			var startTime	= $('#importShopListingModal').find('input[name=startTime]').val();
+			var noticeStr = ''
+			if(platform && account && startTime){
+				$.ajax({
+	       	      type  : "POST",
+	       	      async : false,
+	       	      url   : $(this).attr('href-data'),
+	       	      dataType : "json",
+	       	      data : {'platform' : platform , 'account' : account,'startTime' : startTime},
+	       	      success : function(ret){
+		     	      var str = '';
+		              if(ret.errCode == '200'){
+		                  var data = ret.data;
+		                  if(data){
+		                      for(var k in data){
+		                        if(data[k][0] == "200"){
+		                        	str += '<span style="color:green">'+k+'=>'+data[k][1]+'</span>';
+		                        }else{
+		                        	str += '<span style="color:red">'+k+'=>'+data[k][1]+'</span>';
+		                        }
+		                      }
+		                  }
+		              }else{
+		                  str = '<span style="color:red">'+ret.errMsg+'</span>';
+		              }
+		              $("#importShopListingModal").find("div[role-name=ls_res]").html(str);
+	       	      }
+	       	  	});
+			}else{
+				if(!platform) noticeStr = '<span style="color:red">未选择平台</span>';
+				if(!account) noticeStr = '<span style="color:red">未选择店铺</span>';
+				if(!startTime) noticeStr = '<span style="color:red">未输入起始更新时间</span>';
+				$("#importShopListingModal").find("div[role-name=ls_res]").html(noticeStr);
+			}
+		});
+	});
+</script>
+{/literal}
+<!-- end modal -->
+

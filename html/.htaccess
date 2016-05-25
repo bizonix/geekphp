@@ -1,0 +1,9 @@
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^.*(gif|jpg|jpeg|png|ico|swf|xml|css|js|txt|ttf|TTF|xlsx|doc|docx|xls|bmp|csv|CSV)$
+RewriteCond %{REQUEST_URI} !^.*(api\.php)(.*)$
+RewriteCond %{REQUEST_URI} !^.*(My97DatePicker\.htm)(.*)$
+RewriteCond %{REQUEST_URI} !^.*verify\.php$
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteRule ^.*$ index.php [NC,L]

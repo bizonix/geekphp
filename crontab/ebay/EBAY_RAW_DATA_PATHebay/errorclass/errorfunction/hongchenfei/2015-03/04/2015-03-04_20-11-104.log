@@ -1,0 +1,39 @@
+##############################################  requestBody start ###################################################
+
+<?xml version="1.0" encoding="utf-8"?>
+			<GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+				<RequesterCredentials>
+					<eBayAuthToken></eBayAuthToken>
+				</RequesterCredentials>  
+				<DetailLevel>ReturnAll</DetailLevel>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>Completed</OrderStatus>
+				<OutputSelector>PaginationResult</OutputSelector>
+				<OutputSelector>HasMoreOrders</OutputSelector>
+				<OutputSelector>ReturnedOrderCountActual</OutputSelector>				
+				<OutputSelector>OrderArray.Order.OrderID</OutputSelector>
+				<OutputSelector>OrderArray.Order.PaidTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.ShippedTime</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.CheckoutStatus</OutputSelector>
+				<OutputSelector>OrderArray.Order.TransactionArray.Transaction.ShippingDetails.SellingManagerSalesRecordNumber</OutputSelector>
+				<ModTimeFrom>2015-03-04T08:11:09</ModTimeFrom>
+				<ModTimeTo>2015-03-04T12:11:09</ModTimeTo>
+				<Pagination>
+					<EntriesPerPage>100</EntriesPerPage>
+					<PageNumber>1</PageNumber>
+				</Pagination>
+				<IncludeFinalValueFee>true</IncludeFinalValueFee>
+				<OrderRole>Seller</OrderRole>
+				<OrderStatus>All</OrderStatus>
+			</GetOrdersRequest>
+
+##############################################  requestBody end   ###################################################
+
+
+
+############################################## responseBody start ###################################################
+
+
+
+##############################################  responseBody end  ###################################################

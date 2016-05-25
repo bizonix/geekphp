@@ -1,0 +1,133 @@
+<link href="{$smarty.const.TPL}/public/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="{$smarty.const.TPL}/public/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<link href="{$smarty.const.TPL}/public/assets/styles.css" rel="stylesheet" media="screen">
+<script src="{$smarty.const.TPL}/public/vendors/jquery-1.9.1.min.js"></script>
+<script src="{$smarty.const.TPL}/public/bootstrap/js/bootstrap.min.js"></script>
+<script src="{$smarty.const.TPL}/public/assets/scripts.js"></script>
+<script src="{$smarty.const.TPL}/public/vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Weclu</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> {$loginName} <i class="caret"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a tabindex="-1" href="/order/orderlist">个人中心</a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" href="#">待处理通知</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a tabindex="-1" href="/login/logout">退出</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#">用户中心</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">产品库 <b class="caret"></b></a>
+                        <ul class="dropdown-menu" id="menu1">
+                            <li>
+                                <a href="#" data-toggle="dropdown">爆品区 <i class="icon-arrow-right"></i>
+                                </a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li>
+                                        <a href="#">Reports</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Logs</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Errors</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">活动产品</a>
+                            </li>
+                            <li>
+                                <a href="#">最新产品</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/categoryProduct/index">所有</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">商家交流 <i class="caret"></i>
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a tabindex="-1" href="#">卖家成长区</a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" href="#">常见问题</a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" href="#"></a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" href="#">Calendar</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a tabindex="-1" href="#">FAQ</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">购物区 <i class="caret"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a tabindex="-1" href="#">User List</a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" href="#">Search</a>
+                            </li>
+                            <li>
+                                <a tabindex="-1" href="#">Permissions</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- system modal start -->
+<div id="ycf-alert" class="modal fade" style="display:none;">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h5 class="modal-title"><i class="fa fa-exclamation-circle"></i> [Title]</h5>
+      </div>
+      <div class="modal-body small">
+        <p>[Message]</p>
+      </div>
+      <div class="modal-footer" >
+        <button type="button" class="btn btn-primary ok" data-dismiss="modal">[BtnOk]</button>
+        <button type="button" class="btn btn-default cancel" data-dismiss="modal">[BtnCancel]</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{$smarty.const.TPL}/public/vendors/chosen.jquery.min.js"></script>
+<script src="{$smarty.const.TPL}/public/js/common.js"></script>
+<!-- system modal end -->
