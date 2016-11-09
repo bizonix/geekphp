@@ -2,7 +2,7 @@
 /**
  * PublicAct
  * 功能：用于公共的ajax处理动作
- * @author 邹军荣
+ * @author wcx
  * v 1.0
  * 2014/06/26 
  */
@@ -25,7 +25,7 @@ class PublicAct extends CheckAct {
 	
 	/*
 	 * 发送验证邮箱
-	 * zjr
+	 * wcx
 	 */
 	public function act_sendEmail($email,$flag=''){
 		if(!$this->act_checkEmailStr($email)){
@@ -72,7 +72,7 @@ class PublicAct extends CheckAct {
 	
 	/**
 	 * 功能：获取平台运输方式
-	 * zjr
+	 * wcx
 	 */
 	public function act_getPlatformCarrier($platformId){
 		if(empty($platformId)){

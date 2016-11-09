@@ -14,7 +14,7 @@ class InterfacePaModel extends InterfaceModel {
      * 获取不运送国家
 	 * @param int $siteId
 	 * @return array
-	 * @author zjr
+	 * @author wcx
      */
 	public function getExcludeShippingCountry($siteID){
 		$conf = $this->getRequestConf(__FUNCTION__);
@@ -29,7 +29,7 @@ class InterfacePaModel extends InterfaceModel {
      * 获取运送国家
 	 * @param int $siteId
 	 * @return array
-	 * @author zjr
+	 * @author wcx
      */
 	public function getShippingCountry($siteID){
 		$conf = $this->getRequestConf(__FUNCTION__);
@@ -44,7 +44,7 @@ class InterfacePaModel extends InterfaceModel {
      * 同步分分销商店铺信息
 	 * @param int $siteId
 	 * @return array
-	 * @author zjr
+	 * @author wcx
      */
 	public function synDistributorShopInfor($compayId,$shopInfo){
 		$conf = $this->getRequestConf(__FUNCTION__);
@@ -59,7 +59,7 @@ class InterfacePaModel extends InterfaceModel {
      * 同步分分销商开放类目信息
 	 * @param int $siteId
 	 * @return array
-	 * @author zjr
+	 * @author wcx
      */
 	public function synDistributorOpenCategory($compayId,$category){
 		$conf = $this->getRequestConf(__FUNCTION__);
@@ -121,7 +121,7 @@ class InterfacePaModel extends InterfaceModel {
     
     /**
      * 调用PA系统接口用户屏蔽分类
-     * @author zjr
+     * @author wcx
      */
     public function updateOpenCategory($companyId) {
 		$conf					 = $this->getRequestConf(__FUNCTION__);
@@ -133,7 +133,7 @@ class InterfacePaModel extends InterfaceModel {
     }
     /**
      * 调用PA系统接口添加账号
-     * @author zjr
+     * @author wcx
      */
     public function addDistributorAccount($ebayAccount,$paypal,$platFormId,$companyId,$siteId) {
 		$conf					 = $this->getRequestConf(__FUNCTION__);
@@ -149,7 +149,7 @@ class InterfacePaModel extends InterfaceModel {
     }
     /**
      * 调用PA系统修改添加账号
-     * @author zjr
+     * @author wcx
      */
     public function updateDistributorAccount($ebayAccount,$status,$companyId,$platformId,$siteId) {
 		$conf					 = $this->getRequestConf(__FUNCTION__);

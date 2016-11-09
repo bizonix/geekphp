@@ -40,7 +40,7 @@ class TemplateAct extends CheckAct {
      * @param  string $orderdatas [description]
      * @param  string $email      [description]
      * @return [type]             [description]
-     * zjr
+     * wcx
      */
     public function templateList($companyId){
         $sort     = "order by id";
@@ -75,7 +75,7 @@ class TemplateAct extends CheckAct {
     
     /**
      * 验证范本是否存在
-     * zjr
+     * wcx
      */
     public function checkTemplateIsExist($tpName){
         if(empty($tpName)){
@@ -100,7 +100,7 @@ class TemplateAct extends CheckAct {
      *          "tpDetail"  => array(....),
      *      )
      * );
-     * by zjr
+     * by wcx
      * 2015-06-27
      */
     public function getTpInfoByIds($idArr){

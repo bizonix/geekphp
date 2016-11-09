@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：邮件管理
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2014/03/16
  *
@@ -61,7 +61,7 @@ class EmailsView extends BaseView {
 
     /**
      * 功能：发送邮件给卖家
-     * zjr
+     * wcx
      */
     public function view_sendEmailToBuyers(){
         $emails     = $_REQUEST['emails'];

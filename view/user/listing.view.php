@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：listingview
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2015/06/28
  *
@@ -56,7 +56,7 @@ class ListingView extends BaseView {
     
     /**
      * 上架listing
-     * zjr
+     * wcx
      */
     public function view_onlineListing(){
         $companyId  = get_usercompanyid();
@@ -67,7 +67,7 @@ class ListingView extends BaseView {
     
     /**
      * 下架listing
-     * zjr
+     * wcx
      */
     public function view_offlineListing(){
         $companyId  = get_usercompanyid();
@@ -78,7 +78,7 @@ class ListingView extends BaseView {
     
     /**
      *  同步店铺listing
-     *  zjr
+     *  wcx
      */
     public function view_synShopListing(){
         $companyId  = get_usercompanyid();

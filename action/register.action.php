@@ -3,7 +3,7 @@
  * 类名：registerAct
  * 功能：登录
  * 版本：v1.0
- * 作者：邹军荣
+ * 作者：wcx
  * 时间：2014/06/24
  * errCode：1060
  */
@@ -66,7 +66,7 @@ class RegisterAct extends CheckAct {
 
 	/*
 	 * 验证用户的用户名和邮箱是否可用
-	 * zjr
+	 * wcx
 	 */
 	public function act_check(){
 		$email 		= @$_REQUEST['email'];

@@ -120,7 +120,7 @@ class InterfacePcModel extends InterfaceModel {
      * getGoodsStatus()
      * 获取物品状态
      * @return  array
-     * @author zjr
+     * @author wcx
      */
     public function getGoodsStatus($sku)
     {

@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：订单管理管理
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2014/12/16
  *
@@ -16,7 +16,7 @@ class OrderView extends BaseView {
     }
     /*
      * 功能： 订单显示
-     * by zjr
+     * by wcx
      */
 	public function view_orderlist() {
 		$orderList = A("Order")->act_getOrderList();
@@ -26,7 +26,7 @@ class OrderView extends BaseView {
 
 	/*
      * 功能： 過濾订单显示
-     * by zjr
+     * by wcx
      */
 	public function view_queryOrderlist() {
 		$shopId				= $_REQUEST['shopId'];
@@ -45,7 +45,7 @@ class OrderView extends BaseView {
 	
 	/**
 	 * 功能：抓取订单
-	 * zjr
+	 * wcx
 	 */
 	public function view_fechOrders(){
 		$shopId 		= $_REQUEST['shopId'];
@@ -58,7 +58,7 @@ class OrderView extends BaseView {
 
 	/**
 	 * 功能：推送订单至
-	 * zjr
+	 * wcx
 	 */
 	public function view_pushOrders(){
 		$orderSysIds = $_REQUEST['orderSysIds'];
@@ -68,7 +68,7 @@ class OrderView extends BaseView {
 
 	/**
 	 * 功能：合并订单
-	 * zjr
+	 * wcx
 	 */
 	public function view_mergeOrders(){
 		$orderSysIds = $_REQUEST['orderSysIds'];
@@ -78,7 +78,7 @@ class OrderView extends BaseView {
 
 	/**
 	 * 功能：改变订单状态
-	 * zjr
+	 * wcx
 	 */
 	public function view_updateHandleStatus(){
 		$ordersId = array_filter(explode(",", $_REQUEST['ordersId']));
@@ -88,7 +88,7 @@ class OrderView extends BaseView {
 	}
 	/**
 	 * 功能：删除订单
-	 * zjr
+	 * wcx
 	 */
 	public function view_deleteOrders(){
 		$ordersId = $_REQUEST['ordersId'];
@@ -98,7 +98,7 @@ class OrderView extends BaseView {
 
 	/**
 	 * 功能：标记发货
-	 * zjr
+	 * wcx
 	 */
 	public function view_sellersShippment(){
 		$platformId 	= $_REQUEST['platformId'];

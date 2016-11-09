@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：店铺管理
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2014/12/16
  *

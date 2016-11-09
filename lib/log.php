@@ -114,7 +114,7 @@ class Log {
      * @param string $dirPath 日志文件在日志目录下的路径  前后不用/  例 orders/root  ===> WEB_PATH.'log/orders/root/'
      * @param string $logName 日志文件名称
      * @param char   $time    日志文件记录的时间格式
-     * zjr
+     * wcx
      */
     static function writeLog($str='',$dirPath='',$logName='',$time=''){
         if(empty($str)) return;

@@ -10,7 +10,7 @@ class Aliexpress extends AliexpressSession{
 	
 	/**
 	 * 功能：获取物流信息
-	 * by：zjr
+	 * by：wcx
 	 */
 	public function listLogisticsService(){
 		$apiName	= 'api.listLogisticsService';

@@ -268,7 +268,7 @@ class InterfacePowerModel extends InterfaceModel {
 	 * @param $psw 密码
 	 * @param $version 修改版本  目前版本为 1.0
 	 * @return array
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function updateGlobalUserPsw($loginName, $psw, $version='1.0'){
 		$conf = $this->getRequestConf(__FUNCTION__);
@@ -294,7 +294,7 @@ class InterfacePowerModel extends InterfaceModel {
 	 * 根据统一用户登录邮箱给鉴权系统，返回用户相关信息
 	 * @param int $userLoginEmail: 统一用户邮箱
 	 * @return array
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function getUserInfoByLoginEmail($userLoginEmail){
 		$conf = $this->getRequestConf(__FUNCTION__);
@@ -318,7 +318,7 @@ class InterfacePowerModel extends InterfaceModel {
 	/**
 	 * 获取鉴权中所有公司账号信息
 	 * @return array
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function getAllCompanyInfo(){
 		$conf = $this->getRequestConf(__FUNCTION__);

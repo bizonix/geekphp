@@ -1,7 +1,7 @@
 <?php
 /*
 * wish平台对接接口
-* add by: zjr @date 20150226
+* add by: wcx @date 20150226
 */
 class WishButtAct extends CheckAct
 {
@@ -94,7 +94,7 @@ class WishButtAct extends CheckAct
 
     /*
      * 获取所有产品
-     * zjr
+     * wcx
      */
     public function listAllProducts($start,$limit,$since=''){
         $wishObj     = F('wish.package.WishProducts');
@@ -104,7 +104,7 @@ class WishButtAct extends CheckAct
 
     /*
      * 添加主产品信息
-     * zjr
+     * wcx
      */
     public function createProduct($params){
         $needParams = array('name','description','tags','sku','inventory','price','shipping','main_image');
@@ -115,7 +115,7 @@ class WishButtAct extends CheckAct
 
     /*
      * 添加子产品信息
-     * zjr
+     * wcx
      */
     public function createProductVariation($params){
         $wishObj     = F('wish.package.WishProducts');
@@ -124,7 +124,7 @@ class WishButtAct extends CheckAct
     }
     /*
      * 修改主产品
-     * zjr
+     * wcx
      */
     public function updateProduct($params){
         $wishObj     = F('wish.package.WishProducts');
@@ -146,7 +146,7 @@ class WishButtAct extends CheckAct
     }
     /*
      * 修改子产品属性
-     * zjr
+     * wcx
      */
     public function updateVariant($params){
         $wishObj     = F('wish.package.WishProducts');
@@ -169,7 +169,7 @@ class WishButtAct extends CheckAct
     }
     /*
      * 上架spu系列产品
-     * zjr
+     * wcx
      */
     public function enableParentSku($spu){
         $params     = array('parent_sku' => $spu);
@@ -179,7 +179,7 @@ class WishButtAct extends CheckAct
     }
     /*
      * 下架spu系列产品
-     * zjr
+     * wcx
      */
     public function disableParentSku($spu){
         $params     = array('parent_sku' => $spu);
@@ -189,7 +189,7 @@ class WishButtAct extends CheckAct
     }
     /*
      * 上架sku产品
-     * zjr
+     * wcx
      */
     public function enableSku($sku){
         $params     = array('sku' => $sku);
@@ -199,7 +199,7 @@ class WishButtAct extends CheckAct
     }
     /*
      * 下架sku产品
-     * zjr
+     * wcx
      */
     public function disableSku($sku){
         $params     = array('sku' => $sku);
@@ -209,7 +209,7 @@ class WishButtAct extends CheckAct
     }
     /*
      * 修改产品sku的库存
-     * zjr
+     * wcx
      */
     public function updateInventory($sku,$inventory){
         $params     = array('sku' => $sku,'inventory' => $inventory);

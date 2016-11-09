@@ -18,21 +18,21 @@ class PackageDpAct extends PackageAct{
 	
 	/*
 	 * 返回分销商的开放类别信息
-	 * zjr
+	 * wcx
 	 */
 	public function act_packageOpenCategory($datas){
 		return $datas;
 	}
 	/*
 	 * 返回从超卖系统中推送过来的接受信息
-	 * zjr
+	 * wcx
 	 */
 	public function act_packageReciveOversoldSkus($datas){
 		return $datas;
 	}
 	/*
 	 * 返回分销商信息
-	 * zjr
+	 * wcx
 	 */
 	public function act_packageGetDeveloperInfo($datas){
 	    return $datas;
@@ -40,7 +40,7 @@ class PackageDpAct extends PackageAct{
 	
 	/*
 	 * 返回分销商信息提供给独立商城的接口
-	 * zjr
+	 * wcx
 	 */
 	public function act_packagePushOrder($datas){
 	    return $datas;
@@ -79,7 +79,7 @@ class PackageDpAct extends PackageAct{
 	}
 	/*
 	* 返回分销商订单是否插入成功的信息
-	* zjr
+	* wcx
 	*/
 	public function act_packageReceiveDistributorOrder($data){
 		if(!empty($data)){
@@ -109,7 +109,7 @@ class PackageDpAct extends PackageAct{
 	
 	/**
 	 * 返回分销商的类别信息
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_packageReturnDistributorCategoryInfo($data){
 		return !empty($data) ? $data : null;
@@ -117,7 +117,7 @@ class PackageDpAct extends PackageAct{
 	
 	/**
 	 * 返回SPU对分销商是否开放
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_packageReturnDistributorSpuIsOpen($data){
 		return !empty($data) ? $data : null;

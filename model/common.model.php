@@ -16,7 +16,7 @@ class CommonModel extends ValidateModel{
 	/**
 	 * 组织插入信息
 	 * @param array $data
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function bulitDatas($data){
 		$retData = array();
@@ -301,7 +301,7 @@ class CommonModel extends ValidateModel{
 	/**
 	 * 删除信息
 	 * @param array $data
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function deleteDataByCondition($whereData){
 		$this->initDbPrefix();

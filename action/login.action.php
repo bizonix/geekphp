@@ -3,7 +3,7 @@
  * 类名：LoginAct
  * 功能：登录
  * 版本：v1.0
- * 作者：邹军荣
+ * 作者：wcx
  * 时间：2014/06/25
  * errCode：
  */
@@ -66,7 +66,7 @@ class LoginAct extends CheckAct {
     
     /*
      * 验证的邮箱的动作
-     * zjr
+     * wcx
      */
     public function act_checkEmail(){
     	$email		= isset($_REQUEST['email']) ? $_REQUEST['email'] : '';
@@ -102,7 +102,7 @@ class LoginAct extends CheckAct {
     
     /*
      * 修改密码的动作
-     * zjr
+     * wcx
      */
     public function act_updatePwd(){
     	$newPwd		        = isset($_REQUEST['newPwd']) ? $_REQUEST['newPwd'] : '';
@@ -140,7 +140,7 @@ class LoginAct extends CheckAct {
     
     /*
      * 修改密码的动作
-     * zjr
+     * wcx
      */
     public function act_acitveUser(){
     	$userpassword		= isset($_REQUEST['userpassword']) ? $_REQUEST['userpassword'] : '';
@@ -163,7 +163,7 @@ class LoginAct extends CheckAct {
     
     /*
      * 验证是否已经登录
-     * zjr
+     * wcx
      */
     public function act_checkLogin(){
     	if($_SESSION['loginStatus'] == "out"){
@@ -176,7 +176,7 @@ class LoginAct extends CheckAct {
     
     /*
      * 退出登录操作
-     * zjr
+     * wcx
      */
     public function act_logout(){
     	setcookie('user','',0,"/");

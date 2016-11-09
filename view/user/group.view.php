@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：公司管理
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2014/01/27
  *
@@ -110,7 +110,7 @@ class GroupView extends BaseView {
 
     /**
      * 功能：检测该名称是不是存在
-     * zjr
+     * wcx
      */
     public function view_checkGroupIsExit(){
         $groupCnName = $_REQUEST["cn_name"];

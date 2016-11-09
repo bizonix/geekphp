@@ -1,8 +1,5 @@
 <?php
 /*
- *Action公用的方法类
- *@add by : Herman.Xi ,date : 20090926
- *@modify by : linzhengxiang ,date : 20140525
  */
 class CommonAct{
 
@@ -112,7 +109,7 @@ class CommonAct{
 	/**
 	 * 返回分销商信息
 	 * @return string
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_getUserInfor($flag){
 	    $data  =   @json_decode(_authcode($_COOKIE['hcUser']),true);
@@ -122,7 +119,7 @@ class CommonAct{
 	/**
 	 * 返回分销商一部分信息
 	 * @return string
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_getUserSomeInfor($flag){
 		return    isset($_SESSION[$flag]) ? $_SESSION[$flag] : 1;

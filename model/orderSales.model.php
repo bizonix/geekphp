@@ -3,7 +3,7 @@
  * 类名：OrderSalesModel
  * 功能：sku销量统计
  * 版本：V1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015-05-05
  */
 class OrderSalesModel extends CommonModel{

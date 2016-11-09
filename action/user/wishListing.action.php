@@ -3,7 +3,7 @@
  * 类名：WishListingAct
  * 功能：Listing管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015/06/27
  * errCode：
  */ 
@@ -15,7 +15,7 @@ class WishListingAct extends CheckAct {
     
     /**
      * 保存Listing
-     * zjr
+     * wcx
      */
     public function saveListingData($params,$companyId){
         //获取公司信息
@@ -104,7 +104,7 @@ class WishListingAct extends CheckAct {
     
     /**
      * wish刊登-核心刊登方法
-     * zjr
+     * wcx
      */
     public function listingDataToWish($lsId,$companyId,$flag = true){
         if(empty($lsId)){

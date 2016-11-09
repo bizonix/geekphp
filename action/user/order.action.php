@@ -3,7 +3,7 @@
  * 类名：OrderAct
  * 功能：订单管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2014/12/16
  * errCode：
  */
@@ -14,7 +14,7 @@ class OrderAct extends CheckAct {
 	
 	/*
 	 * 功能：对接分销商订单到分销系统
-	 * by zjr
+	 * by wcx
 	 */
 	public function act_receiveOrders($orderdatas='', $email = 'system'){
 		// print_r($orderdatas);exit;
@@ -77,7 +77,7 @@ class OrderAct extends CheckAct {
 	/**
 	 * 获取订单
 	 * @param int $companyId
-	 * by zjr
+	 * by wcx
 	 */
 	public function act_getOrderList($companyId=0){
 		if(!$companyId) $companyId = get_usercompanyid();
@@ -139,7 +139,7 @@ class OrderAct extends CheckAct {
 	/**
 	 * 根据条件查询订单
 	 * @param int $companyId
-	 * by zjr
+	 * by wcx
 	 */
 	public function act_queryOrderList($shopId=0,$comeFrom=0,$deliveryFrom=0,$orderStatus='',$handleStatus='',$orderSysId=0,$orderId=0,$platform=0,$sellerShipStatus='#'){
 		$companyId = get_usercompanyid();
@@ -236,7 +236,7 @@ class OrderAct extends CheckAct {
 
 	/**
 	 * 修改订单的处理状态
-	 * add zjr
+	 * add wcx
 	 * $orderSysIdArr  格式 array("1231233","423423");
 	 * $handleStatus  1|2|3|4|5
 	 */
@@ -281,7 +281,7 @@ class OrderAct extends CheckAct {
 
 	/**
 	 * 修改订单的状态
-	 * add zjr
+	 * add wcx
 	 * $ordersArr  格式 array(array("orderId","status"));
 	 */
 	public function act_updateOrderStatus($ordersArr){
@@ -317,7 +317,7 @@ class OrderAct extends CheckAct {
 	}
 	/**
 	 * 功能：订单标记发货
-	 * zjr
+	 * wcx
 	 */
 	public function act_sellerShippment($platformId,$orderId,$trackingNumber,$transportType,$description,$sendType,$transportUrl){
 		if(empty($platformId)) {
@@ -370,7 +370,7 @@ class OrderAct extends CheckAct {
 
 	/**
 	 * 功能：删除订单
-	 * zjr
+	 * wcx
 	 */
 	public function act_deleteOrders($ordersId){
 		$ordersId = explode(",", $ordersId);
@@ -396,7 +396,7 @@ class OrderAct extends CheckAct {
 
 	/**
 	 * 功能：推送订单发货
-	 * zjr
+	 * wcx
 	 */
 	public function act_pushOrders($orderSysIds){
 		$orderSysIds = explode(",", $orderSysIds);
@@ -524,7 +524,7 @@ class OrderAct extends CheckAct {
 
 	/**
 	 * 功能：合并订单
-	 * zjr
+	 * wcx
 	 */
 	public function act_mergeOrders($orderSysIds){
 		$orderSysIds 	= explode(",", $orderSysIds);

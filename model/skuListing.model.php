@@ -3,7 +3,7 @@
  * 类名：SkuListingModel
  * 功能：sku刊登和范本统计
  * 版本：V1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015-05-05
  */
 class SkuListingModel extends CommonModel{
@@ -13,7 +13,7 @@ class SkuListingModel extends CommonModel{
 	
 	/*
 	 * 组装数据
-	 * zjr
+	 * wcx
 	 */
 	public function buildDatas($params){
 	    $publicData    = array();
@@ -87,7 +87,7 @@ class SkuListingModel extends CommonModel{
 	 *     'SV00123_XL_2' = array('200','操作成功！'),
 	 *     'SV00123_XL_3' = array('200','操作成功！'),
 	 * )
-	 * zjr
+	 * wcx
 	 */
 	public function insertMoreSkuListingDatas($skuDatas){
 	    if(!isset($skuDatas['skuArr']) || empty($skuDatas['skuArr'])){

@@ -3,7 +3,7 @@
  * 类名：ListingModel
  * 功能：Listing主表管理
  * 版本：V1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2016-06-27
  */
 class ListingModel extends CommonModel{
@@ -14,7 +14,7 @@ class ListingModel extends CommonModel{
     
     /**
      * 创建保存数据
-     * by zjr
+     * by wcx
      */
     public function buildSaveData($params){
         $retData = array();
@@ -83,7 +83,7 @@ class ListingModel extends CommonModel{
 	 * 创建查询条件
 	 * @param unknown $where
 	 * @return string
-	 * by zjr
+	 * by wcx
 	 */
 	public function buildWhereData($params){
 	    $retData = array();
@@ -104,7 +104,7 @@ class ListingModel extends CommonModel{
 	
 	/**
 	 * 插入数据
-	 * zjr
+	 * wcx
 	 */
 	public function saveListingData($data,$detailData){
 	    $ret = 0;

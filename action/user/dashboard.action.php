@@ -3,7 +3,7 @@
  * 类名：DashboardAct
  * 功能: 监控板
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015/05/06
  * errCode：
  */

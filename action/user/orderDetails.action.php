@@ -3,7 +3,7 @@
  * 类名：OrderDetailsAct
  * 功能：订单详情管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015/01/14
  * errCode：
  */

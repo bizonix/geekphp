@@ -3,7 +3,7 @@
  * 类名：CategoryProductAct
  * 功能：登录
  * 版本：v1.0
- * 作者：邹军荣
+ * 作者：wcx
  * 时间：2015/01/04
  */
 class CategoryProductAct extends CheckAct {

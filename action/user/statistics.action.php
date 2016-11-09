@@ -3,7 +3,7 @@
  * 类名：StatisticsAct
  * 功能: 店铺管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2014/01/18
  * errCode：
  */
@@ -76,7 +76,7 @@ class StatisticsAct extends CheckAct {
 
 	/**
 	 * query orderFee
-	 * zjr
+	 * wcx
 	 */
 	public function act_getOrderSales($params = array()){
 		$company_id = get_usercompanyid();

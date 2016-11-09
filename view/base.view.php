@@ -298,7 +298,7 @@ class BaseView{
      * @description 检测必填参数是否填写
      * @param [unkowm] [$value] [要检测的值]
      * @param [string] [$msg] [为空时返回错误信息值]
-     * @author zjr
+     * @author wcx
      */
     public function must($value,$msg,$type='string') {
         if(!empty($value)){

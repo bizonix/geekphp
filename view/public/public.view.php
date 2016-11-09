@@ -2,7 +2,7 @@
 /**
  * PublicView
  * 功能：用于公共的ajax处理控制
- * @author 邹军荣
+ * @author wcx
  * v 1.0
  * 2014/06/26  
  */
@@ -41,7 +41,7 @@ class PublicView extends BaseView {
 	
 	/**
 	 * 404页面显示 
-	 * zjr
+	 * wcx
 	 */
 	public function view_showErr(){
 	    if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])){
@@ -54,7 +54,7 @@ class PublicView extends BaseView {
 
 	/**
 	 * 获取速卖通refrashToken方法
-	 * add zjr
+	 * add wcx
 	 */
 	public function view_getSmtRefrashToken(){
 		session_start();
@@ -126,7 +126,7 @@ class PublicView extends BaseView {
 
 	/*
 	 *	功能：根据平台ID获取跟踪号ID
-	 *	by：zjr
+	 *	by：wcx
 	 */
 	public function view_getPlatformCarrier(){
 		$platformId = $_REQUEST['platformId'];

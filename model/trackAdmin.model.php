@@ -3,7 +3,7 @@
  * 类名：TrackAdminModel
  * 功能：跟踪号查询管理
  * 版本：V1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015-02-12
  */
 class TrackAdminModel extends CommonModel{

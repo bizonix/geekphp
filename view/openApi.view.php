@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：控制登录方面的一系列动作
- * @author 邹军荣
+ * @author wcx
  * v 1.0
  * 时间：2014/06/27
  *
@@ -14,7 +14,7 @@ class OpenApiView extends BaseView {
     
     /*
      * 速卖通的回调地址
-     * zjr
+     * wcx
      */
     public function view_aliApiCallback() {
         log::write("\n apiREQUEST = ".json_encode($_REQUEST));

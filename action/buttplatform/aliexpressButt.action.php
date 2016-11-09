@@ -26,7 +26,7 @@ class AliexpressButtAct extends CheckAct{
 	/**
 	 * 抓取处于 'orderStatus'  => 'WAIT_SELLER_SEND_GOODS' 的订单
 	 * @return array 订单数组
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function findOrderListQuery($orderStatus='WAIT_SELLER_SEND_GOODS',$createDateStart = '', $createDateEnd = '',$page,$pageSize){
 		$OrderObject = F('aliexpress.package.AliexpressGetOrders');
@@ -64,7 +64,7 @@ class AliexpressButtAct extends CheckAct{
 		$OrderObject->setConfig($this->account, $this->appKey, $this->appSecret, $this->refresh_token);
         $OrderObject->doInit();
         $ret = $OrderObject->sellerShipment($serviceName, $logisticsNo, $sendType, $outRef, $description,$Website);
-        log::writeLog('sellerShipment ret = '.json_encode($ret),'zjr_test/tmp','ret','d');
+        log::writeLog('sellerShipment ret = '.json_encode($ret),'wcx_test/tmp','ret','d');
         if(empty($ret['success'])){
             if($ret['error_code'] == "15-2001"){
                 self::$errMsg['30001'] = get_promptmsg("30001");

@@ -3,7 +3,7 @@
  * 类名：ListingAct
  * 功能：Listing管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015/6/27
  * errCode：
  */ 
@@ -51,7 +51,7 @@ class ListingAct extends CheckAct {
      *          "lsDetail"  => array(....),
      *      )
      * );
-     * by zjr
+     * by wcx
      * 2015-06-27
      */
     public function getLsInfoByIds($idArr){
@@ -93,7 +93,7 @@ class ListingAct extends CheckAct {
     
     /**
      * 上线listing  spu
-     * zjr
+     * wcx
      */
     public function onlineListing($lsIds,$companyId){
         if(empty($companyId)){
@@ -146,7 +146,7 @@ class ListingAct extends CheckAct {
     
     /**
      * 下线listing  spu
-     * zjr
+     * wcx
      */
     public function offlineListing($lsIds,$companyId){
         if(empty($companyId)){
@@ -199,7 +199,7 @@ class ListingAct extends CheckAct {
     
     /**
      * 同步线上listing
-     * zjr
+     * wcx
      */
     public function synShopListing($platform,$account,$startTime,$companyId){
         if(empty($platform)){

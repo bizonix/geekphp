@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：控制登录方面的一系列动作
- * @author 邹军荣
+ * @author wcx
  * v 1.0
  * 时间：2014/06/27
  *
@@ -14,7 +14,7 @@ class LoginView extends BaseView {
 	
 	/*
 	 * 登录页面的控制
-	 * zjr
+	 * wcx
 	 */
 	public function view_login() {
 		$this->smarty->display('login.html');
@@ -22,7 +22,7 @@ class LoginView extends BaseView {
 
 	/*
 	 * 登录页面的控制
-	 * zjr
+	 * wcx
 	 */
 	public function view_newPwd() {
 		$res = A("Login")->act_checkEmail();
@@ -35,7 +35,7 @@ class LoginView extends BaseView {
 
 	/*
 	 * 来自登录页面的请求控制
-	 * zjr
+	 * wcx
 	 */
 	public function view_loginPost(){
 		$this->ajaxReturn(A('Login')->act_login());
@@ -43,7 +43,7 @@ class LoginView extends BaseView {
 
 	/*
 	 * 退出登录
-	 * zjr
+	 * wcx
 	 */
 	public function view_logout(){
 		A('login')->act_logout();
@@ -52,7 +52,7 @@ class LoginView extends BaseView {
 	
 	/*
 	 * 忘记密码功能的显示
-	 * zjr
+	 * wcx
 	 */
 	public function view_forget() {
 		$this->smarty->display('login.html');
@@ -60,7 +60,7 @@ class LoginView extends BaseView {
 
 	/*
 	 * 忘记密码功能的显示
-	 * zjr
+	 * wcx
 	 */
 	public function view_register() {
 		if(isset($_REQUEST['retcode'])) {
@@ -72,7 +72,7 @@ class LoginView extends BaseView {
 	
 	/*
 	 * 用户注册
-	 * zjr
+	 * wcx
 	 */
 	public function view_registerd() {
 		$registerAct	= A("Register");
@@ -82,7 +82,7 @@ class LoginView extends BaseView {
 
 	/*
 	 * 忘记密码页面的请求控制
-	 * zjr
+	 * wcx
 	 */
 	public function view_forgetPost() {
 		$email 		= isset($_REQUEST['email']) ? trim($_REQUEST['email']) : '';
@@ -111,7 +111,7 @@ class LoginView extends BaseView {
 	
 	/*
 	 * 通过邮箱链接返回信息的处理
-	* zjr
+	* wcx
 	*/
 	public function view_updatePwd(){
 		$this->ajaxReturn(A('Login')->act_updatePwd());
@@ -119,7 +119,7 @@ class LoginView extends BaseView {
 	
 	/*
 	 * 激活邮件处理
-	 * zjr
+	 * wcx
 	 */
 	public function view_activeUser(){
 		$res 	= 	A('Login')->act_checkEmail();
@@ -134,7 +134,7 @@ class LoginView extends BaseView {
 
 	/*
 	 * 验证用户的邮箱和用户名
-	 * zjr
+	 * wcx
 	 */
 	 
 	public function view_check(){

@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：统计管理
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2015/05/15
  *

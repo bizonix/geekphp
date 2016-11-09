@@ -1,7 +1,6 @@
 <?php
 /*
  *通用验证方法类
- *@add by : linzhengxiang ,date : 20140523
  */
 class CheckAct extends CommonAct{
 

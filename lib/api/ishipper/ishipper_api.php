@@ -68,7 +68,7 @@ class iShipper
 	
 	/*
 	 * 推送订单
-	 * zjr
+	 * wcx
 	 */
 	public function postOrder($orders){
 		$this->serverUrl = $this->baseUrl."postorder";

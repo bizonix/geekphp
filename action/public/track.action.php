@@ -3,7 +3,7 @@
  * 类名：TrackAct
  * 功能：跟踪号
  * 版本：v1.0
- * 作者：邹军荣
+ * 作者：wcx
  * 时间：2015/01/04
  */
 class TrackAct extends CheckAct {
@@ -104,7 +104,7 @@ class TrackAct extends CheckAct {
 
 	/**
 	 * 获取费用
-	 * zjr
+	 * wcx
 	 */
 	public function act_getChangesFee($country,$shippingType,$channel=0){
 		$pre = C('TRANS_DB_NAME').'.'.C('TRANS_TB_PRE');

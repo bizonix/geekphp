@@ -3,7 +3,7 @@
  * 类名：AdminSystemSetAct
  * 功能: 系统设置管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015/03/01
  * errCode：
  */

@@ -31,7 +31,7 @@ class InterfaceDpModel extends InterfaceModel {
 	 * getShippingTypeApi()
 	 * 获取运输方式的接口
 	 * @return  array
-	 * @auth: 邹军荣
+	 * @auth: wcx
 	 */
 	public function getShippingTypeApi(){
 		$conf = $this->getRequestConf(__FUNCTION__);

@@ -3,7 +3,7 @@
  * 类名：GoodsBasicListAct
  * 功能: 产品基础信息管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015/06/01
  * errCode：
  */
@@ -86,7 +86,7 @@ class GoodsBasicAct extends CheckAct {
 	 * 保存基础信息
 	 * @param unknown $params
 	 * @return boolean|unknown
-	 * by zjr
+	 * by wcx
 	 */
 	public function saveBasicInfo($params){
 	    //获取公司信息

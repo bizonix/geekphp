@@ -3,7 +3,7 @@
  * 类名：WishListingDetailModel
  * 功能：wish Listing详情表管理
  * 版本：V1.0
- * 作者：邹军荣
+ * 作者：wcx
  * 时间：2015-06-27
  */
 class WishListingDetailModel extends CommonModel{
@@ -124,7 +124,7 @@ class WishListingDetailModel extends CommonModel{
 	
 	/**
 	 * 插入数据
-	 * zjr
+	 * wcx
 	 */
 	public function saveListingDetailData($data,$subfix){
 	    $ret = 0;

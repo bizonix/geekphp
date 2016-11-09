@@ -2,7 +2,7 @@
 /**
  * ApiIntegtationAct
  * 功能：用于公共的ajax处理动作
- * @author 邹军荣
+ * @author wcx
  * v 1.0
  * 2014/06/26
  */
@@ -167,7 +167,7 @@ class ApiIntegrationAct extends CheckAct {
 
 	/**
 	 * 将订单通过接口推送到赛维
-	 * zjr
+	 * wcx
 	 */
 	
 	public function act_pushOrdersToSailvan($orderSysIds){
@@ -306,7 +306,7 @@ class ApiIntegrationAct extends CheckAct {
 
 	/**
 	 * 将订单通过接口推送到赛维 最新接口
-	 * zjr
+	 * wcx
 	 */
 	
 	public function act_pushOrdersToValsun($orderSysIds){
@@ -460,7 +460,7 @@ class ApiIntegrationAct extends CheckAct {
 
 	/**
 	 * 获取赛维的产品
-	 * zjr
+	 * wcx
 	 */
 	public function act_getProductsTemp(){
 		if(empty($_POST)){

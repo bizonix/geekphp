@@ -3,7 +3,7 @@
  * 类名：WishTemplateAct
  * 功能：范本管理
  * 版本：v1.0
- * 作者：zjr
+ * 作者：wcx
  * 时间：2015/06/10
  * errCode：
  */ 
@@ -103,7 +103,7 @@ class WishTemplateAct extends CheckAct {
     
     /**
      * wish刊登-核心刊登方法
-     * zjr
+     * wcx
      */
     public function listingDataToWish($tpId,$companyId){
         if(empty($tpId)){
@@ -250,7 +250,7 @@ class WishTemplateAct extends CheckAct {
     
     /**
      * 获取tpId
-     * zjr
+     * wcx
      */
     public function getTpId(){
         return $this->tpId;

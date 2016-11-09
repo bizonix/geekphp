@@ -2,7 +2,7 @@
 /**
  * RegisterView
  * 功能：用于用户注册控制
- * @author 邹军荣
+ * @author wcx
  * 2014/06/26
  *
  */

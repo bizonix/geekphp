@@ -3,7 +3,7 @@
  * 类名：GoodsBasicModel
  * 功能：产品基础信息管理
  * 版本：V1.0
- * 作者：邹军荣
+ * 作者：wcx
  * 时间：2015-05-28
  */
 class GoodsBasicModel extends CommonModel{
@@ -14,7 +14,7 @@ class GoodsBasicModel extends CommonModel{
 
 	/**
 	 * variants format
-	 * add by zjr
+	 * add by wcx
 	 */
 	public function buildVariants($params){
 		$variants = array();
@@ -37,7 +37,7 @@ class GoodsBasicModel extends CommonModel{
 	/**
 	 * main_image format
 	 * $params = array('SV002123_B.jpg','23334_M.jpg');
-	 * add by zjr
+	 * add by wcx
 	 */
 	public function buildMainImages($params){
 	}
@@ -45,7 +45,7 @@ class GoodsBasicModel extends CommonModel{
 	/**
 	 * extra_images format
 	 * $params = array('SV002123_B-1.jpg','SV002123_B-2.jpg','23334_M-1.jpg');
-	 * add by zjr
+	 * add by wcx
 	 */
 	public function buildExtraImages($params){
 	}

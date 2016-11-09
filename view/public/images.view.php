@@ -2,7 +2,7 @@
 /**
  * ImagesView
  * 功能：用于处理图片控制
- * @author 邹军荣
+ * @author wcx
  * v 1.0
  * 2015/04/19  
  */

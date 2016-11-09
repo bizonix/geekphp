@@ -74,7 +74,7 @@ class IShipperButtAct extends CheckAct
 
     /*
      * 获取所有运输方式api
-     * zjr
+     * wcx
      */
     public function getallshipway(){
         return $this->ishipperObj->getallshipway();

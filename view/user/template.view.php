@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：范本view
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2015/06/08
  *
@@ -79,7 +79,7 @@ class TemplateView extends BaseView {
     
     /**
      * 验证范本是否存在
-     * zjr
+     * wcx
      */
     public function view_checkTemplateIsExist(){
         $tp_name = $this->getParam('tp_name');
@@ -89,7 +89,7 @@ class TemplateView extends BaseView {
     
     /**
      * 制作范本
-     * zjr
+     * wcx
      */
     public function view_apiToTp(){
         $platform   = $this->getParam('platform');

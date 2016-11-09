@@ -14,7 +14,7 @@ class InterfacePicsModel extends InterfaceModel {
 	 * 转发图片至图片系统分销商文件夹下
 	 * @param json imgInfor
 	 * @return int
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function saveDistributorWaterMark($imgInfor){
 		$conf = $this->getRequestConf(__FUNCTION__);

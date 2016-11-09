@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：邮件管理
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2014/12/16
  *
@@ -133,7 +133,7 @@ class EmailsAct extends CheckAct {
 
     /**
      * 功能：获取模板信息
-     * zjr
+     * wcx
      */
     public function act_getEmailTemplates($companyId){
         $where    = array("company_id" => $companyId);
@@ -146,7 +146,7 @@ class EmailsAct extends CheckAct {
 
     /**
      * 功能：获取模板信息
-     * zjr
+     * wcx
      */
     public function act_getEmailTemplatesInfo($templateId){
         $where          = array("id" => $templateId);
@@ -156,7 +156,7 @@ class EmailsAct extends CheckAct {
 
     /**
      * 功能：获取所有模板信息
-     * zjr
+     * wcx
      */
     public function act_getAllEmailTemplates($companyId){
         $where    = array("company_id" => $companyId);
@@ -166,7 +166,7 @@ class EmailsAct extends CheckAct {
 
     /**
      * 功能：发送邮件给卖家
-     * zjr
+     * wcx
      */
     public function act_sendEmailToBuyers($emails,$templateId,$orderSysId){
         $emails = explode(";", $emails);

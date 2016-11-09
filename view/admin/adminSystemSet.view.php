@@ -2,7 +2,7 @@
 /**
  * AdminSystemSetView
  * 功能：用于系统设置
- * @author 邹军荣
+ * @author wcx
  * v 1.0
  * 2015/03/01  
  */

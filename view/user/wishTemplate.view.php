@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：Wish范本管理
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2015/06/10
  *

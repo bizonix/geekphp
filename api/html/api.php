@@ -106,7 +106,7 @@ exit;
  * @param string $appKey    访问者身份
  * @param number $contorlTime   控制访问频率区间
  * @param number $visitNums   控制区间内访问次数
- * @by zjr
+ * @by wcx
  */
 
 function controlVisitTimes($appKey,$contorlTime = 60 ,$visitNums = 50){

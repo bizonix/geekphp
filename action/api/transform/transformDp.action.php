@@ -36,7 +36,7 @@ class TransformDpAct extends TransformAct{
 
 	/*
 	 * 返回分销商开放类别信息
-	 * zjr
+	 * wcx
 	 */
 	public function act_transformOpenCategory(){
 	    $companyId     =   $_REQUEST['companyId'];
@@ -65,7 +65,7 @@ class TransformDpAct extends TransformAct{
 
 	/*
 	 * 返回SKU实时库存信息
-	 * zjr
+	 * wcx
 	 */
 	public function act_transformSkuStock(){
 	    $sku     =   $_REQUEST['sku'];
@@ -77,7 +77,7 @@ class TransformDpAct extends TransformAct{
 	}
 	/*
 	* 返回SKU实时库存信息
-	* zjr
+	* wcx
 	*/
 	public function act_transformPushOrder(){
 		    return true;
@@ -95,7 +95,7 @@ class TransformDpAct extends TransformAct{
 
 	/**
 	 * 推送独立商城订单到分销系统
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_transformReceiveOrders(){
 		return true;
@@ -103,14 +103,14 @@ class TransformDpAct extends TransformAct{
 	}
 	/**
 	 * 推送分销商订单到分销系统
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_transformReceiveDistributorOrder(){
 		return true;
 	}
 	/**
 	 * 超卖系统中推送过来的接受信息
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_transformReciveOversoldSkus(){
 	    $oversoldSkus = $_REQUEST['oversoldSkus'];
@@ -131,7 +131,7 @@ class TransformDpAct extends TransformAct{
 	
 	/**
 	 * 接收用户参数
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_transformReturnDistributorCategoryInfo(){
 	    $appkey = $_REQUEST['app_key'];
@@ -143,7 +143,7 @@ class TransformDpAct extends TransformAct{
 	}
 	/**
 	 * 接收用户参数
-	 * @author zjr
+	 * @author wcx
 	 */
 	public function act_transformReturnDistributorSpuIsOpen(){
 	    $spu   = $_REQUEST['spu'];

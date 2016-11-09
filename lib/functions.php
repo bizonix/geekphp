@@ -303,7 +303,7 @@ function get_statusmenunamebyid($cid){
 /**
  * 获取当前用户信息
  * @return string
- * @author zjr
+ * @author wcx
  */
 function get_userinfo($index=''){
 	$data = json_decode(_authcode($_COOKIE['user']),true);
@@ -314,7 +314,7 @@ function get_userinfo($index=''){
 /**
  * 获取当前用户id
  * @return int
- * @author zjr
+ * @author wcx
  */
 function get_userid(){
 	return get_userinfo('id');
@@ -323,7 +323,7 @@ function get_userid(){
 /**
  * 获取当前用户用户名
  * @return int
- * @author zjr
+ * @author wcx
  */
 function get_username(){
 	return get_userinfo('user_name');
@@ -332,7 +332,7 @@ function get_username(){
 /**
  * 获取当前用户邮箱
  * @return int
- * @author zjr
+ * @author wcx
  */
 function get_useremail(){
 	return get_userinfo('email');
@@ -341,7 +341,7 @@ function get_useremail(){
 /**
  * 获取当前用户所属公司
  * @return int
- * @author zjr
+ * @author wcx
  */
 function get_usercompanyid(){
 	return get_userinfo('company_id');
@@ -388,7 +388,7 @@ function validate_numTchar($value){
  * 验证用户名：字母/数字/下划线 5-15位
  * @param string $value
  * @return  bool
- * @author zjr
+ * @author wcx
  */
 function validate_userName($value){
 	return preg_match('/^[a-zA-Z][_a-zA-Z0-9]{5,15}$/', $value);
@@ -594,7 +594,7 @@ function array3sql($array) {
  * 数组转化为查询语句
  * @param array $data
  * @return string
- * @author zjr
+ * @author wcx
  */
 function array3where($array) {
 	$sql_array = array ();
@@ -735,7 +735,7 @@ function encode_pass($tex,$key,$type="encode"){
 /**
  * 加密函数,需要定义密钥AUTH_KEY
  * @param string $string
- * @author zjr
+ * @author wcx
  */
 function _authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 	$ckey_length = 4;
@@ -1179,7 +1179,7 @@ function filterHTMLFlag($string) {
 /**
  * 将数组转换成json数据并解决中文乱码问题
  * @param array $arr
- * by zjr
+ * by wcx
  */
 function jsonCN_encode($arr){
     $na = array();

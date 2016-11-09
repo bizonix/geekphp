@@ -120,7 +120,7 @@ class InterfacePcModel extends InterfaceModel {
      * getGoodsStatus()
      * 获取物品状态
      * @return  array
-     * @author zjr
+     * @author wcx
      */
     public function getGoodsStatus($sku)
     {
@@ -139,7 +139,7 @@ class InterfacePcModel extends InterfaceModel {
      * getGoodsStatusBySpu()
      * 获取物品信息
      * @return  array
-     * @author zjr
+     * @author wcx
      */
     public function getGoodsStatusBySpu($spu)
     {
@@ -226,7 +226,7 @@ class InterfacePcModel extends InterfaceModel {
     /**
      * 获取料号料号的前缀
      * @return Ambigous <number, boolean>
-     * @author zjr
+     * @author wcx
      */
     public function getSpuPrefixList(){
     	$conf = $this->getRequestConf(__FUNCTION__);

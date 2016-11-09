@@ -1,7 +1,7 @@
 <?php
 /**
  * 功能：订单详情
- * @author zjr
+ * @author wcx
  * v 1.0
  * 时间：2015/01/14
  *
